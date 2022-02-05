@@ -39,7 +39,7 @@ class Certification(models.Model):
     
 class Community(models.Model):
     communityName = models.CharField(verbose_name="커뮤니티 이름", max_length=50)
-    createdDate = models.DateTimeField(verbose_name="커뮤니티 생성일")
+    createdDate = models.DateField(verbose_name="커뮤니티 생성일")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Community_userID", verbose_name="유저 id")
     music_id = models.ForeignKey(Music, on_delete=models.CASCADE, related_name="Community_musicID", verbose_name="music id")
     
