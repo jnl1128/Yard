@@ -15,10 +15,17 @@ class User(AbstractUser):
     imageUrl = models.ImageField(upload_to="user_img", null=True, blank=True)
     
     def __str__(self):
-        return self.name
+        return self.user_id
+
+class Artist(models.Model):
+    name = models.CharField(verbose_name="가수", max_length=20)
+    birth = models.DateField(verbose_name="출생년도")
     
+    def __str__(self):
+        return self.name
+
 class Music(models.Model):
-    artist = models.CharField(verbose_name="가수", max_length=20)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="music_artist", verbose_name="artist id")
     title = models.CharField(verbose_name="제목", max_length=50)
     albumTitle = models.CharField(verbose_name="앨범 이름", max_length=50)
     releasedDate = models.DateField(verbose_name="출시일")
@@ -38,6 +45,7 @@ class Certification(models.Model):
         return self.createdDate
     
 class Community(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="community_artist", verbose_name="artist id", null=True)
     communityName = models.CharField(verbose_name="커뮤니티 이름", max_length=50)
     createdDate = models.DateField(verbose_name="커뮤니티 생성일")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Community_userID", verbose_name="유저 id")
