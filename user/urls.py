@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.mainSearch, name="main"),
     path('search/',views.searchResult, name='search'),
     path('createCommunity/', views.createCommunity, name="createCommunity"),
+    path('community/<int:pk>/', views.communityDetail, name="communityDetail"),
 ]

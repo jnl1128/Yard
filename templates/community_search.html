@@ -15,7 +15,7 @@
         <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
             <div class="card text-center" style="min-width: 18rem">
                 <div class="card-body">
-                    <h4>{{community.communityName}}</h4>
+                    <a href="{% url 'user:communityDetail' community.id%}"><h4>{{community.communityName}}</h4></a>
                 </div>
             </div>
         </div>
