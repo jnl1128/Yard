@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+import datetime
 
 # Create your models here.
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'))
@@ -30,11 +30,11 @@ class Music(models.Model):
 
 
 class Certification(models.Model):
-    createdDate = models.DateField(verbose_name="인증 날짜")
+    createdDate = models.DateField(verbose_name="인증 날짜", default=datetime.date.today)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="certification_userID", verbose_name="유저 id")
     music_id = models.ForeignKey(Music, on_delete=models.CASCADE, related_name="certification_musicID", verbose_name="music id")
     
-    def __str__(self):
+    def __int__(self):
         return self.createdDate
     
 class Community(models.Model):
