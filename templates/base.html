@@ -20,12 +20,37 @@
 
 <body>
   <header>
-    <h1 class="header-title">
-      <a href="/">야~드러봐 <span class="highlight"></span>Yard</a>
-    </h1>
-    <a href=""><span class="header-new">오늘의추천</span></a>
-    <a href=""><span class="header-new">인기검색어</span></a>
-    <a href=""><span class="header-new">야드~</span></a>
+    <nav class="navbar px-5 py-1 fixed-top navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'user:main' %}" style="color:#1d7c6c;">야,들어봐 <strong>Yard</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            {% if request.user.is_authenticated %} 
+            <li class="nav-item">
+              <span class="nav-link text-light me-4">Hi {{request.user.name}} ! :) </span>
+               <li class="nav-item" ><a class="nav-link" href="" style="color:#1d7c6c;"><strong>Yard의 추천</strong></a></li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" style="color:#1d7c6c;"><strong>로그아웃</strong></a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="" style="color:#1d7c6c;"><strong>로그인</strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" style="color:#1d7c6c;"><strong>회원가입</strong></a>
+            </li>
+            {% endif %}
+
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
   </header>
   {% block content %} {% endblock %}
 </body>

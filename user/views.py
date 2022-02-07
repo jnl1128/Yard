@@ -14,22 +14,23 @@ def searchResult(request):
     query = None
     music = None
     artist = None
+    
     if ('q' in request.GET):
         query = request.GET.get('q')
+        if query=="":
+            messages.error(request, '검색어는 2글자 이상 입력해주세요.') 
         print(query)
         try:
             music = Music.objects.get(title=query)
             communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(music_id=music.id))          
         except:
-            pass
-        try:
-            artist = Artist.objects.get(name=query)
-            communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(artist=artist.id))          
-        except:
-            pass
-        # communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(music_id=music.id) | Q(artist=artist.id))          
-    # else:
-    #     messages.error(request, '검색어는 2글자 이상 입력해주세요.')   
+            try:
+                artist = Artist.objects.get(name=query)
+                communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(artist=artist.id))
+            except:
+                communities = Community.objects.all().filter(Q(communityName__icontains=query))
+   
+         
     return render(request, 'community_search.html', {'query':query, 'communities':communities})
 
 def createCommunity(request):

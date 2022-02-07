@@ -1,8 +1,11 @@
 {% extends "base.html" %} {% block content %} 
-    <form class="form-inline my-2 my-lg-0" action="{% url 'user:search' %}" method="get">
-        {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-    </form>
+    <div style="margin-top:5rem;">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'user:search' %}" method="get">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    
     
 {% endblock %}
