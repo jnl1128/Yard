@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>인증서 등록</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>
+        ul{
+            list-style: none;
+        }
+    </style>
+
 </head>
 <body>
-    <form action="methods">
+    <form class="searchDiv" action="methods">
         <label for="songinfo">음악 검색</label>
         <input type="text" id="songinfo" class="whatToSearch" placeholder="검색" autocomplete="off" onkeyup="addMusicList()">
         <button type="button" onclick="addMusicList()">검색</button>
