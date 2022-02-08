@@ -19,7 +19,7 @@ class User(AbstractUser):
 
 class Artist(models.Model):
     name = models.CharField(verbose_name="가수", max_length=20)
-    birth = models.DateField(verbose_name="출생년도", null=True)
+    birth = models.DateField(verbose_name="출생년도", null=True, blank=True)
     
     def __str__(self):
         return self.name
