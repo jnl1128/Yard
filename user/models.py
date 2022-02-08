@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 import datetime
 
 # Create your models here.
-GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'))
+GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
     userId = models.CharField(verbose_name="아이디", max_length=30)
     name = models.CharField(verbose_name="이름", max_length=20)
