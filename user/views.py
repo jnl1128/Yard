@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -16,3 +16,6 @@ def myPage(request):
   sorted(years, reverse=False)
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
+  
+def musicRegister(request):
+    return render(request, 'musicRegister.html')
