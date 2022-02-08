@@ -22,7 +22,7 @@ def searchResult(request):
         print(query)
         try:
             music = Music.objects.get(title=query)
-            communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(music_id=music.id))          
+            communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(musicId=music.id))          
         except:
             try:
                 artist = Artist.objects.get(name=query)
