@@ -11,7 +11,7 @@ class User(AbstractUser):
     email = models.CharField(verbose_name="이메일",max_length=50)
     nickName = models.CharField(verbose_name="닉네임", max_length=30)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
-    birth = models.DateField(verbose_name="출생년도",  null=True)
+    birth = models.DateField(verbose_name="출생년도", null=True)
     userImg = models.ImageField(upload_to="userImg", null=True, blank=True)
     
     def __str__(self):
