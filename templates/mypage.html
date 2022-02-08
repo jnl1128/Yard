@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/myPage.css' %}">
+  <title></title>
+</head>
+<body>
+  <h1>내 노래들</h1>
+  <div class="certificate-container">
+    {% for certificate in certificates %}
+    {% if request.user == certificate.userId %}
+    <div class="certificate">
+      {% if certificate.musicId.albumCoverUrl %}
+        <img src="{{ certificate.musicId.albumCoverUrl.url }}" height="200" width="200">
+      {% endif %}
+      <div class="music-info">
+        <div class="index">곡</div><div>{{certificate.musicId.title}}</div>
+      </div>
+      <div class="music-info">
+        <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
+      </div> 
+      <div class="music-info">
+        <div class="index">아티스트</div><div>{{certificate.musicId.artist}}</div>
+      </div>
+      <div class="music-date">
+        <div>{{certificate.musicId.releaseDate | date:"Y-m-d"}}부터 좋아했음</div>
+      </div>
+      <i class="far fa-stop-circle fa-7x"></i>
+      <i class="fas fa-award fa-5x"></i>
+      </div>
+    {% endif %}    
+    {% endfor %}
+    <div class="addCertificate"><i class="fas fa-plus fa-7x"></i></div>
+  </div>
+  <h1>음악 취향의 기록</h1>
+  
+  <div class="history-container">
+    {% for year in years%}
+    <h2>{{year}}</h2>
+    {% for his in history %}
+    {% if request.user == his.userId %}
+      {% if year == his.year %}
+        <div class="history">{{his.createdDate | date:"Y-m-d"}}   |   {{his.musicId.title}}</div>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </div>
+  
+  
+</body>
+</html>
