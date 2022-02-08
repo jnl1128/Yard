@@ -15,8 +15,8 @@
     {% for certificate in certificates %}
     {% if request.user == certificate.userId %}
     <div class="certificate">
-      {% if certificate.musicId.albumCoverUrl %}
-        <img src="{{ certificate.musicId.albumCoverUrl.url }}" height="200" width="200">
+      {% if certificate.musicId.albumImg %}
+        <img src="{{ certificate.musicId.albumImg.url }}" height="200" width="200">
       {% endif %}
       <div class="music-info">
         <div class="index">곡</div><div>{{certificate.musicId.title}}</div>

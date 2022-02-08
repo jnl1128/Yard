@@ -6,9 +6,9 @@ def main(request):
   return render(request, 'main.html')
 
 def myPage(request):
-  certificates = Certificate.objects.all()
-  history = Certificate.objects.order_by('-createdDate')
-  dates = Certificate.objects.values_list('createdDate')
+  certificates = Certification.objects.all()
+  history =  Certification.objects.order_by('-createdDate')
+  dates =  Certification.objects.values_list('createdDate')
   date_list = list(dates)
   years = set()
   for date in date_list:

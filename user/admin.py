@@ -4,5 +4,6 @@ from .models import *
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Music)
-admin.site.register(Certificate)
+admin.site.register(Certification)
 admin.site.register(Community)
+admin.site.register(Artist)
