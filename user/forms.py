@@ -22,3 +22,8 @@ class CustomSignupForm(SignupForm):
         user.imageUrl = self.cleaned_data['imageUrl']
         user.save()
         return user
+
+class createCommunityForm(forms.ModelForm):
+    class Meta:
+        model = Community
+        fields = "__all__"
