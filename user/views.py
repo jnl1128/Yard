@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
-def certDetail(request, pk):
-	certification = Certification.objects.get(id=pk)
-	music = certification.music_id
+def mainSearch(request):
+    return render(request, 'mainPage.html')
 
-	ctx = {'music':music, 'certification':certification}
+def certDetail(request, pk):
+	cert = Certification.objects.get(id=pk)
+	music = cert.musicId
+
+	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
 # def certDelete(request, pk):
