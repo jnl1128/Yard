@@ -7,16 +7,16 @@ class CustomSignupForm(SignupForm):
     last_name = forms.CharField(label="성", max_length=30)
     nickName = forms.CharField(label="닉네임", max_length=30)
     gender = forms.ChoiceField(label="성별", choices=GENDER_CHOICES, required=False)
-    age = forms.IntegerField(label="나이", required=False)
+    birth = forms.IntegerField(label="나이", required=False)
     imageUrl = forms.ImageField(label="유저 이미지", required=False)
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         user.name = self.cleaned_data['last_name'] + self.cleaned_data['first_name']
-        user.user_id = self.cleaned_data['username']
+        user.userId = self.cleaned_data['username']
         user.nickName = self.cleaned_data['nickName']
         user.gender = self.cleaned_data['gender']
-        user.age = self.cleaned_data['age']
+        user.birth = self.cleaned_data['birth']
         user.imageUrl = self.cleaned_data['imageUrl']
         user.save()
         return user
