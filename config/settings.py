@@ -149,3 +149,5 @@ ACCOUNT_FORMS = {'signup': 'user.forms.CustomSignupForm'}
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_EMAIL_REQUIRED = True
