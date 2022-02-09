@@ -11,5 +11,5 @@ urlpatterns = [
   path('search/',views.searchResult, name='search'),
   path('createCommunity/', views.createCommunity, name="createCommunity"),
   path('community/<int:pk>/', views.communityDetail, name="communityDetail"),
-	path('<int:pk>/', views.certDetail, name='certDetail'),
+  path('mypage/<int:pk>/', views.certDetail, name='certDetail'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
