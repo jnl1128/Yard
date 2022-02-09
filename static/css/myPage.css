@@ -1,0 +1,81 @@
+.fa-plus{
+  cursor: pointer;
+}
+body{
+  display: flex;
+  flex-direction: column;
+}
+.certificate-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.certificate{
+  filter: brightness(-1);
+  z-index: -2;
+  margin-right: 5px;
+  padding: 20px;
+  border: 2px solid rgba(54, 51, 42, 0.5);
+  background-color: silver;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 30px;
+}
+.certificate img{
+  border: 1px solid rgba(54, 51, 42, 0.5);
+}
+
+.music-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.music-info .index{
+  font-weight:bold;
+}
+.music-date{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.fa-stop-circle{
+  color: rgb(54, 51, 42);
+  opacity: 0.4;
+  position: absolute;
+  top: 230px;
+  left: 60px;
+  z-index: -1;
+}
+
+.fa-award{
+  color: goldenrod;
+  opacity: 0.6;
+  position: absolute;
+  z-index: -1;
+  bottom: 5px;
+  left: 160px;
+}
+
+.addCertificate{
+  padding-top: 100px;
+  padding-left: 25px;
+}
+
+.year{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.history-container{
+  display:flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.history{
+  font-size: 20px;
+  padding-left: 50px;
+  padding-bottom: 10px;
+}
