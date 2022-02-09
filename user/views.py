@@ -64,7 +64,7 @@ def createCommunity(request):
     return render(request, template_name='form.html', context=ctx)
 
 def communityDetail(request, pk):
-    community = Community.objects.get(id=pk);
+    community = Community.objects.get(id=pk)
     return render(request, template_name='communityDetail.html', context={'community':community})
     
 def certDetail(request, pk):
