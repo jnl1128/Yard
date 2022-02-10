@@ -41,8 +41,8 @@ class Certification(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="유저 id")
     musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
     
-    def __int__(self):
-        return self.createdDate
+    def __str__(self):
+        return self.musicId.title
     
     def year(self):
         return self.createdDate.strftime('%Y')
