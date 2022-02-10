@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!--fontawesome-->
+  <script defer src="https://kit.fontawesome.com/34c2088d9a.js" crossorigin="anonymous"></script>
   <!--font-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,45 +20,11 @@
   <title>Yard</title>
 </head>
 <body style="background:linear-gradient(180deg, #361C82 14.58%, rgba(219, 86, 231, 0.78) 100%);">
-  <!--<header>
-    <nav class="navbar px-5 py-1 fixed-top navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'user:main' %}" style="color:#1d7c6c;">야,들어봐 <strong>Yard</strong></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            {% if request.user.is_authenticated %} 
-            <li class="nav-item">
-              <span class="nav-link text-light me-4">Hi {{request.user.name}} ! :) </span>
-               <li class="nav-item" ><a class="nav-link" href="" style="color:#1d7c6c;"><strong>Yard의 추천</strong></a></li>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="" style="color:#1d7c6c;"><strong>로그아웃</strong></a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/login" style="color:#1d7c6c;"><strong>로그인</strong></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/signup" style="color:#1d7c6c;"><strong>회원가입</strong></a>
-            </li>
-            {% endif %}
-
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-    
-  </header> -->
  
   <header class="nav">
     
     <a href="/"><div class="nav--logo">logo</div></a>
     <!--<div class="nav--title" style="position: absolute; top: 0;left: 600px; font-size: 100px;">Yar:D</div>-->
-    
     <div class="navBtn">
       {% if not request.user.is_authenticated %} 
       <a href="#"><div class="nav--signUp">Sign up</div></a>

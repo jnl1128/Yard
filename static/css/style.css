@@ -15,6 +15,7 @@ body{
   height: 200vh;
   width: 100vw;
   margin: 0;
+  overflow-x: hidden;
 }
 
 a{
