@@ -4,6 +4,7 @@ from .forms import *
 from django.db.models import Q
 from django.contrib import messages
 from .forms import *
+from django.utils import timezone
 
 
 # Create your views here.
@@ -78,15 +79,30 @@ def certDetail(request, pk):
 
 def certificationRegister(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = createCertForm(request.POST)
         if form.is_valid():
             cert = form.save(commit=False)
             cert.published_date = timezone.now()
             cert.save()
             return redirect('mypage')
     else:
-        form = PostForm()
+        form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
+from spotipy.oauth2 import SpotifyClientCredentials
+import spotipy
+
 def musicSearch(request):
+#    clientId = '063856828b244dacaa86f2ad891283bc'
+#    clientSecret = '615ead2d4a0343a08e9a6bea7328f6e9'
+
+#    clientCredentialsManager = SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret)
+#    sp = spotipy.Spotify(client_credentials_manager=clientCredentialsManager)
+
+#    searchKeyword = ''
+
+#    result = sp.search(searchKeyword)
+
+#    ctx = {'results': result}
+
     return render(request, 'musicSearch.html')
