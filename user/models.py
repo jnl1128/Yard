@@ -7,7 +7,7 @@ GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'
 class User(AbstractUser):
     userId = models.CharField(verbose_name="아이디", max_length=30)
     name = models.CharField(verbose_name="이름", max_length=20)
-    password = models.CharField(verbose_name="패스워드", max_length=20)
+    password = models.CharField(verbose_name="패스워드", max_length=128)
     email = models.CharField(verbose_name="이메일",max_length=50)
     nickName = models.CharField(verbose_name="닉네임", max_length=30)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
@@ -41,18 +41,26 @@ class Certification(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="유저 id")
     musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
     
-    def __int__(self):
-        return self.createdDate
+    def __str__(self):
+        return self.musicId.title
     
     def year(self):
         return self.createdDate.strftime('%Y')
-    
-class Community(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artist id", null=True)
-    communityName = models.CharField(verbose_name="커뮤니티 이름", max_length=50)
-    createdDate = models.DateField(verbose_name="커뮤니티 생성일")
-    userId = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저 id")
-    musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
+
+class HashTag(models.Model):
+    name = models.CharField(verbose_name="해쉬태그 종류", max_length=20)
     
     def __str__(self):
-        return self.communityName
+        return self.name
+   
+class Feed(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artist id", null=True)
+    feedName = models.CharField(verbose_name="피드 이름", max_length=50)
+    createdDate = models.DateField(verbose_name="피드 생성일")
+    userId = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저 id")
+    musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
+    tags = models.ManyToManyField('HashTag', blank=True)
+    content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
+    
+    def __str__(self):
+        return self.feedName

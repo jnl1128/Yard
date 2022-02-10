@@ -1,4 +1,6 @@
+from unicodedata import name
 from django.shortcuts import render, redirect
+from django.test import tag
 from .models import *
 from .forms import *
 from django.db.models import Q
@@ -27,43 +29,49 @@ def mainSearch(request):
     return render(request, 'mainPage.html')
     
 def searchResult(request):
-    communities = None
+    feeds = None
     query = None
     music = None
     artist = None
+    tags = None
     
     if ('q' in request.GET):
         query = request.GET.get('q')
         if query=="":
-            messages.error(request, '검색어는 2글자 이상 입력해주세요.') 
-        print(query)
+            query = "#모든"
+        if query=="#모든":
+            feeds = Feed.objects.all()
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+        if query[0] == '#':
+            tagId = HashTag.objects.filter(name=query)
+            feeds = Feed.objects.all().filter(tags=tagId[0].id)
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
         try:
             music = Music.objects.get(title=query)
-            communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(musicId=music.id))          
+            feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(musicId=music.id))          
         except:
             try:
                 artist = Artist.objects.get(name=query)
-                communities = Community.objects.all().filter(Q(communityName__icontains=query) | Q(artist=artist.id))
+                feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
             except:
-                communities = Community.objects.all().filter(Q(communityName__icontains=query))
+                feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
    
-         
-    return render(request, 'community_search.html', {'query':query, 'communities':communities})
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
-def createCommunity(request):
+def createFeed(request):
     if request.method == 'POST':
-        form = createCommunityForm(request.POST)
+        form = createFeedForm(request.POST)
         if form.is_valid():
-            community = form.save()
+            feed = form.save()
             return render(request, 'mainPage.html')
     else:
-        form = createCommunityForm()
+        form = createFeedForm()
     ctx = {'form': form}
     return render(request, template_name='form.html', context=ctx)
 
-def communityDetail(request, pk):
-    community = Community.objects.get(id=pk)
-    return render(request, template_name='communityDetail.html', context={'community':community})
+def feedDetail(request, pk):
+    feed = Feed.objects.get(id=pk)
+    return render(request, template_name='feedDetail.html', context={'feed':feed})
     
 def certDetail(request, pk):
 	cert = Certification.objects.get(id=pk)
