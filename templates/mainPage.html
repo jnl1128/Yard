@@ -1,10 +1,23 @@
-{% extends "base.html" %} {% block content %} 
-    <div style="margin-top:5rem;">
-        <form class="form-inline my-2 my-lg-0" action="{% url 'user:search' %}" method="get">
+{% extends "base.html" %} 
+{% block content %} 
+<div class="main-container">
+    <div class="main--text--container">
+        <h1 class="title">Yar:d</h1>
+        <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui omnis autem beatae dolore. Praesentium id blanditiis facilis voluptas cupiditate impedit ipsam tempore, molestias nobis. Labore laudantium maiores accusantium voluptate!</div>
+    </div> 
+    <img src="../static/img/note.png" class="main--img">
+</div> 
+
+
+    <div class="search-container">
+        <form class="" action="{% url 'user:search' %}" method="get">
             {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
+            <button class="" type="submit">찾기</button>
         </form>
+        <div class="hashtag--container">
+            
+        </div>
     </div>
     
     
