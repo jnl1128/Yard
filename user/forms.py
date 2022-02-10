@@ -25,6 +25,11 @@ class CustomSignupForm(SignupForm):
 
 class createFeedForm(forms.ModelForm):
     class Meta:
-        model = Feed
-        fields = "__all__"
+      model = Feed
+      fields = "__all__"
     createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
+
+class createCertForm(forms.ModelForm):
+    class Meta:
+        model = Music
+        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate') 
