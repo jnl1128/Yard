@@ -15,7 +15,10 @@ class User(AbstractUser):
     userImg = models.ImageField(upload_to="userImg", null=True, blank=True)
     
     def __str__(self):
-        return self.userId
+        if self.userId != '':
+            return self.userId
+        else:
+            return self.username
 
 class Artist(models.Model):
     name = models.CharField(verbose_name="가수", max_length=20)
