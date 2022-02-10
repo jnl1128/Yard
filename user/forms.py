@@ -10,7 +10,7 @@ class CustomSignupForm(SignupForm):
     nickName = forms.CharField(label="닉네임", max_length=30)
     gender = forms.ChoiceField(label="성별", choices=GENDER_CHOICES, required=False)
     birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=False)
-    imageUrl = forms.ImageField(label="유저 이미지", required=False)
+    userImg = forms.ImageField(label="유저 이미지", required=False)
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
@@ -19,17 +19,17 @@ class CustomSignupForm(SignupForm):
         user.nickName = self.cleaned_data['nickName']
         user.gender = self.cleaned_data['gender']
         user.birth = self.cleaned_data['birth']
-        user.imageUrl = self.cleaned_data['imageUrl']
+        user.userImg = self.cleaned_data['userImg']
         user.save()
         return user
 
-class createCommunityForm(forms.ModelForm):
+class createFeedForm(forms.ModelForm):
     class Meta:
-        model = Community
-        fields = "__all__"
-
+      model = Feed
+      fields = "__all__"
+    createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
 
 class createCertForm(forms.ModelForm):
     class Meta:
         model = Music
-        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate')
+        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate') 

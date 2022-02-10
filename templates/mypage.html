@@ -1,38 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <h1>내 노래들</h1>
-  <div class="certificate-container">
-    {% for certificate in certificates %}
-    {% if request.user == certificate.userId %}
-    <div class="certificate">
-      {% if certificate.musicId.albumImg %}
-        <img src="{{ certificate.musicId.albumImg.url }}" height="200" width="200">
-      {% endif %}
-      <div class="music-info">
-        <div class="index">곡</div><div>{{certificate.musicId.title}}</div>
+<main class="">
+  <h1>My Certificates</h1>
+  <a href="{% url 'user:musicRegister'%}">인증서 등록</a>
+  <div class="certificate-list">
+  {% for certificate in certificates %}
+  {% if request.user == certificate.userId %}
+  <a href="#">
+    <div class="certificate-container">
+      <div class="certificate" style="background-image:url({{ certificate.musicId.albumImg.url }})"></div>
+      <div class="music-info-container hidden" id="musicInfo">
+        <div class="music-info">
+          <div class="index">곡</div><div>{{certificate.musicId.title}}</div>
+        </div>
+        <div class="music-info">
+          <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
+        </div> 
+        <div class="music-info">
+          <div class="index">아티스트</div><div>{{certificate.musicId.artist}}</div>
+        </div>
+        <div class="music-info">
+          <div class="index">발급일</div><div>{{certificate.createdDate | date:"Y-m-d"}}</div>
+        </div>
       </div>
-      <div class="music-info">
-        <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
-      </div> 
-      <div class="music-info">
-        <div class="index">아티스트</div><div>{{certificate.musicId.artist}}</div>
-      </div>
-      <div class="music-date">
-        <div>{{certificate.createdDate | date:"Y-m-d"}}부터 좋아했음</div>
-      </div>
-      <i class="far fa-stop-circle fa-7x"></i>
-      <i class="fas fa-award fa-5x"></i>
-      </div>
+    </div>
+  </a>
     {% endif %}    
     {% endfor %}
-    <div class="addCertificate">
-      <a href="/register/">
-        <i class="fas fa-plus fa-7x"></i>
-      </a>
-    </div>
+    <img class="moreCertBtn" id = 'moreCertBtn' src="../static/img/moreCertBtn.png">
   </div>
-  <h1>음악 취향의 기록</h1>
+  <h1>History</h1>
   
   <div class="history-container">
     {% for year in years%}
@@ -47,5 +45,10 @@
     {% endfor %}
   </div>
   
-  
+</main>
+
+{% endblock %}
+
+{% block js%}
+<script src ="{% static 'js/myPage.js' %}"> </script>
 {% endblock %}
