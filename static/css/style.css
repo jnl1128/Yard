@@ -2,6 +2,7 @@
 @import './base.css';
 @import './mainPage.css';
 @import './variables.css';
+@import './reset.css';
 
 *{
   box-sizing: border-box;
