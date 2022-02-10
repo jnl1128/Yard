@@ -23,7 +23,8 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
 
-class createCommunityForm(forms.ModelForm):
+class createFeedForm(forms.ModelForm):
     class Meta:
-        model = Community
+        model = Feed
         fields = "__all__"
+    createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
