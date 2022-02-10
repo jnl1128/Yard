@@ -3,7 +3,7 @@
 {% block content %}
 <main class="">
   <h1>My Certificates</h1>
-  <a href="{% url 'user:musicRegister'%}">인증서 등록</a>
+  <a href="{% url 'user:certificationRegister'%}">인증서 등록</a>
   <div class="certificate-list">
   {% for certificate in certificates %}
   {% if request.user == certificate.userId %}
