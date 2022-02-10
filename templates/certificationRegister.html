@@ -1,0 +1,9 @@
+{% block content %}
+    <h1>새 인증서</h1>
+    <input type="text">
+    <a><button>검색</button></a>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

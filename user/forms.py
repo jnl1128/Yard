@@ -27,3 +27,9 @@ class createCommunityForm(forms.ModelForm):
     class Meta:
         model = Community
         fields = "__all__"
+
+
+class createCertForm(forms.ModelForm):
+    class Meta:
+        model = Music
+        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate')

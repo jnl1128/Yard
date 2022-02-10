@@ -35,6 +35,7 @@
         $.ajax({
             type: 'GET',
             url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+musicKeyWord+'&api_key=91921c9761d97539ea8147f4599b5f3e&format=json',
+            //url: 'http://www.maniadb.com/api/search.asp?v=0.3&target=music&itemtype=song&option=song&query='+musicKeyWord+'&key=yeon',
             success: function (response) {
                     let musicList = response["results"]["trackmatches"]["track"];
                     for (let i = 0; i < musicList.length; i++) {

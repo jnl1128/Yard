@@ -21,9 +21,6 @@ def myPage(request):
   sorted(years, reverse=False)
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
-  
-def musicRegister(request):
-    return render(request, 'musicRegister.html')
 
 def mainSearch(request):
     return render(request, 'mainPage.html')
@@ -78,3 +75,18 @@ def certDetail(request, pk):
 #     certification = Certification.objects.get(id=pk)
 #     certification.delete()
 # 	return redirect('user:myPage')
+
+def certificationRegister(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            cert = form.save(commit=False)
+            cert.published_date = timezone.now()
+            cert.save()
+            return redirect('mypage')
+    else:
+        form = PostForm()
+    return render(request, 'certificationRegister.html', {'form': form})
+
+def musicSearch(request):
+    return render(request, 'musicSearch.html')
