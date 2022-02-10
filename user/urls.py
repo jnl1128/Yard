@@ -9,7 +9,7 @@ urlpatterns = [
   path('mypage/', view=views.myPage, name="myPage"),
   path('register/', views.musicRegister, name='musicRegister'),
   path('search/',views.searchResult, name='search'),
-  path('createCommunity/', views.createCommunity, name="createCommunity"),
-  path('community/<int:pk>/', views.communityDetail, name="communityDetail"),
+  path('createFeed/', views.createFeed, name="createFeed"),
+  path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),
 	path('<int:pk>/', views.certDetail, name='certDetail'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
