@@ -10,6 +10,8 @@ class CustomSignupForm(SignupForm):
     birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=False)
     userImg = forms.ImageField(label="유저 이미지", required=False)
 
+    field_order = ['email', 'password1', 'password2',  'userImg', 'nickName', 'gender', 'birth']
+
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         user.nickName = self.cleaned_data['nickName']
@@ -19,10 +21,11 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
 
+
 class createFeedForm(forms.ModelForm):
     class Meta:
-      model = Feed
-      fields = "__all__"
+        model = Feed
+        fields = "__all__"
     createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
 
 class createCertForm(forms.ModelForm):
