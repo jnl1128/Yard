@@ -2,8 +2,7 @@
 @import './myPage.css';
 @import './base.css';
 @import './mainPage.css';
-@import './variables.css';
-
+@import './feed.css';
 *{
   box-sizing: border-box;
   font-family: 'Shrikhand', cursive;
