@@ -15,23 +15,18 @@
     <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
       <div class="card text-center" style="min-width: 18rem">
         <div class="card-body">
-          <a href="{% url 'user:feedDetail' feed.id%}"
-            ><h4>{{feed.feedName}}</h4></a
-          >
+          <a href="{% url 'user:feedDetail' feed.id%}">
+            <h4>{{feed.feedName}}</h4>
+          </a>
         </div>
       </div>
     </div>
     {% empty %}
     <div class="row mx-auto">
       <p class="text-center my_search_text">
-        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp<a
-          href="{% url 'user:createFeed' %}"
-          ><button
-            class="btn btn-secondary my-2 my-sm-0 center-block"
-            type="submit"
-          >
-            <i class="fas fa-plus-square"></i></button
-        ></a>
+        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp<a href="{% url 'user:createFeed' %}"><button
+            class="btn btn-secondary my-2 my-sm-0 center-block" type="submit">
+            <i class="fas fa-plus-square"></i></button></a>
       </p>
     </div>
     {% endfor %}
