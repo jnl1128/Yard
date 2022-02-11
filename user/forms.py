@@ -24,12 +24,42 @@ class CustomSignupForm(SignupForm):
         return user
 
 class createFeedForm(forms.ModelForm):
+    # music = forms.CharField(
+    #     max_length=100,
+    #     label='음악 제목',
+    #     help_text='제목은 100자이내로 작성하세요.',
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'my-input',
+    #             'placeholder': '제목 입력'
+    #             }
+    #         )
+    # )
+    # content = forms.CharField(
+    #     label='내용',
+    #     help_text='자유롭게 작성해주세요.',
+    #     widget=forms.Textarea(
+    #             attrs={
+    #                 'row': 5,
+    #                 'col': 50,
+    #             }
+    #     )
+    # )
+    # createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
+    
     class Meta:
-      model = Feed
-      fields = "__all__"
-    createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
+        model = Feed
+        fields = ['music', 'artist', 'tags', 'content', 'feedImg']
+    
+    
+    
+    
+    # class Meta:
+    #   model = Feed
+    #   fields = "__all__"
+    # createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
 
 class createCertForm(forms.ModelForm):
     class Meta:
-        model = Music
-        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate') 
+        model = Certification
+        fields =  "__all__"

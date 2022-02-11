@@ -12,13 +12,13 @@
       <div class="certificate" style="background-image:url({{ certificate.musicId.albumImg.url }})"></div>
       <div class="music-info-container hidden" id="musicInfo">
         <div class="music-info">
-          <div class="index">곡</div><div>{{certificate.musicId.title}}</div>
+          <div class="index">곡</div><div>{{certificate.music}}</div>
         </div>
         <div class="music-info">
           <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
         </div> 
         <div class="music-info">
-          <div class="index">아티스트</div><div>{{certificate.musicId.artist}}</div>
+          <div class="index">아티스트</div><div>{{certificate.artist}}</div>
         </div>
         <div class="music-info">
           <div class="index">발급일</div><div>{{certificate.createdDate | date:"Y-m-d"}}</div>

@@ -1,4 +1,14 @@
 {% extends "base.html" %} {% block content %}
+<div class="search-container">
+  <form class="" action="{% url 'user:search' %}" method="get">
+      {% csrf_token %}
+      <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
+      <button class="" type="submit">찾기</button>
+  </form>
+  <div class="hashtag--container">
+      
+  </div>
+</div>
 <div style="margin-top: 5rem">
   <p class="text-center my_search_text">검색한 커뮤니티: <b>"{{query}}"</b></p>
 </div>
@@ -16,8 +26,20 @@
       <div class="card text-center" style="min-width: 18rem">
         <div class="card-body">
           <a href="{% url 'user:feedDetail' feed.id%}">
-            <h4>{{feed.feedName}}</h4>
+            <h4>{{feed.music}}</h4>
           </a>
+          <p>
+            {{feed.artist}}
+          </p>
+          <p>
+            {{feed.createdDate}}
+          </p>
+          <p>
+            {{feed.content}}
+          </p>
+          <p>
+            {{feed.userId}}
+          </p>
         </div>
       </div>
     </div>
@@ -29,6 +51,7 @@
             <i class="fas fa-plus-square"></i></button></a>
       </p>
     </div>
+    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
     {% endfor %}
   </div>
 </div>

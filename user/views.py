@@ -36,30 +36,36 @@ def searchResult(request):
         if query=="":
             query = "#모든"
         if query=="#모든":
-            feeds = Feed.objects.all()
+            feeds = Feed.objects.all().order_by('-createdDate')
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
         if query[0] == '#':
             tagId = HashTag.objects.filter(name=query)
-            feeds = Feed.objects.all().filter(tags=tagId[0].id)
+            feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        try:
-            music = Music.objects.get(title=query)
-            feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(musicId=music.id))          
-        except:
-            try:
-                artist = Artist.objects.get(name=query)
-                feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
-            except:
-                feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
+        # try:
+            # music = Music.objects.get(title=query)
+        feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
+        # except:
+        #     try:
+        #         artist = Artist.objects.get(name=query)
+        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
+        #     except:
+        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
    
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 def createFeed(request):
+    current_user = request.user
     if request.method == 'POST':
         form = createFeedForm(request.POST)
         if form.is_valid():
-            feed = form.save()
-            return render(request, 'mainPage.html')
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            feeds = Feed.objects.all().order_by('-createdDate')
+            query = "#모든"
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            
     else:
         form = createFeedForm()
     ctx = {'form': form}
