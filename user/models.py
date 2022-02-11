@@ -5,20 +5,15 @@ import datetime
 # Create your models here.
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
-    userId = models.CharField(verbose_name="아이디", max_length=30)
-    name = models.CharField(verbose_name="이름", max_length=20)
-    password = models.CharField(verbose_name="패스워드", max_length=128)
     email = models.CharField(verbose_name="이메일",max_length=50)
     nickName = models.CharField(verbose_name="닉네임", max_length=30)
+    password = models.CharField(verbose_name="패스워드", max_length=128)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
     birth = models.DateField(verbose_name="출생년도", null=True)
     userImg = models.ImageField(upload_to="userImg", null=True, blank=True)
     
     def __str__(self):
-        if self.userId != '':
-            return self.userId
-        else:
-            return self.username
+        return self.email
 
 class Artist(models.Model):
     name = models.CharField(verbose_name="가수", max_length=20)
