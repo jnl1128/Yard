@@ -1,0 +1,54 @@
+.feed-list{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 30px;
+  
+  margin: 50px 100px;
+  height: 200vh;
+}
+
+.feed-container{
+  margin: 50px 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.feed--userInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.feed--userImg{
+  border: 1px solid white;
+  border-radius: 50%;
+  height:100px;
+  width:100px;
+  margin-bottom: 10px;
+}
+
+.feed--userName{
+  font-size: 25px;
+}
+
+.feed--content{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-left: 40px;
+  padding: 30px 50px;
+}
+
+.feed--content-my{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-right: 40px;
+  padding: 30px 50px;
+}
