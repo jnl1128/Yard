@@ -1,6 +1,4 @@
-from unicodedata import name
 from django.shortcuts import render, redirect
-from django.test import tag
 from .models import *
 from .forms import *
 from django.db.models import Q

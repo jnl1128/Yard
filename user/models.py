@@ -93,12 +93,12 @@ class HashTag(models.Model):
    
 class Feed(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artist id", null=True)
-    feedName = models.CharField(verbose_name="피드 이름", max_length=50)
     createdDate = models.DateField(verbose_name="피드 생성일")
     userId = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저 id")
     musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
     tags = models.ManyToManyField('HashTag', blank=True)
     content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
+    feedImg = models.ImageField(upload_to="feedImg", null=True, blank=True)
     
     def __str__(self):
         return self.feedName
