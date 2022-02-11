@@ -1,5 +1,5 @@
 from unicodedata import name
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.test import tag
 from .models import *
 from .forms import *
@@ -78,10 +78,18 @@ def certDetail(request, pk):
 	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
-# def certDelete(request, pk):
-#     certification = Certification.objects.get(id=pk)
-#     certification.delete()
-# 	return redirect('user:myPage')
+def certUpdate(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+
+	if request.method == 'POST':
+		form = createCertForm(request.POST, instance = cert)
+		if form.is_valid():
+			cert = form.save()
+			return redirect('user:certDetail', pk)
+	else :
+		form = createCertForm(instance = cert)
+		ctx = {'form' : form}
+		return render(request, template_name = 'certUpdate.html', context = ctx)
 
 def certificationRegister(request):
     if request.method == "POST":

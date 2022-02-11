@@ -31,4 +31,9 @@ class createFeedForm(forms.ModelForm):
 class createCertForm(forms.ModelForm):
     class Meta:
         model = Music
-        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate') 
+        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate')
+
+class CertForm(forms.ModelForm):
+    class Meta:
+        model = Certification
+        fields = ('createdDate') 
