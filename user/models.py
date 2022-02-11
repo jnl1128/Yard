@@ -55,7 +55,6 @@ class User(AbstractUser):
     objects = UserManager()
 
 
-
 class Certification(models.Model):
     createdDate = models.DateField(verbose_name="인증 날짜", default=datetime.date.today)
     userId = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="유저 id")
