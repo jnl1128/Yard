@@ -61,6 +61,7 @@ class Certification(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="유저 id")
     music = models.CharField(verbose_name="인증서 음악", max_length=100)
     artist = models.CharField(verbose_name="인증서 가수", max_length=100)
+    albumImg = models.ImageField(upload_to="albumImg", null=True, blank=True)
     
     def __str__(self):
         return self.musicId.title
