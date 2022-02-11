@@ -9,7 +9,7 @@
   {% if request.user == certificate.userId %}
   <a href="#">
     <div class="certificate-container">
-      <div class="certificate" style="background-image:url({{ certificate.musicId.albumImg.url }})"></div>
+      <div class="certificate" style="background-image:url({{ certificate.albumImg }})"></div>
       <div class="music-info-container hidden" id="musicInfo">
         <div class="music-info">
           <div class="index">곡</div><div>{{certificate.music}}</div>
