@@ -1,8 +1,8 @@
+@import './reset.css';
 @import './myPage.css';
 @import './base.css';
 @import './mainPage.css';
 @import './variables.css';
-@import './reset.css';
 
 *{
   box-sizing: border-box;
@@ -17,6 +17,8 @@ body{
   width: 100vw;
   margin: 0;
   overflow-x: hidden;
+  color: white !important;/*임시*/
+
 }
 
 a{
