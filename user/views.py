@@ -93,15 +93,21 @@ def certUpdate(request, pk):
 
 def certificationRegister(request):
     if request.method == "POST":
-        form = createCertForm(request.POST)
-        if form.is_valid():
-            cert = form.save(commit=False)
-            cert.published_date = timezone.now()
-            cert.save()
-            return redirect('mypage')
+        form1 = createCertForm(request.POST,prefix="form1")
+		form2 = certFrom(request.POST,prefix="form2")
+        if form1.is_valid() and form2.is_valid():
+			music = form1.save()
+            music.published_date = timezone.now()
+            music.save()
+
+			cert = form2.save()
+            return redirect('user:myPage')
     else:
-        form = createCertForm()
-    return render(request, 'certificationRegister.html', {'form': form})
+        form1 = createCertForm(prefix="form1")
+		form2 = certFrom(prefix="form2")
+	ctx = {'form1' : form1, 'form2':form2}
+		
+    return render(request, 'certificationRegister.html', context=ctx)
 
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
