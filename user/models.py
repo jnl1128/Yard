@@ -1,24 +1,55 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 import datetime
 
 # Create your models here.
+class UserManager(BaseUserManager):
+    def create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError('Enter an email address')
+
+        email = self.normalize_email(email)
+
+        user = self.model(
+            email=email,
+            password=password,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+    
+    def create_superuser(self, email, password):       
+        user = self.create_user(            
+            email,
+            password=password,
+        )
+        user.is_admin = True
+        user.is_superuser = True        
+        user.is_staff = True
+        user.save(using=self._db)
+
+        return user
+
+
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
-    userId = models.CharField(verbose_name="아이디", max_length=30)
-    name = models.CharField(verbose_name="이름", max_length=20)
-    password = models.CharField(verbose_name="패스워드", max_length=128)
-    email = models.CharField(verbose_name="이메일",max_length=50)
+    email = models.EmailField(verbose_name="이메일 주소", unique=True)
     nickName = models.CharField(verbose_name="닉네임", max_length=30)
+    password = models.CharField(verbose_name="패스워드", max_length=128)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
     birth = models.DateField(verbose_name="출생년도", null=True)
     userImg = models.ImageField(upload_to="userImg", null=True, blank=True)
+    first_name = None
+    last_name = None
+
     
+    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'
+
     def __str__(self):
-        if self.userId != '':
-            return self.userId
-        else:
-            return self.username
+        return self.email
 
 class Artist(models.Model):
     name = models.CharField(verbose_name="가수", max_length=20)
