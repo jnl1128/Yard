@@ -6,7 +6,7 @@ import datetime
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
     email = models.EmailField(('이메일 주소'), unique=True)
-    nickName = models.CharField(verbose_name="닉네임", max_length=30)
+    nickName = models.CharField(verbose_name="닉네임", max_length=30, unique=True)
     password = models.CharField(verbose_name="패스워드", max_length=128)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
     birth = models.DateField(verbose_name="출생년도", null=True)
