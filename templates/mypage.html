@@ -9,14 +9,11 @@
   {% if request.user == certificate.userId %}
   <a href="#">
     <div class="certificate-container">
-      <div class="certificate" style="background-image:url({{ certificate.albumImg }})"></div>
+      
       <div class="music-info-container hidden" id="musicInfo">
         <div class="music-info">
           <div class="index">곡</div><div>{{certificate.music}}</div>
         </div>
-        <div class="music-info">
-          <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
-        </div> 
         <div class="music-info">
           <div class="index">아티스트</div><div>{{certificate.artist}}</div>
         </div>
@@ -38,7 +35,7 @@
     {% for his in history %}
     {% if request.user == his.userId %}
       {% if year == his.year %}
-        <div class="history">{{his.createdDate | date:"Y-m-d"}}   |   {{his.musicId.title}}</div>
+        <div class="history">{{his.createdDate | date:"Y-m-d"}}   |   {{his.music}}</div>
       {% endif %}
     {% endif %}
     {% endfor %}

@@ -79,7 +79,7 @@ def feedDetail(request, pk):
     
 def certDetail(request, pk):
 	cert = Certification.objects.get(id=pk)
-	music = cert.musicId
+	music = cert.music
 
 	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
@@ -122,19 +122,13 @@ def musicSearch(request):
 @csrf_exempt
 def add_comment_ajax(request):
     # 요청을 통해 들어온 데이터값들 (request.body에 담겨있음) req에 담아줌.
-
     req = json.loads(request.body)
-    print(req)
     music = req['music']
     artist = req['artist']
+    print(music)
+    print(artist)
             
     form = createFeedForm()
     ctx = {'form': form, 'music':music, 'artist':artist}
     print("hello")
-    return render(request, template_name='form.html', context=ctx)
-
-
-    # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
-    # 서버가 클라이언트로 보내는 요청임.
-    # 사실 매개변수(id와 type)는 안넣어도 되는데 클라이언트에게 어떰 값이 변경되었는지 알려주기 위해 넣어준것.
-   
+    return render(request, 'form.html', context=ctx)
