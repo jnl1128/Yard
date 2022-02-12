@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-<img src="{static 'img/moreCertBtn.png'}" alt="">
-<div>My Certificate</div>
+
+<div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage" src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
 
 <div class="certDetail-container">
 	

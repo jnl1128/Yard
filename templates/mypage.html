@@ -4,16 +4,16 @@
 <main class="">
   <h1>My Certificates</h1>
   <div class="certificate-btn" id = 'certificate-btn'>
-    <img class="certificate-leftBtn" id = 'certificate-leftBtn' src="{static 'img/moreCertBtn.png'}">
-    <img class="certificate-rightBtn" id = 'certificate-rightBtn' src="{static 'img/moreCertBtn.png'}">  
+    <img class="certificate-leftBtn" id = 'certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
+    <img class="certificate-rightBtn" id = 'certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">  
   </div>
   <a href="{% url 'user:certificationRegister'%}">인증서 등록</a>
   <div class="certificate-list">
   {% for certificate in certificates %}
   {% if request.user == certificate.userId %}
   
-  <a href="#">
-    <div class="certificate-container">
+  <a href="{% url 'user:certDetail' certificate.id %}">
+    <div class="certificate-container"> 
       <div class="certificate" style="background-image:url({{ certificate.musicId.albumImg.url }})"></div>
       <div class="music-container hidden" id="musicInfo">
         <div class="music-info">
