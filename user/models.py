@@ -4,49 +4,55 @@ import datetime
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, **extra_fields):
-        user = self.model(
-            email=email,
-            password=password,
-        )
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+    """Define a model manager for User model with no username field."""
+
+    use_in_migrations = True
+
+    def _create_user(self, email, password, **extra_fields):
+        """Create and save a User with the given email and password."""
+        if not email:
+            raise ValueError('The given email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        return user
 
-        return user
-    
-    def create_superuser(self, email, password, **extra_fields):       
-        user = self.create_user(            
-            email = self.normalize_email(email),
-            password=password,
-            **extra_fields
-        )
-        user.is_admin = True        
-        user.is_superuser = True        
-        user.is_staff = True
-        user.save(using=self._db)
-        
-        return user
+    def create_user(self, email, password=None, **extra_fields):
+        """Create and save a regular User with the given email and password."""
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
+        """Create and save a SuperUser with the given email and password."""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
 
 
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
+    """User model."""
+
+    username = None
     email = models.EmailField(verbose_name="이메일 주소", unique=True)
-    nickName = models.CharField(verbose_name="닉네임", max_length=30, unique=True)
+    nickName = models.CharField(verbose_name="닉네임", max_length=30)
     password = models.CharField(verbose_name="패스워드", max_length=128)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
     birth = models.DateField(verbose_name="출생년도", null=True)
     userImg = models.ImageField(upload_to="userImg", null=True, blank=True)
-    username = None
-    first_name = None
-    last_name = None
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    def __str__(self):
-        return self.email
+    objects = UserManager()
 
 
 class Certification(models.Model):
