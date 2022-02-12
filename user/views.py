@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.contrib import messages
 from .forms import *
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 # Create your views here.
@@ -116,3 +118,23 @@ def musicSearch(request):
 #    ctx = {'results': result}
 
     return render(request, 'musicSearch.html')
+
+@csrf_exempt
+def add_comment_ajax(request):
+    # 요청을 통해 들어온 데이터값들 (request.body에 담겨있음) req에 담아줌.
+
+    req = json.loads(request.body)
+    print(req)
+    music = req['music']
+    artist = req['artist']
+            
+    form = createFeedForm()
+    ctx = {'form': form, 'music':music, 'artist':artist}
+    print("hello")
+    return render(request, template_name='form.html', context=ctx)
+
+
+    # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
+    # 서버가 클라이언트로 보내는 요청임.
+    # 사실 매개변수(id와 type)는 안넣어도 되는데 클라이언트에게 어떰 값이 변경되었는지 알려주기 위해 넣어준것.
+   
