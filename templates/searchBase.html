@@ -20,10 +20,14 @@
   <title>Yard</title>
 </head>
 <body style="background: linear-gradient(180deg, #361C82 14.58%, rgba(219, 86, 231, 0.78) 100%);">
- 
   <header class="nav">
-    <a href="/"><img class="logobtn" src="../static/img/logo.png"></a>
-    <div class="dropdown">
+    <a href="/"><img class="logobtn"src="../static/img/logo.png"></a>
+    <div class="nav--inputBox">
+      <form action="methods">
+        <input class="nav--input" type="text" placeholder="음악" autocomplete="off" >
+      </form>
+    </div>
+    <div class="nav--dropdown">
       <a class="dropbtn" href=""><img src="../static/img/profile.png" alt=""></a>
       <div class="dropdown-content">
         {% if not request.user.is_authenticated %} 

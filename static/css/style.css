@@ -1,9 +1,9 @@
 @import "./reset.css";
 @import "./myPage.css";
-@import "./mainPage.css";
-@import "./variables.css";
 @import "./base.css";
-
+@import "./mainPage.css";
+@import "./feed.css";
+@import "./account.css";
 * {
   box-sizing: border-box;
   font-family: "Shrikhand", cursive;
@@ -17,6 +17,12 @@ body {
   width: 100vw;
   margin: 0;
   overflow-x: hidden;
+  color: white !important; /*임시*/
+  background: linear-gradient(
+    180deg,
+    #361c82 14.58%,
+    rgba(219, 86, 231, 0.78) 100%
+  ) !important;
 }
 
 a {
