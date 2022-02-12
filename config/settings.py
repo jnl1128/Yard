@@ -150,12 +150,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -163,3 +158,12 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+ACCOUNT_UNIQUE_EMAIL = True
