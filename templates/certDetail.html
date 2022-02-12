@@ -1,7 +1,33 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
+<img src="{static 'img/moreCertBtn.png'}" alt="">
+<div>My Certificate</div>
+
+<div class="certDetail-container">
+	
+	<div class="certDetail-img">
+		<img src="{{music.albumImg.url}}" height="440" width="400">
+	</div>
+	<div class="certDetail-info">
+		<div class="music-info">
+			<div class="index">곡</div><div>{{music.title}}</div>
+		</div>
+		<div class="music-info">
+			<div class="index">앨범</div><div>{{music.albumTitle}}</div>
+		</div> 
+		<div class="music-info">
+			<div class="index">아티스트</div><div>{{music.artist}}</div>
+		</div>
+		<div class="music-info">
+			<div class="index">발급일</div><div>{{cert.createdDate | date:'Y.m.d'}}</div>
+		</div>
+	</div>
+</div>
+
+
+<!--
 <div class="cert-left">
 	<div class=album-img>
 		{% if music.albumImg %}
@@ -11,14 +37,12 @@
 		{% endif %}
 	</div>
 
-	<h4>가수 {{music.artist}}</h4>
-	<h4>앨범 {{music.albumTitle}}</h4>
-	<h4>{{cert.createdDate | date:'Y.m.d'}}부터 좋아했음</h4>
+	
 </div>
 
 <div class="cert-right">
 	<h1>{{music.title}}</h1>
 	<div>{{music.lyric}}</div>
 </div>
-
+-->
 {% endblock %}
