@@ -42,16 +42,150 @@
   </div>
 </div>
 {% endcomment %}
+
 <div class="form-container">
   <div class="form">
     <h2 class="form-title">
       <span class="highlight">Create</span>New Community⭐️
     </h2>
     <hr />
+    <label for="songinfo">음악 검색</label>
+    <input
+      type="text"
+      id="songinfo"
+      class="whatToSearch"
+      placeholder="검색"
+      autocomplete="off"
+      onkeyup="addMusicList()"
+    />
+    <button type="button" onclick="addMusicList()">검색</button>
+    <button
+      id="registerMusic"
+      style="
+        border-radius: 1rem;
+        border-width: 0.1rem;
+        background-color: cornflowerblue;
+        color: white;
+      "
+      onclick="registerMusic()"
+    >
+      노래 등록
+    </button>
     <form method="POST" class="post-form" enctype="multipart/form-data">
-      {% csrf_token %} {{ form.as_p }}
+      {% csrf_token %}{% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for field in form %} {% if field.errors %}
+          <strong>{{ field.label }}</strong>
+          {{ field.errors }} {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+        <div class="form-group">
+          <label for="subject">음악</label>
+          <input
+            type="text"
+            class="form-control"
+            name="music"
+            {% comment %} value="{{ form.music.value|default_if_none:'' }}" {% endcomment %}
+            placeholder={{music}}
+          />
+        </div>
+        <div class="form-group">
+          <label for="subject">가수</label>
+          <input
+            type="text"
+            class="form-control"
+            name="artist"
+            value="{{ form.artist.value|default_if_none:'' }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="content">내용</label>
+          <textarea class="form-control" name="content" id="content" rows="10">
+  {{ form.content.value|default_if_none:'' }}</textarea
+          >
+        </div>
+        <button type="submit" class="save btn btn-primary">Save</button>
+      </form>
       <button type="submit" class="save btn btn-primary">Save</button>
     </form>
   </div>
 </div>
+
+<div class="musicListList"></div>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  $(document).ready($(".musicList").empty());
+
+  function addMusicList() {
+    let musicKeyWord = $("#songinfo").val();
+    $(".musicList").empty();
+    $.ajax({
+      type: "GET",
+      url:
+        "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" +
+        musicKeyWord +
+        "&api_key=91921c9761d97539ea8147f4599b5f3e&format=json",
+      //url: 'https://api.spotify.com/v1/search?track:'+musicKeyWord,
+      success: function (response) {
+        let musicList = response["results"]["trackmatches"]["track"];
+        for (let i = 0; i < musicList.length; i++) {
+          let albumTitle = musicList[i]["name"];
+          let albumArtist = musicList[i]["artist"];
+          getMusicHtml(albumTitle, albumArtist);
+        }
+      },
+    });
+  }
+
+  function getMusicHtml(title, artist) {
+    let musicHtml = `<div class="songs">
+          <input class="form-check-input" type="checkbox" value="" id="musicChoice">
+          <label class="form-check-label" for="musicChoice" id="musicInfo">
+              ${title}
+              |
+              ${artist}
+          </label>
+      </div>`;
+    $(".musicListList").append(musicHtml);
+  }
+
+  let registerMusicBtn = document.querySelector("#registerMusic");
+  registerMusicBtn.addEventListener("click", registerMusic());
+
+  function registerMusic() {
+    let listedMusic = document.querySelectorAll(".songs");
+    for (let i = 0; i < listedMusic.length; i++) {
+      if (listedMusic[i].querySelector("#musicChoice").checked) {
+        let checkedMusic = listedMusic[i];
+        let musicInfo = checkedMusic.querySelector("#musicInfo").innerHTML;
+        let musicTitle = musicInfo.split("|")[0].trim();
+        let musicArtist = musicInfo.split("|")[1].trim();
+        //checkedMusic의 title, artist 불러 오기
+        //console.log(checkedMusic);
+        console.log(listedMusic[i]);
+        console.log(checkedMusic);
+        console.log(musicInfo);
+        console.log(musicTitle);
+        console.log(musicArtist);
+        onClickAddMusic(musicTitle, musicArtist);
+      }
+    }
+  }
+
+  const onClickAddMusic = async (music, artist) => {
+    console.log(music);
+    const url = "/add_comment_ajax/";
+    // 해당하는 url에 요청을 보내는데 id, type을 함께 보내겠다 라는 말.
+    // 서버에서 응답이 올때까지 await로 기다리다가 온 응답을 data에 받겠다.
+    const { data } = await axios.post(url, {
+      music,
+      artist,
+    });
+  };
+</script>
 {% endblock %}
