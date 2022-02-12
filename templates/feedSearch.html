@@ -1,0 +1,60 @@
+{% extends "searchBase.html" %} {% block content %}
+
+  <div class="hashtag--container">
+      
+  </div>
+
+<div style="margin-top: 5rem">
+  <p class="text-center my_search_text">검색 결과: <b>"{{query}}"</b></p>
+</div>
+<div class="feed-list">
+    <!-- {% if messages %}
+        <section id="messages">
+            <script type="text/javascript">
+                alert('검색어는 2글자 이상 입력해주세요.');
+            </script>      
+        </section>
+        {% endif %} -->
+    {% for feed in feeds %}
+    <!--남의 피드인 경우-->
+    <div class="feed-container">
+      <div class="feed--userInfo">
+        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        <p class="feed--userName">{{feed.userId}}</p>
+      </div>
+      <div class="feed--content">
+        <p>{{feed.artist}} - {{feed.title}}</p>
+        <p>{{feed.content}}</p>
+        <p>{{feed.tags}}</p>
+       <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+      </div>
+    </div>
+    <!--내 피드인 경우-->
+    <div class="feed-container">
+      <div class="feed--content-my">
+          <p>{{feed.artist}} - {{feed.title}}</p>
+          <p>{{feed.content}}</p>
+          <p>{{feed.tags}}</p>
+         <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+      </div>
+      <div class="feed--userInfo">
+        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        <p class="feed--userName">{{feed.userId}}</p>
+      </div>
+    </div>
+    {% empty %}
+    <div class="">
+      <p class="text-center my_search_text">
+        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
+        <a href="{% url 'user:createFeed' %}">
+          <button class="btn btn-secondary my-2 my-sm-0 center-block" type="submit">
+            <i class="fas fa-plus-square"></i>
+          </button>
+        </a>
+      </p>
+    </div>
+    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 35px 45px;
+  color: white;
+  font-size: 30px;
+  background-color: transparent;
+}
+
+.navBtn {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  justify-content: space-around;
+}
+main {
+  margin-top: 100px;
+}
