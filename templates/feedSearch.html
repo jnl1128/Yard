@@ -1,14 +1,9 @@
 {% extends "searchBase.html" %} {% block content %}
-<div class="search-container">
-  <form class="" action="{% url 'user:search' %}" method="get">
-      {% csrf_token %}
-      <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
-      <button class="" type="submit">찾기</button>
-  </form>
+
   <div class="hashtag--container">
       
   </div>
-</div>
+
 <div style="margin-top: 5rem">
   <p class="text-center my_search_text">검색 결과: <b>"{{query}}"</b></p>
 </div>
