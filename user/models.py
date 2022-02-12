@@ -55,29 +55,12 @@ class User(AbstractUser):
     objects = UserManager()
 
 
-class Artist(models.Model):
-    name = models.CharField(verbose_name="가수", max_length=20)
-    birth = models.DateField(verbose_name="출생년도", null=True, blank=True)
-    
-    def __str__(self):
-        return self.name
-
-class Music(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artistId")
-    title = models.CharField(verbose_name="제목", max_length=50)
-    albumTitle = models.CharField(verbose_name="앨범 이름", max_length=50)
-    releasedDate = models.DateField(verbose_name="출시일")
-    lyric = models.TextField(verbose_name="가사")
-    albumImg = models.ImageField(upload_to="albumImg", null=True, blank=True)
-    
-    def __str__(self):
-        return self.title
-
-
 class Certification(models.Model):
     createdDate = models.DateField(verbose_name="인증 날짜", default=datetime.date.today)
     userId = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="유저 id")
-    musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
+    music = models.CharField(verbose_name="인증서 음악", max_length=100)
+    artist = models.CharField(verbose_name="인증서 가수", max_length=100)
+    albumImg = models.ImageField(upload_to="albumImg", null=True, blank=True)
     
     def __str__(self):
         return self.musicId.title
@@ -92,13 +75,13 @@ class HashTag(models.Model):
         return self.name
    
 class Feed(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artist id", null=True)
-    feedName = models.CharField(verbose_name="피드 이름", max_length=50)
-    createdDate = models.DateField(verbose_name="피드 생성일")
+    music = models.CharField(verbose_name="피드 음악", max_length=100)
+    artist = models.CharField(verbose_name="피드 가수", max_length=100)
+    createdDate = models.DateTimeField(verbose_name="피드 생성일",auto_now_add=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저 id")
-    musicId = models.ForeignKey(Music, on_delete=models.CASCADE, verbose_name="music id")
     tags = models.ManyToManyField('HashTag', blank=True)
     content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
+    feedImg = models.ImageField(upload_to="feedImg", null=True, blank=True)
     
     def __str__(self):
-        return self.feedName
+        return self.music

@@ -13,12 +13,12 @@
 - [ ] 체크 사항 2
 - [ ] 체크 사항 3
 - [ ] 체크 사항 4
-<br><br>
+      <br><br>
 
 ## 체크리스트
 
 - [ ] Assignees / Labels / Projects 선택했는지
-<br><br>
+      <br><br>
 
 ## 참고한 자료
 
