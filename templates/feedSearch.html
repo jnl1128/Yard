@@ -18,7 +18,7 @@
         <p class="feed--userName">{{feed.userId}}</p>
       </div>
       <div class="feed--content">
-        <p>{{feed.musicId.artist}} - {{feed.musicId.title}}</p>
+        <p>{{feed.artist}} - {{feed.title}}</p>
         <p>{{feed.content}}</p>
         <p>{{feed.tags}}</p>
        <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
@@ -27,7 +27,7 @@
     <!--내 피드인 경우-->
     <div class="feed-container">
       <div class="feed--content-my">
-          <p>{{feed.musicId.artist}} - {{feed.musicId.title}}</p>
+          <p>{{feed.artist}} - {{feed.title}}</p>
           <p>{{feed.content}}</p>
           <p>{{feed.tags}}</p>
          <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
