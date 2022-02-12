@@ -1,11 +1,38 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 import datetime
 
 # Create your models here.
+class UserManager(BaseUserManager):
+    def create_user(self, email, password, **extra_fields):
+        user = self.model(
+            email=email,
+            password=password,
+        )
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+    
+    def create_superuser(self, email, password, **extra_fields):       
+        user = self.create_user(            
+            email = self.normalize_email(email),
+            password=password,
+            **extra_fields
+        )
+        user.is_admin = True        
+        user.is_superuser = True        
+        user.is_staff = True
+        user.save(using=self._db)
+        
+        return user
+
+
 GENDER_CHOICES= (('여성', '여성'), ('남성', '남성'), ('기타', '기타'))
 class User(AbstractUser):
-    email = models.EmailField(('이메일 주소'), unique=True)
+    email = models.EmailField(verbose_name="이메일 주소", unique=True)
     nickName = models.CharField(verbose_name="닉네임", max_length=30, unique=True)
     password = models.CharField(verbose_name="패스워드", max_length=128)
     gender = models.CharField(verbose_name="성별", max_length=10, choices=GENDER_CHOICES)
