@@ -11,7 +11,7 @@ urlpatterns = [
   path('register/musicsearch/', views.musicSearch, name='musicSearch'),
   path('search/',views.searchResult, name='search'),
   path('createFeed/', views.createFeed, name="createFeed"),
+  path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),
   path('mypage/<int:pk>/', views.certDetail, name='certDetail'),
-  path('add_comment_ajax/', views.add_comment_ajax, name='add_comment_ajax'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
