@@ -85,9 +85,6 @@ def certDetail(request, pk):
 def certUpdate(request, pk):
 	cert = get_object_or_404(Certification, id=pk)
 
-	print(request.POST)
-	print(request.FILES)
-
 	if request.method == 'POST':
 		form = createCertForm(request.POST, request.FILES, instance = cert)
 		if form.is_valid():
