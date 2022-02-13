@@ -1,9 +1,16 @@
 {% extends "searchBase.html" %} {% block content %}
+<<<<<<< HEAD
 {% load static %}
   <div class="hashtag--container">
       
   </div>
 
+=======
+<div id="feedAdd">
+  <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+  <input type="text" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm"/>
+</div>
+>>>>>>> a102dba ([FEAT] 모달 창 생성 기능 구현)
 <div style="margin-top: 5rem">
   <p class="text-center my_search_text">검색 결과: <b>"{{query}}"</b></p>
 </div>
@@ -68,5 +75,26 @@
     <a href="{% url 'user:main' %}">메인으로 이동하기</a>
     {% endfor %}
 </div>
-
+<div id="feedForm" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: black;">피드 등록하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="color: black;">
+          <form method="POST" class="post-form" enctype="multipart/form-data" data-csrfmiddlewaretoken="{{ csrf_token }}">
+            {% csrf_token %}
+            {{ form.as_p }}
+          </form>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
