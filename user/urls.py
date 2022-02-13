@@ -14,4 +14,6 @@ urlpatterns = [
   path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),
   path('mypage/<int:pk>/', views.certDetail, name='certDetail'),
+  path('mypage/<int:pk>/update/', views.certUpdate, name='certUpdate'),
+  path('mypage/<int:pk>/delete/', views.certDelete, name='certDelete'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
