@@ -63,7 +63,7 @@ class Certification(models.Model):
     albumImg = models.ImageField(upload_to="albumImg", null=True, blank=True)
     
     def __str__(self):
-        return self.musicId.title
+        return self.music
     
     def year(self):
         return self.createdDate.strftime('%Y')

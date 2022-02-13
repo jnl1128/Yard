@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 from django.db.models import Q
@@ -79,15 +79,26 @@ def feedDetail(request, pk):
     
 def certDetail(request, pk):
 	cert = Certification.objects.get(id=pk)
-	music = cert.musicId
-
-	ctx = {'music':music, 'cert':cert}
+	ctx = {'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
-# def certDelete(request, pk):
-#     certification = Certification.objects.get(id=pk)
-#     certification.delete()
-# 	return redirect('user:myPage')
+def certUpdate(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+
+	if request.method == 'POST':
+		form = createCertForm(request.POST, request.FILES, instance = cert)
+		if form.is_valid():
+			cert = form.save()
+			return redirect('user:certDetail', pk)
+	else :
+		form = createCertForm(instance = cert)
+		ctx = {'form' : form}
+		return render(request, template_name = 'certificationRegister.html', context = ctx)
+
+def certDelete(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+	cert.delete()
+	return redirect('user:myPage')
 
 def certificationRegister(request):
     if request.method == "POST":
@@ -96,7 +107,7 @@ def certificationRegister(request):
             cert = form.save(commit=False)
             cert.published_date = timezone.now()
             cert.save()
-            return redirect('mypage')
+            return redirect('myPage')
     else:
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
