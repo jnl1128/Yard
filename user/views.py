@@ -82,6 +82,22 @@ def certDetail(request, pk):
 	ctx = {'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
+def certUpdate(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+
+	print(request.POST)
+	print(request.FILES)
+
+	if request.method == 'POST':
+		form = createCertForm(request.POST, request.FILES, instance = cert)
+		if form.is_valid():
+			cert = form.save()
+			return redirect('user:certDetail', pk)
+	else :
+		form = createCertForm(instance = cert)
+		ctx = {'form' : form}
+		return render(request, template_name = 'certificationRegister.html', context = ctx)
+
 def certDelete(request, pk):
 	cert = get_object_or_404(Certification, id=pk)
 	cert.delete()

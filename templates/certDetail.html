@@ -1,4 +1,6 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% load static %}
 
 {% block content %}
 
@@ -18,7 +20,7 @@
 	<h1>곡 {{cert.music}}</h1>
 	<div>가수 {{cert.artist}}</div>
 
-	<button>수정</button>
+	<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
 	<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
 </div>
 
