@@ -19,9 +19,6 @@
           <div class="index">곡</div><div>{{certificate.music}}</div>
         </div>
         <div class="music-info">
-          <div class="index">앨범</div><div>{{certificate.musicId.albumTitle}}</div>
-        </div> 
-        <div class="music-info">
           <div class="index">아티스트</div><div>{{certificate.artist}}</div>
         </div>
         <div class="music-info">
@@ -42,7 +39,7 @@
     {% for his in history %}
     {% if request.user == his.userId %}
       {% if year == his.year %}
-        <div class="history">{{his.createdDate | date:"Y-m-d"}}   |   {{his.musicId.title}}</div>
+        <div class="history">{{his.createdDate | date:"Y-m-d"}}   |   {{his.music}} - {{his.artist}}</div>
       {% endif %}
     {% endif %}
     {% endfor %}

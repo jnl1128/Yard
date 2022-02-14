@@ -1,0 +1,10 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}
+{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+
+가입을 위해 아래 링크로 접속해주세요 : 
+{{ activate_url }}
+{% endblocktrans %}{% endautoescape %}{% endblock %}
