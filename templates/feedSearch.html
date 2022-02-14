@@ -15,37 +15,42 @@
             </script>      
         </section>
         {% endif %} -->
-      <div class="d-flex">
-        <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
-        <button>좋아요 모아보기</button>
-      </div>
-      
+        <div class="d-flex">
+          <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
+          <button>좋아요 모아보기</button>
+        </div>
+  
     {% for feed in feeds %}
-    <!--남의 피드인 경우-->
-    {% if request.user.is_authenticated %} 
+    {% if request.user.id != feed.userId.id%}
     <div class="feed-container">
-      <div class="feed--content-my">
-          <p>{{feed.artist}} - {{feed.title}}</p>
-          <p>{{feed.content}}</p>
-          <p>{{feed.tags}}</p>
-         <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
-      </div>
       <div class="feed--userInfo">
         <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
         <p class="feed--userName">{{feed.userId.nickName}}</p>
-      </div>
-    </div>
-    {% else %}
-    <div class="feed-container">
-      <div class="feed--userInfo">
-        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
-        <p class="feed--userName">{{feed.userId}}</p>
       </div>
       <div class="feed--content">
         <p>{{feed.artist}} - {{feed.title}}</p>
         <p>{{feed.content}}</p>
         <p>{{feed.tags}}</p>
+        {% if feed.feedImg %}
+          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+        {% endif %}
        <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+      </div>
+    </div>
+    {% else %}
+    <div class="feed-container">
+      <div class="feed--content-my">
+          <p>{{feed.artist}} - {{feed.title}}</p>
+          <p>{{feed.content}}</p>
+          <p>{{feed.tags}}</p>
+          {% if feed.feedImg %}
+            <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+          {% endif %}
+         <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+      </div>
+      <div class="feed--userInfo">
+        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
     </div>
     {% endif %}
