@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>새 인증서</h1>
-<form class="searchDiv" action="methods">
-	<label for="songinfo">음악 검색</label>
-	<input type="text" id="songinfo" class="whatToSearch" placeholder="검색" autocomplete="off">
-	<button type="button" onclick="addMusicList()">검색</button>
-</form>
+    <h1>새 인증서</h1>
+    <form class="searchDiv" action="methods">
+        <label for="songinfo">음악 검색</label>
+        <input
+            type="text"
+            id="songinfo"
+            class="whatToSearch"
+            placeholder="검색"
+            autocomplete="off"
+        />
+        <input type="text" style="display: none" />
+        <button type="button" onclick="addMusicList()">검색</button>
+    </form>
 
 <div class="musicListList">
 </div>

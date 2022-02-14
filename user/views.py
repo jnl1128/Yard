@@ -60,7 +60,7 @@ def searchResult(request):
 def createFeed(request):
     current_user = request.user
     if request.method == 'POST':
-        form = createFeedForm(request.POST)
+        form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
             feed = form.save(commit=False)
             feed.userId = current_user
