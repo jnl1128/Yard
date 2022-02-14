@@ -30,7 +30,7 @@
       <div class="feed--content">
         <p>{{feed.artist}} - {{feed.title}}</p>
         <p>{{feed.content}}</p>
-        <p>{{feed.tags}}</p>
+        <p>{{feed.tags.all | join:" "}}</p>
         {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
         {% endif %}
@@ -42,7 +42,7 @@
       <div class="feed--content-my">
           <p>{{feed.artist}} - {{feed.title}}</p>
           <p>{{feed.content}}</p>
-          <p>{{feed.tags}}</p>
+          <p>{{feed.tags.all | join:" "}}</p>
           {% if feed.feedImg %}
             <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
           {% endif %}
