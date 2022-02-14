@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}[야드 YAR:D]이메일 주소 인증{% endblocktrans %}
+{% endautoescape %}

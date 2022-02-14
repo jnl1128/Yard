@@ -3,8 +3,6 @@ from .models import *
 
 # Register your models here.
 admin.site.register(User)
-admin.site.register(Artist)
-admin.site.register(Music)
 admin.site.register(Certification)
 admin.site.register(Feed)
 admin.site.register(HashTag)
