@@ -80,7 +80,9 @@ def feedDetail(request, pk):
     
 def certDetail(request, pk):
 	cert = Certification.objects.get(id=pk)
-	ctx = {'cert':cert}
+	music = cert.music
+
+	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
 def certUpdate(request, pk):

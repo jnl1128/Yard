@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  position: relative;
 }
 .certificate-container {
   border: 3px solid #fff;
@@ -28,6 +29,9 @@ body {
   flex-direction: row;
   margin-bottom: 30px;
   margin-left: 100px;
+  position: relative;
+  left : 0;
+  transition: .3s ease-in-out;
 }
 
 .certificate {
@@ -48,12 +52,12 @@ body {
   display: none;
 }
 
-.music-info-container {
+.music-container{
   position: absolute;
   width: 340px;
   margin: auto;
   margin-top: 100px;
-  z-index: 100;
+  z-index: 50;
   padding: 0 20px;
   font-size: 20px;
   color: white;
@@ -70,7 +74,18 @@ body {
   font-weight: bold;
 }
 
-.moreCertBtn {
+
+
+.certificate-btn .certificate-leftBtn{
+  z-index: 100;
+  position: absolute;
+  left: 10px;
+  margin-top: 150px;
+  cursor: pointer;
+  transform: scaleX(-1); 
+}
+
+.certificate-btn .certificate-rightBtn{
   z-index: 100;
   position: absolute;
   right: 10px;

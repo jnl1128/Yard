@@ -1,5 +1,5 @@
 {% extends "searchBase.html" %} {% block content %}
-
+{% load static %}
   <div class="hashtag--container">
       
   </div>
@@ -19,8 +19,8 @@
     <!--남의 피드인 경우-->
     <div class="feed-container">
       <div class="feed--userInfo">
-        
-        <p class="feed--userName">{{feed.userId}}</p>
+        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
       <div class="feed--content">
         <p>{{feed.artist}} - {{feed.title}}</p>
@@ -38,8 +38,8 @@
          <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
       </div>
       <div class="feed--userInfo">
-        
-        <p class="feed--userName">{{feed.userId}}</p>
+        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
     </div>
     {% empty %}

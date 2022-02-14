@@ -3,14 +3,19 @@
 {% block content %}
 <main class="">
   <h1>My Certificates</h1>
-  <a href="{% url 'user:certificationRegister' %}">인증서 등록</a>
+  <div class="certificate-btn" id = 'certificate-btn'>
+    <img class="certificate-leftBtn" id = 'certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
+    <img class="certificate-rightBtn" id = 'certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">  
+  </div>
+  <a href="{% url 'user:certificationRegister'%}">인증서 등록</a>
   <div class="certificate-list">
   {% for certificate in certificates %}
   {% if request.user == certificate.userId %}
-  <a href="#">
-    <div class="certificate-container">
-      <div class="certificate" style="background-image:url({{ certificate.albumImg }})"></div>
-      <div class="music-info-container hidden" id="musicInfo">
+  
+  <a href="{% url 'user:certDetail' certificate.id %}">
+    <div class="certificate-container"> 
+      <div class="certificate" style="background-image:url({{ certificate.musicId.albumImg.url }})"></div>
+      <div class="music-container hidden" id="musicInfo">
         <div class="music-info">
           <div class="index">곡</div><div>{{certificate.music}}</div>
         </div>
@@ -28,7 +33,7 @@
   </a>
     {% endif %}    
     {% endfor %}
-    <img class="moreCertBtn" id = 'moreCertBtn' src="../static/img/moreCertBtn.png">
+    
   </div>
   <h1>History</h1>
   
