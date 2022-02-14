@@ -3,7 +3,15 @@
 {%block content%}
 <form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">update</button>
+  <div class="updateInfo-container">
+    <div class="updateInfo-img">
+     <div>유저 이미지</div><div class="">{{form.userImg}}</div>
+    </div>
+    <div class="updateInfo-nickName">
+      <div>유저 별명</div><div>{{form.nickName}}</div>
+    </div>
+    <button type="submit">update</button>
+</div>
+
 </form>
 {% endblock %}

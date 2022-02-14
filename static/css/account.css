@@ -87,3 +87,21 @@
   margin: 20px 40px;
   border-bottom: 1px solid #E1D2FA;
 }
+
+.updateInfo-container{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  justify-content: center;
+  margin: 0 auto;
+  border: solid 1px #fff;
+  border-radius: 10px;;
+  padding: 40px;
+}
+.updateInfo-container>div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 40px;
+  border-bottom:1px solid #E1D2FA;
+}
