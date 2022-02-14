@@ -148,8 +148,6 @@ ACCOUNT_FORMS = {'signup': 'user.forms.CustomSignupForm'}
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
@@ -174,3 +172,5 @@ AUTHENTICATION_BACKENDS = (
 )
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 ACCOUNT_UNIQUE_EMAIL = True
+
+SOCIALACCOUNT_ADAPTER = "user.adapter.MySocialAccountAdapter"

@@ -62,6 +62,7 @@ class Artist(models.Model):
     def __str__(self):
         return self.name
 
+
 class Music(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artistId")
     title = models.CharField(verbose_name="제목", max_length=50)
@@ -85,12 +86,14 @@ class Certification(models.Model):
     def year(self):
         return self.createdDate.strftime('%Y')
 
+
 class HashTag(models.Model):
     name = models.CharField(verbose_name="해쉬태그 종류", max_length=20)
     
     def __str__(self):
         return self.name
-   
+
+
 class Feed(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, verbose_name="artist id", null=True)
     feedName = models.CharField(verbose_name="피드 이름", max_length=50)
