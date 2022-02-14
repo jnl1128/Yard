@@ -61,7 +61,7 @@ class createCertForm(forms.ModelForm):
         model = Certification
         fields = ('albumImg', 'music', 'artist', 'userId') 
 
-class updateUserInfo(forms.ModelForm):
+class updateUserInfoForm(forms.ModelForm):
     class Meta: 
         model = User
-        fields = ('userImg', 'email', 'nickName', 'password', 'gender', 'birth') 
+        fields = ('userImg', 'nickName')

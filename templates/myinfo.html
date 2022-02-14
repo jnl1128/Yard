@@ -5,7 +5,7 @@
 
   <div class="info-btn">
     <img class="info-userImg" src="{{user.userImg.url}}"  width="100" height="100" alt="">
-    <a href="{% url 'user:updateInfo' request.user.id %}" class="info-updateBtn">수정</a>
+    <a href="{% url 'user:updateInfo' %}" class="info-updateBtn">수정</a>
   </div>
   <div class="info-container">
     <div class="info-email">{{user.email}}</div>

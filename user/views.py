@@ -26,25 +26,25 @@ def myPage(request):
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
 
-def myInfo(request, pk):
-  user = User.objects.get(id=pk)
-  ctx = {'user': user}
+def myInfo(request):
+  users = User.objects.all()
+  ctx = {'users': users}
   return render(request,'myinfo.html', context = ctx )
 
-def updateInfo(request, pk):
-    userInfo = get_object_or_404(User,id =pk)
+def updateInfo(request):
+    userInfo = request.user
     if request.method == 'POST':
-        form = updateUserInfo(request.POST, request.FILES)
+        form = updateUserInfoForm(request.POST, request.FILES, instance = userInfo)
         if form.is_valid():
-            userInfo = form.save(commit=False)
+            userInfo.userImg = form.cleaned_data['userImg']
+            userInfo.nickName = form.cleaned_data['nickName']
+            
             userInfo.save()
-            return redirect('user:myInfo', pk)
+            return redirect('user:myInfo')
     else:
-        form = updateUserInfo(instance = userInfo)
-    ctx = {'form':form}
+        form = updateUserInfoForm(instance = userInfo)
+    ctx = {'form':form, 'user':userInfo}
     return render(request, 'updateInfo.html', context=ctx)
-
-  
 
 def mainSearch(request):
     return render(request, 'mainPage.html')

@@ -27,7 +27,7 @@
           <a href="/accounts/login">Log in</a>
         {% else %} 
           <a href="{% url 'user:myPage' %}">My Page</a>
-					<a href="{% url 'user:myInfo' request.user.id %}">My Info</a>
+					<a href="{% url 'user:myInfo' %}">My Info</a>
           <a href="/accounts/logout">Log out</a>
         {% endif %} 
       </div> 

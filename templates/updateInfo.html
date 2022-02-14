@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {%block content%}
-<form class="" method="POST" enctype="multipart/form-data">
+<form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">update</button>
