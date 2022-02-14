@@ -107,7 +107,7 @@ def certificationRegister(request):
     if request.method == "POST":
         form = createCertForm(request.POST)
         if form.is_valid():
-            cert = form.save(commit=False)
+            cert = form.save()
             cert.published_date = timezone.now()
             cert.save()
             return redirect('user:myPage')
@@ -115,34 +115,17 @@ def certificationRegister(request):
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
-from spotipy.oauth2 import SpotifyClientCredentials
-import spotipy
-
 def musicSearch(request):
-#    clientId = '063856828b244dacaa86f2ad891283bc'
-#    clientSecret = '615ead2d4a0343a08e9a6bea7328f6e9'
-
-#    clientCredentialsManager = SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret)
-#    sp = spotipy.Spotify(client_credentials_manager=clientCredentialsManager)
-
-#    searchKeyword = ''
-
-#    result = sp.search(searchKeyword)
-
-#    ctx = {'results': result}
-
     return render(request, 'musicSearch.html')
+
+import json
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
     req = json.loads(request.body)
     title = req['music']
     artist = req['artist']
-
+    
     return JsonResponse({'music': title, 'artist': artist})
-
-
-    # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
-    # 서버가 클라이언트로 보내는 요청임.
-    # 사실 매개변수(id와 type)는 안넣어도 되는데 클라이언트에게 어떰 값이 변경되었는지 알려주기 위해 넣어준것.
-   

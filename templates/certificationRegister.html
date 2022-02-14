@@ -1,9 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>새 인증서</h1>
-<input type="text">
-<a href="{% url 'user:musicSearch' %}"><button>검색</button></a>
-<form method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit" class="save btn btn-default">Save</button>
-</form>
+    <h1>새 인증서</h1>
+    <form class="searchDiv" action="methods">
+        <label for="songinfo">음악 검색</label>
+        <input type="text" id="songinfo" class="whatToSearch" placeholder="검색" autocomplete="off">
+        <button type="button" onclick="addMusicList()">검색</button>
+    </form>
+
+    <div class="musicListList">
+    </div>
+    
+    <button id="registerMusic" style="border-radius: 1rem; border-width: .1rem; background-color: cornflowerblue; color: white;" onclick="registerMusic()">노래 등록</button>
+    
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="/mypage">
+            <button type="submit" class="save btn btn-default">Save</button>
+        </a>
+    </form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
+{% block js %}
+<script>
+    $(document).ready(
+            $('.musicList').empty()
+        )
+
+    function addMusicList() {
+        let musicKeyWord = $('#songinfo').val()
+        $('.musicList').empty()
+        $('.musicListList').empty()
+        $.ajax({
+            type: 'GET',
+            url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+musicKeyWord+'&api_key=91921c9761d97539ea8147f4599b5f3e&format=json',
+            success: function (response) {
+                    let musicList = response["results"]["trackmatches"]["track"];
+                    for (let i = 0; i < musicList.length; i++) {
+                    let albumTitle = musicList[i]["name"]
+                    let albumArtist = musicList[i]["artist"]
+                    getMusicHtml(albumTitle, albumArtist)
+                }
+            }
+        })
+    }
+
+    function getMusicHtml(title, artist) {
+        let musicHtml = `<div class="songs">
+            <input class="form-check-input" type="checkbox" value="" id="musicChoice">
+            <label class="form-check-label" for="musicChoice" id="musicInfo">
+                ${title}
+                |
+                ${artist}
+            </label>
+        </div>`
+        $('.musicListList').append(musicHtml)
+    }
+
+    let registerMusicBtn = document.querySelector('#registerMusic');
+    registerMusicBtn.addEventListener("click", registerMusic());
+
+    function registerMusic() {
+        let listedMusic = document.querySelectorAll(".songs");
+        for (let i=0;i<listedMusic.length;i++) {
+            if (listedMusic[i].querySelector("#musicChoice").checked) {
+                let checkedMusic = listedMusic[i];
+                let musicInfo = checkedMusic.querySelector('#musicInfo').innerHTML;
+                let musicTitle = musicInfo.split('|')[0].trim();
+                let musicArtist = musicInfo.split('|')[1].trim();
+
+                onClickMusic(musicTitle, musicArtist);
+            }
+        }
+    }
+
+    const onClickMusic = async (music, artist) => {
+        console.log(music);
+        const url = "addMusicAjax/";
+        const { data } = await axios.post(url, {
+        music,
+        artist,
+        });
+        musicHandleResponse(data.music, data.artist);
+    };
+
+    const musicHandleResponse = (music, artist) => {
+
+        const titleInput = document.querySelector('#id_music');
+        const artistInput = document.querySelector('#id_artist');
+
+        titleInput.value = music;
+        artistInput.value = artist;
+    };
+
+    function doOpenCheck(chk) {
+    var obj = document.getElementsByName("musicChoice");
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i] != chk) {
+        obj[i].checked = false;
+      }
+    }
+  }
+</script>
