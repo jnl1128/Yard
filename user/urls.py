@@ -7,7 +7,8 @@ app_name = 'user'
 urlpatterns = [
   path('', view=views.mainSearch, name="main"),
   path('mypage/', view=views.myPage, name="myPage"),
-  path('myInfo/', view=views.myInfo, name="myInfo"),
+  path('myInfo/<int:pk>/', view=views.myInfo, name="myInfo"),
+  path('updateInfo/<int:pk>/', view=views.updateInfo, name="updateInfo"),
   path('register/', views.certificationRegister, name='certificationRegister'),
   path('register/musicsearch/', views.musicSearch, name='musicSearch'),
   path('register/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),

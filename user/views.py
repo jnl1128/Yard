@@ -1,4 +1,6 @@
+from asyncio import FastChildWatcher
 from django.shortcuts import render, redirect, get_object_or_404
+import pkg_resources
 from .models import *
 from .forms import *
 from django.db.models import Q
@@ -24,11 +26,23 @@ def myPage(request):
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
 
-def myInfo(request):
-  users = User.objects.all()
-  ctx = {'users': users}
+def myInfo(request, pk):
+  user = User.objects.get(id=pk)
+  ctx = {'user': user}
   return render(request,'myinfo.html', context = ctx )
 
+def updateInfo(request, pk):
+    userInfo = get_object_or_404(User,id =pk)
+    if request.method == 'POST':
+        form = updateUserInfo(request.POST, request.FILES)
+        if form.is_valid():
+            userInfo = form.save(commit=False)
+            userInfo.save()
+            return redirect('user:myInfo', pk)
+    else:
+        form = updateUserInfo(instance = userInfo)
+    ctx = {'form':form}
+    return render(request, 'updateInfo.html', context=ctx)
 
   
 

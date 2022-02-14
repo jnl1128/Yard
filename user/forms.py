@@ -1,3 +1,4 @@
+from re import M
 from allauth.account.forms import SignupForm
 from django import forms
 from .models import *
@@ -59,3 +60,8 @@ class createCertForm(forms.ModelForm):
     class Meta:
         model = Certification
         fields = ('albumImg', 'music', 'artist', 'userId') 
+
+class updateUserInfo(forms.ModelForm):
+    class Meta: 
+        model = User
+        fields = ('userImg', 'email', 'nickName', 'password', 'gender', 'birth') 

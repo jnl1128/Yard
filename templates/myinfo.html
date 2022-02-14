@@ -2,11 +2,10 @@
 {%load static %}
 
 {%block content%}
-  {%for user in users%}
-  {% if request.user.id == user.id%}
+
   <div class="info-btn">
     <img class="info-userImg" src="{{user.userImg.url}}"  width="100" height="100" alt="">
-    <a href="#" class="info-updateBtn">수정</a>
+    <a href="{% url 'user:updateInfo' request.user.id %}" class="info-updateBtn">수정</a>
   </div>
   <div class="info-container">
     <div class="info-email">{{user.email}}</div>
@@ -14,6 +13,4 @@
     <div class="info-gender">{{user.gender}}</div>
     <div class="info-birth">{{user.birth}}</div>
   </div>
-  {% endif %}
-  {% endfor %}
 {%endblock%}
