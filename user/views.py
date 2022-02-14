@@ -7,6 +7,7 @@ from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.http import JsonResponse 
 
 
 # Create your views here.
@@ -131,18 +132,12 @@ def musicSearch(request):
     return render(request, 'musicSearch.html')
 
 @csrf_exempt
-def add_comment_ajax(request):
-    # 요청을 통해 들어온 데이터값들 (request.body에 담겨있음) req에 담아줌.
-
+def addMusicAjax(request):
     req = json.loads(request.body)
-    print(req)
-    music = req['music']
+    title = req['music']
     artist = req['artist']
-            
-    form = createFeedForm()
-    ctx = {'form': form, 'music':music, 'artist':artist}
-    print("hello")
-    return render(request, template_name='form.html', context=ctx)
+
+    return JsonResponse({'music': title, 'artist': artist})
 
 
     # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
