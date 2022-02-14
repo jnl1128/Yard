@@ -4,7 +4,10 @@
 
 
 <div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage" src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
-
+<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
+<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a>    
+<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();">카카오톡</a>    
+	
 <div class="certDetail-container">
 	<div class="certDetail-img">
 		<div class="certDetail-img-front"><img src="{{ cert.albumImg.url }}" height="440" width="400"></div>
@@ -49,4 +52,33 @@
 	<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
 </div>
 -->
+{% endblock %}
+
+{% block js %}
+	<script src="{% static 'js/SNS.js' %}">
+		function shareKakao() {
+			
+			// 사용할 앱의 JavaScript 키 설정
+			Kakao.init('1706f71509ba01819512832811f52204')
+			
+			// 카카오링크 버튼 생성
+			Kakao.Link.createDefaultButton({
+				container: '#btnKakao', // 카카오공유버튼ID
+				objectType: 'feed',
+				content: {
+					title: "개발새발", // 보여질 제목
+					description: "개발새발 블로그입니다", // 보여질 설명
+					imageUrl: "http://127.0.0.1:8000", // 콘텐츠 URL
+					link: {
+							mobileWebUrl: "http://127.0.0.1:8000",
+							webUrl: "http://127.0.0.1:8000"
+					}
+				}
+			});
+		}
+	</script>
+
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js">
+		
+	</script>
 {% endblock %}
