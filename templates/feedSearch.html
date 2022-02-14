@@ -15,21 +15,14 @@
             </script>      
         </section>
         {% endif %} -->
+      <div class="d-flex">
+        <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
+        <button>좋아요 모아보기</button>
+      </div>
+      
     {% for feed in feeds %}
     <!--남의 피드인 경우-->
-    <div class="feed-container">
-      <div class="feed--userInfo">
-        
-        <p class="feed--userName">{{feed.userId}}</p>
-      </div>
-      <div class="feed--content">
-        <p>{{feed.artist}} - {{feed.title}}</p>
-        <p>{{feed.content}}</p>
-        <p>{{feed.tags}}</p>
-       <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
-      </div>
-    </div>
-    <!--내 피드인 경우-->
+    {% if request.user.is_authenticated %} 
     <div class="feed-container">
       <div class="feed--content-my">
           <p>{{feed.artist}} - {{feed.title}}</p>
@@ -42,6 +35,20 @@
         <p class="feed--userName">{{feed.userId}}</p>
       </div>
     </div>
+    {% else %}
+    <div class="feed-container">
+      <div class="feed--userInfo">
+        
+        <p class="feed--userName">{{feed.userId}}</p>
+      </div>
+      <div class="feed--content">
+        <p>{{feed.artist}} - {{feed.title}}</p>
+        <p>{{feed.content}}</p>
+        <p>{{feed.tags}}</p>
+       <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+      </div>
+    </div>
+    {% endif %}
     {% empty %}
     <div class="">
       <p class="text-center my_search_text">

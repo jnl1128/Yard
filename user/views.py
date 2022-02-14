@@ -54,7 +54,7 @@ def searchResult(request):
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
         #     except:
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
-   
+    
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 def createFeed(request):
@@ -143,4 +143,10 @@ def addMusicAjax(request):
     # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
     # 서버가 클라이언트로 보내는 요청임.
     # 사실 매개변수(id와 type)는 안넣어도 되는데 클라이언트에게 어떰 값이 변경되었는지 알려주기 위해 넣어준것.
-   
+
+def searchMyFeed(request):
+    current_user = request.user
+    feeds = Feed.objects.all().filter(userId=current_user).order_by('-createdDate')
+    query = "내가 쓴글"
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
