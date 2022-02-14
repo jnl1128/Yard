@@ -10,8 +10,6 @@ class CustomSignupForm(SignupForm):
     birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=False)
     userImg = forms.ImageField(label="유저 이미지", required=False)
 
-    field_order = ['email', 'password1', 'password2',  'userImg', 'nickName', 'gender', 'birth']
-
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         user.nickName = self.cleaned_data['nickName']
@@ -21,14 +19,43 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
 
-
 class createFeedForm(forms.ModelForm):
+    # music = forms.CharField(
+    #     max_length=100,
+    #     label='음악 제목',
+    #     help_text='제목은 100자이내로 작성하세요.',
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'my-input',
+    #             'placeholder': '제목 입력'
+    #             }
+    #         )
+    # )
+    # content = forms.CharField(
+    #     label='내용',
+    #     help_text='자유롭게 작성해주세요.',
+    #     widget=forms.Textarea(
+    #             attrs={
+    #                 'row': 5,
+    #                 'col': 50,
+    #             }
+    #     )
+    # )
+    # createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
+    
     class Meta:
         model = Feed
-        fields = "__all__"
-    createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
+        fields = ['music', 'artist', 'tags', 'content', 'feedImg']
+    
+    
+    
+    
+    # class Meta:
+    #   model = Feed
+    #   fields = "__all__"
+    # createdDate = forms.DateField(label='date', widget=forms.SelectDateWidget)
 
 class createCertForm(forms.ModelForm):
     class Meta:
-        model = Music
-        fields = ('albumImg', 'title', 'artist', 'albumTitle', 'releasedDate') 
+        model = Certification
+        fields = ('albumImg', 'music', 'artist') 
