@@ -58,4 +58,4 @@ class createFeedForm(forms.ModelForm):
 class createCertForm(forms.ModelForm):
     class Meta:
         model = Certification
-        fields = ('albumImg', 'music', 'artist') 
+        fields = ('albumImg', 'music', 'artist', 'userId') 

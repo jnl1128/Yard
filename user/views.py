@@ -113,10 +113,11 @@ def certDelete(request, pk):
 
 def certificationRegister(request):
     if request.method == "POST":
-        form = createCertForm(request.POST)
+        form = createCertForm(request.POST, request.FILES)
         if form.is_valid():
-            cert = form.save()
+            cert = form.save(commit=False)
             cert.published_date = timezone.now()
+            cert.userId = request.user
             cert.save()
             return redirect('user:myPage')
     else:

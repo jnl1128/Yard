@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <h1>새 인증서</h1>
-    <form class="searchDiv" action="methods">
+    <form class="searchDiv" action="methods"  enctype="multipart/form-data">
         <label for="songinfo">음악 검색</label>
         <input
             type="text"
@@ -20,7 +20,7 @@
     
     <button id="registerMusic" style="border-radius: 1rem; border-width: .1rem; background-color: cornflowerblue; color: white;" onclick="registerMusic()">노래 등록</button>
     
-    <form method="POST" class="post-form">
+    <form method="POST" class="post-form"  enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <a href="/mypage">
