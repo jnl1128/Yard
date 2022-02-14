@@ -96,4 +96,12 @@
         artistInput.value = artist;
     };
 
+    function doOpenCheck(chk) {
+    var obj = document.getElementsByName("musicChoice");
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i] != chk) {
+        obj[i].checked = false;
+      }
+    }
+  }
 </script>
