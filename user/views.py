@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse 
+from random import randint
 
 
 # Create your views here.
@@ -47,7 +48,20 @@ def updateInfo(request):
     return render(request, 'updateInfo.html', context=ctx)
 
 def mainSearch(request):
-    return render(request, 'mainPage.html')
+    arr = ['','','','']
+    len = HashTag.objects.count()
+    count = 0
+    while (count < 4):
+        random_object = HashTag.objects.all()[randint(0, len - 1)]
+        if random_object.name in arr: 
+            continue
+        else:
+            arr[count]=random_object.name
+            count += 1;
+    print(arr) 
+    return render(request, 'mainPage.html', {'hashTags':arr})
+
+
     
 def searchResult(request):
     feeds = None
@@ -81,6 +95,7 @@ def searchResult(request):
 
 def createFeed(request):
     current_user = request.user
+    print(current_user)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -152,3 +167,10 @@ def addMusicAjax(request):
     artist = req['artist']
     
     return JsonResponse({'music': title, 'artist': artist})
+
+def searchMyFeed(request):
+    current_user = request.user
+    feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
+    query = "내가 쓴글"
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
