@@ -40,13 +40,16 @@
     <header class="nav">
       <a href="/"><img class="logobtn" src="../static/img/logo.png" /></a>
       <div class="nav--inputBox">
-        <form action="methods">
+        <form class="" action="{% url 'user:search' %}" method="get">
+          {% csrf_token %}
           <input
             class="nav--input"
-            type="text"
-            placeholder="음악"
-            autocomplete="off"
+            type="search"
+            placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!"
+            aria-label="Search"
+            name="q"
           />
+          <button class="" type="submit">찾기</button>
         </form>
       </div>
       <div class="nav--dropdown">
