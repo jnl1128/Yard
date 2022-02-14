@@ -24,6 +24,14 @@ def myPage(request):
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
 
+def myInfo(request):
+  users = User.objects.all()
+  ctx = {'users': users}
+  return render(request,'myinfo.html', context = ctx )
+
+
+  
+
 def mainSearch(request):
     return render(request, 'mainPage.html')
     

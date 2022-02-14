@@ -7,6 +7,7 @@ app_name = 'user'
 urlpatterns = [
   path('', view=views.mainSearch, name="main"),
   path('mypage/', view=views.myPage, name="myPage"),
+  path('myInfo/', view=views.myInfo, name="myInfo"),
   path('register/', views.certificationRegister, name='certificationRegister'),
   path('register/musicsearch/', views.musicSearch, name='musicSearch'),
   path('search/',views.searchResult, name='search'),

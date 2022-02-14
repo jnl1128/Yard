@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%load static %}
+
+{%block content%}
+  {%for user in users%}
+  {% if request.user.id == user.id%}
+  <div>{{user.nickName}}</div>
+  {% endif %}
+  {% endfor %}
+{%endblock%}
