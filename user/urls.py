@@ -9,6 +9,7 @@ urlpatterns = [
   path('mypage/', view=views.myPage, name="myPage"),
   path('register/', views.certificationRegister, name='certificationRegister'),
   path('register/musicsearch/', views.musicSearch, name='musicSearch'),
+  path('register/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('search/',views.searchResult, name='search'),
   path('search/myFeed',views.searchMyFeed, name='searchMyFeed'),
   path('createFeed/', views.createFeed, name="createFeed"),

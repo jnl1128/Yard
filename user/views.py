@@ -80,7 +80,9 @@ def feedDetail(request, pk):
     
 def certDetail(request, pk):
 	cert = Certification.objects.get(id=pk)
-	ctx = {'cert':cert}
+	music = cert.music
+
+	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
 def certUpdate(request, pk):
@@ -105,31 +107,20 @@ def certificationRegister(request):
     if request.method == "POST":
         form = createCertForm(request.POST)
         if form.is_valid():
-            cert = form.save(commit=False)
+            cert = form.save()
             cert.published_date = timezone.now()
             cert.save()
-            return redirect('myPage')
+            return redirect('user:myPage')
     else:
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
-from spotipy.oauth2 import SpotifyClientCredentials
-import spotipy
-
 def musicSearch(request):
-#    clientId = '063856828b244dacaa86f2ad891283bc'
-#    clientSecret = '615ead2d4a0343a08e9a6bea7328f6e9'
-
-#    clientCredentialsManager = SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret)
-#    sp = spotipy.Spotify(client_credentials_manager=clientCredentialsManager)
-
-#    searchKeyword = ''
-
-#    result = sp.search(searchKeyword)
-
-#    ctx = {'results': result}
-
     return render(request, 'musicSearch.html')
+
+import json
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
