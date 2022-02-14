@@ -138,3 +138,10 @@ def addMusicAjax(request):
     artist = req['artist']
     
     return JsonResponse({'music': title, 'artist': artist})
+
+def searchMyFeed(request):
+    current_user = request.user
+    feeds = Feed.objects.all().filter(userId=current_user).order_by('-createdDate')
+    query = "내가 쓴글"
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})

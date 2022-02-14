@@ -12,6 +12,7 @@ urlpatterns = [
   path('register/musicsearch/', views.musicSearch, name='musicSearch'),
   path('register/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('search/',views.searchResult, name='search'),
+  path('search/myFeed',views.searchMyFeed, name='searchMyFeed'),
   path('createFeed/', views.createFeed, name="createFeed"),
   path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),

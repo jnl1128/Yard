@@ -2,7 +2,7 @@
 <h1>새 인증서</h1>
 <!--   <a href="{% url 'user:musicSearch' %}"><input type="text"></a>
     <a href="{% url 'user:musicSearch' %}"><button>검색</button></a>-->
-<form class="searchDiv" action="methods"  enctype="multipart/form-data">
+<form class="searchDiv" action="methods" enctype="multipart/form-data">
   <label for="songinfo">음악 검색</label>
   <input
     type="text"
@@ -30,7 +30,7 @@
   노래 등록
 </button>
 
-<form method="POST" class="post-form"  enctype="multipart/form-data">
+<form method="POST" class="post-form" enctype="multipart/form-data">
   {% csrf_token %} {{ form.as_p }}
   <a href="/mypage">
     <button type="submit" class="save btn btn-default">Save</button>
