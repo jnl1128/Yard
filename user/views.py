@@ -7,7 +7,7 @@ from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import JsonResponse 
+from django.http import JsonResponse
 from random import randint
 
 
@@ -32,28 +32,29 @@ def myInfo(request):
 
 
 def mainSearch(request):
+    # TODO : arr 변수 이름 명확하게 바꾸기
     arr = ['','','','']
     len = HashTag.objects.count()
     count = 0;
     while (count < 4):
         random_object = HashTag.objects.all()[randint(0, len - 1)]
-        if random_object.name in arr: 
+        if random_object.name in arr:
             continue
         else:
             arr[count]=random_object.name
             count += 1;
-    print(arr) 
+    print(arr)
     return render(request, 'mainPage.html', {'hashTags':arr})
 
 
-    
+
 def searchResult(request):
     feeds = None
     query = None
     music = None
     artist = None
     tags = None
-    
+
     if ('q' in request.GET):
         query = request.GET.get('q')
         if query=="":
@@ -67,14 +68,14 @@ def searchResult(request):
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
         # try:
             # music = Music.objects.get(title=query)
-        feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
+        feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')
         # except:
         #     try:
         #         artist = Artist.objects.get(name=query)
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
         #     except:
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
-   
+
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 def createFeed(request):
@@ -89,7 +90,7 @@ def createFeed(request):
             feeds = Feed.objects.all().order_by('-createdDate')
             query = "#모든"
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-            
+
     else:
         form = createFeedForm()
     ctx = {'form': form}
@@ -98,8 +99,9 @@ def createFeed(request):
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
     return render(request, template_name='feedDetail.html', context={'feed':feed})
-    
+
 def certDetail(request, pk):
+    # get_object_or_404 사용하기
 	cert = Certification.objects.get(id=pk)
 	music = cert.music
 
@@ -146,15 +148,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
+    # request에서 받은 걸 그대로 응답해주는게 맞나요??
     req = json.loads(request.body)
     title = req['music']
     artist = req['artist']
-    
+
     return JsonResponse({'music': title, 'artist': artist})
 
 def searchMyFeed(request):
+    # Login Requried
     current_user = request.user
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
     query = "내가 쓴글"
-    
+
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
