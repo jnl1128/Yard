@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 from django.db.models import Q
@@ -7,6 +7,7 @@ from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.http import JsonResponse 
 
 
 # Create your views here.
@@ -84,10 +85,23 @@ def certDetail(request, pk):
 	ctx = {'music':music, 'cert':cert}
 	return render(request, template_name = 'certDetail.html', context = ctx)
 
-# def certDelete(request, pk):
-#     certification = Certification.objects.get(id=pk)
-#     certification.delete()
-# 	return redirect('user:myPage')
+def certUpdate(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+
+	if request.method == 'POST':
+		form = createCertForm(request.POST, request.FILES, instance = cert)
+		if form.is_valid():
+			cert = form.save()
+			return redirect('user:certDetail', pk)
+	else :
+		form = createCertForm(instance = cert)
+		ctx = {'form' : form}
+		return render(request, template_name = 'certificationRegister.html', context = ctx)
+
+def certDelete(request, pk):
+	cert = get_object_or_404(Certification, id=pk)
+	cert.delete()
+	return redirect('user:myPage')
 
 def certificationRegister(request):
     if request.method == "POST":
@@ -120,18 +134,12 @@ def musicSearch(request):
     return render(request, 'musicSearch.html')
 
 @csrf_exempt
-def add_comment_ajax(request):
-    # 요청을 통해 들어온 데이터값들 (request.body에 담겨있음) req에 담아줌.
-
+def addMusicAjax(request):
     req = json.loads(request.body)
-    print(req)
-    music = req['music']
+    title = req['music']
     artist = req['artist']
-            
-    form = createFeedForm()
-    ctx = {'form': form, 'music':music, 'artist':artist}
-    print("hello")
-    return render(request, template_name='form.html', context=ctx)
+
+    return JsonResponse({'music': title, 'artist': artist})
 
 
     # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
