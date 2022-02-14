@@ -24,6 +24,14 @@ def myPage(request):
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
 
+def myInfo(request):
+  users = User.objects.all()
+  ctx = {'users': users}
+  return render(request,'myinfo.html', context = ctx )
+
+
+  
+
 def mainSearch(request):
     return render(request, 'mainPage.html')
     
@@ -54,13 +62,13 @@ def searchResult(request):
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
         #     except:
         #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
-    
+   
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 def createFeed(request):
     current_user = request.user
     if request.method == 'POST':
-        form = createFeedForm(request.POST)
+        form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
             feed = form.save(commit=False)
             feed.userId = current_user
@@ -105,10 +113,11 @@ def certDelete(request, pk):
 
 def certificationRegister(request):
     if request.method == "POST":
-        form = createCertForm(request.POST)
+        form = createCertForm(request.POST, request.FILES)
         if form.is_valid():
-            cert = form.save()
+            cert = form.save(commit=False)
             cert.published_date = timezone.now()
+            cert.userId = request.user
             cert.save()
             return redirect('user:myPage')
     else:
@@ -119,7 +128,7 @@ def musicSearch(request):
     return render(request, 'musicSearch.html')
 
 import json
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -127,13 +136,8 @@ def addMusicAjax(request):
     req = json.loads(request.body)
     title = req['music']
     artist = req['artist']
-
+    
     return JsonResponse({'music': title, 'artist': artist})
-
-
-    # DB에서 바뀐값을 화면에서도 바뀌어 보이게끔.
-    # 서버가 클라이언트로 보내는 요청임.
-    # 사실 매개변수(id와 type)는 안넣어도 되는데 클라이언트에게 어떰 값이 변경되었는지 알려주기 위해 넣어준것.
 
 def searchMyFeed(request):
     current_user = request.user
