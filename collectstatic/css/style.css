@@ -1,0 +1,25 @@
+@import './myPage.css';
+@import './base.css';
+@import './mainPage.css';
+@import './variables.css';
+@import './reset.css';
+
+*{
+  box-sizing: border-box;
+  font-family: 'Shrikhand', cursive;
+}
+
+body{
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 200vh;
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
