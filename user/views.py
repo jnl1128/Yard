@@ -24,6 +24,14 @@ def myPage(request):
   ctx = {'certificates':certificates, 'history':history, 'years':years}
   return render(request, 'mypage.html', context=ctx)
 
+def myInfo(request):
+  users = User.objects.all()
+  ctx = {'users': users}
+  return render(request,'myinfo.html', context = ctx )
+
+
+  
+
 def mainSearch(request):
     return render(request, 'mainPage.html')
     
@@ -105,10 +113,11 @@ def certDelete(request, pk):
 
 def certificationRegister(request):
     if request.method == "POST":
-        form = createCertForm(request.POST)
+        form = createCertForm(request.POST, request.FILES)
         if form.is_valid():
-            cert = form.save()
+            cert = form.save(commit=False)
             cert.published_date = timezone.now()
+            cert.userId = request.user
             cert.save()
             return redirect('user:myPage')
     else:
