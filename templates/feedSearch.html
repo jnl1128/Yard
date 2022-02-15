@@ -34,10 +34,13 @@
     {% for feed in feeds %}
     
     {% if request.user.id != feed.userId.id%}
-    
     <div class="feed-container">
       <div class="feed--userInfo">
+        {% if feed.userId.userImg %}
         <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        {% else %}
+        <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
+        {% endif %}
         <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
       <div class="feed--content">
@@ -62,7 +65,11 @@
          <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
       </div>
       <div class="feed--userInfo">
+        {% if feed.userId.userImg %}
         <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+        {% else %}
+        <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
+        {% endif %}
         <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
     </div>
