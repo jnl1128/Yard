@@ -109,7 +109,7 @@ def createFeed(request):
     else:
         form = createFeedForm()
     ctx = {'form': form}
-    return render(request, template_name='form.html', context=ctx)
+    return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
