@@ -15,6 +15,11 @@
             </script>      
         </section>
         {% endif %} -->
+        <div class="d-flex">
+          <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
+          <button>좋아요 모아보기</button>
+        </div>
+  
     {% for feed in feeds %}
     {% if request.user.id != feed.userId.id%}
     <div class="feed-container">
@@ -25,8 +30,10 @@
       <div class="feed--content">
         <p>{{feed.artist}} - {{feed.title}}</p>
         <p>{{feed.content}}</p>
-        <p>{{feed.tags}}</p>
-        <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+        <p>{{feed.tags.all | join:" "}}</p>
+        {% if feed.feedImg %}
+          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+        {% endif %}
        <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
       </div>
     </div>
@@ -35,8 +42,10 @@
       <div class="feed--content-my">
           <p>{{feed.artist}} - {{feed.title}}</p>
           <p>{{feed.content}}</p>
-          <p>{{feed.tags}}</p>
-          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+          <p>{{feed.tags.all | join:" "}}</p>
+          {% if feed.feedImg %}
+            <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+          {% endif %}
          <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
       </div>
       <div class="feed--userInfo">
