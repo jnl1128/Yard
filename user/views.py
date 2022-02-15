@@ -151,10 +151,6 @@ def certificationRegister(request):
 def musicSearch(request):
     return render(request, 'musicSearch.html')
 
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-
 @csrf_exempt
 def addMusicAjax(request):
     req = json.loads(request.body)
