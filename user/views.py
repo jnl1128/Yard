@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+import user
 from .models import *
 from .forms import *
 from django.db.models import Q
@@ -7,7 +9,8 @@ from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import JsonResponse 
+from django.http import JsonResponse
+
 
 
 # Create your views here.
@@ -30,7 +33,32 @@ def myInfo(request):
   return render(request,'myinfo.html', context = ctx )
 
 
-  
+def myInfoRegister(request):
+    userInstance = request.user
+
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
+    
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
+
+            return redirect('user:myInfo')
+
+    # GET 요청 (혹은 다른 메소드)이면 기본 폼을 생성한다.
+    else:
+        registerForm = SocialRegisterForm(instance = userInstance)
+
+    context = {
+        'form': registerForm,
+        'userInstance': userInstance,
+    }
+
+    return render(request, 'myInfoRegister.html', context=context)
+
 
 def mainSearch(request):
     return render(request, 'mainPage.html')

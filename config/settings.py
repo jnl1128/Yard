@@ -178,4 +178,5 @@ EMAIL_HOST = local_settings.EMAIL['EMAIL_HOST']
 EMAIL_HOST_USER = local_settings.EMAIL['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = local_settings.EMAIL['EMAIL_HOST_PASSWORD']
 
-SOCIALACCOUNT_ADAPTER = "user.adapter.MySocialAccountAdapter"
+ACCOUNT_SIGNUP_REDIRECT_URL = '/myInfo/register'
+LOGIN_REDIRECT_URL = '/'
