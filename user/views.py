@@ -3,12 +3,12 @@ from .models import *
 from .forms import *
 from django.db.models import Q
 from django.contrib import messages
-from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import JsonResponse 
-
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -127,9 +127,7 @@ def certificationRegister(request):
 def musicSearch(request):
     return render(request, 'musicSearch.html')
 
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -145,3 +143,25 @@ def searchMyFeed(request):
     query = "내가 쓴글"
     
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+
+@login_required
+def feedLike(request, pk):
+	# pk = request.POST.get('pk', None)
+    feed = get_object_or_404(Feed, pk=pk)
+    
+    if request.user in feed.like_users.all():
+        feed.like_users.remove(request.user)
+        liked = False
+    else:
+        feed.like_users.add(request.user)
+        liked = True
+	
+    context = {
+		'liked':liked,
+		'count':feed.like_users.count()
+	}
+
+
+    return JsonResponse(context)

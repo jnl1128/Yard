@@ -16,6 +16,7 @@ urlpatterns = [
   path('createFeed/', views.createFeed, name="createFeed"),
   path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),
+  path('search/<int:pk>/like/', views.feedLike, name='feedLike'),
   path('mypage/<int:pk>/', views.certDetail, name='certDetail'),
   path('mypage/<int:pk>/update/', views.certUpdate, name='certUpdate'),
   path('mypage/<int:pk>/delete/', views.certDelete, name='certDelete'),

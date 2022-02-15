@@ -13,65 +13,132 @@
             </script>     
         </section>
         {% endif %} -->
-        <div class="d-flex">
-          <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
-          <button>좋아요 모아보기</button>
-        </div>
-  
-    {% for feed in feeds %}
-    {% if request.user.id != feed.userId.id%}
-    <div class="feed-container">
-      <div class="feed--userInfo">
-        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
-        <p class="feed--userName">{{feed.userId.nickName}}</p>
-      </div>
-      <div class="feed--content">
-        <p>{{feed.artist}} - {{feed.title}}</p>
-        <p>{{feed.content}}</p>
-        <p>{{feed.tags}}</p>
-        {% if feed.feedImg %}
-          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
-        {% endif %}
-       <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
-			<div class="like">
-				<i class="far fa-heart"></i>
-			</div>
+	<div class="d-flex">
+		<a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
+		<button>좋아요 모아보기</button>
+	</div>
+
+	{% for feed in feeds %}
+	{% if request.user.id != feed.userId.id%}
+	<div class="feed-container">
+		<div class="feed--userInfo">
+			<img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+			<p class="feed--userName">{{feed.userId.nickName}}</p>
+		</div>
+		<div class="feed--content">
+			<p>{{feed.artist}} - {{feed.title}}</p>
+			<p>{{feed.content}}</p>
+			<p>{{feed.tags}}</p>
+			{% if feed.feedImg %}
+			<img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+			{% endif %}
+			<!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+
+
+			<!-- <i class="fas fa-heart" style="color:red"></i>
+			<i class="far fa-heart"></i> -->
+			<i class="{% if user in feed.like_users.all %}
+          fas 
+          {% else %}
+          far
+          {% endif %} fa-heart
+          likeButton" data-id="{{ feed.id }}" style="color:red">
+			</i>
+			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span> 명이 좋아합니다.
+
+			<script>
+				const likeButtons = document.querySelectorAll('.likeButton')
+				likeButtons.forEach(function (button) {
+					button.addEventListener('click', function (event) {
+						// console.log(event)
+						const feedId = event.target.dataset.id
+						axios.get(`/search/${feedId}/like/`)
+							.then(function (response) {
+								document.querySelector(`#like-count-${feedId}`)
+									.innerText = response.data.count
+
+								// response.data => {'liked':True} 혹은 {'liked':False}
+								if (response.data.liked) {
+									event.target.classList.remove('far')
+									event.target.classList.add('fas')
+								}
+								else {
+									event.target.classList.remove('fas')
+									event.target.classList.add('far')
+								}
+							})
+					})
+				})
+			</script>
+
 
 		</div>
 	</div>
-    {% else %}
-    <div class="feed-container">
-      <div class="feed--content-my">
-          <p>{{feed.artist}} - {{feed.title}}</p>
-          <p>{{feed.content}}</p>
-          <p>{{feed.tags}}</p>
-          {% if feed.feedImg %}
-            <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
-          {% endif %}
-         <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
-			<div class="like">
-				<i class="far fa-heart"></i>
-			</div>
+	{% else %}
+	<div class="feed-container">
+		<div class="feed--content-my">
+			<p>{{feed.artist}} - {{feed.title}}</p>
+			<p>{{feed.content}}</p>
+			<p>{{feed.tags}}</p>
+			{% if feed.feedImg %}
+			<img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+			{% endif %}
+			<!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
+
+			<i class="{% if user in feed.like_users.all %}
+			          fas 
+			          {% else %}
+			          far
+			          {% endif %} fa-heart
+			          likeButton" data-id="{{ feed.id }}" style="color:red">
+			</i>
+			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span> 명이 좋아합니다.
+
+			<script>
+				const likeButtons = document.querySelectorAll('.likeButton')
+				likeButtons.forEach(function (button) {
+					button.addEventListener('click', function (event) {
+						// console.log(event)
+						const feedId = event.target.dataset.id
+						axios.get(`/search/${feedId}/like/`)
+							.then(function (response) {
+								document.querySelector(`#like-count-${feedId}`)
+									.innerText = response.data.count
+
+								// response.data => {'liked':True} 혹은 {'liked':False}
+								if (response.data.liked) {
+									event.target.classList.remove('far')
+									event.target.classList.add('fas')
+								}
+								else {
+									event.target.classList.remove('fas')
+									event.target.classList.add('far')
+								}
+							})
+					})
+				})
+			</script>
+
 
 		</div>
-      <div class="feed--userInfo">
-        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
-        <p class="feed--userName">{{feed.userId.nickName}}</p>
-      </div>
-    </div>
-    {% endif %}
-    {% empty %}
-    <div class="">
-      <p class="text-center my_search_text">
-        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
-        <a href="{% url 'user:createFeed' %}">
-          <button class="btn btn-secondary my-2 my-sm-0 center-block" type="submit">
-            <i class="fas fa-plus-square"></i>
-          </button>
-        </a>
-      </p>
-    </div>
-    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
-    {% endfor %}
+		<div class="feed--userInfo">
+			<img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+			<p class="feed--userName">{{feed.userId.nickName}}</p>
+		</div>
+	</div>
+	{% endif %}
+	{% empty %}
+	<div class="">
+		<p class="text-center my_search_text">
+			해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
+			<a href="{% url 'user:createFeed' %}">
+				<button class="btn btn-secondary my-2 my-sm-0 center-block" type="submit">
+					<i class="fas fa-plus-square"></i>
+				</button>
+			</a>
+		</p>
+	</div>
+	<a href="{% url 'user:main' %}">메인으로 이동하기</a>
+	{% endfor %}
 </div>
 {% endblock %}
