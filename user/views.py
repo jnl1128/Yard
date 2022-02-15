@@ -10,7 +10,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse 
 from random import randint
-
+from datetime import datetime
 
 
 # Create your views here.
@@ -185,10 +185,6 @@ def certificationRegister(request):
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
-def musicSearch(request):
-    return render(request, 'musicSearch.html')
-
-
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -206,6 +202,38 @@ def searchMyFeed(request):
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 
+def deleteFeed(request, pk):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    feed = Feed.objects.get(id=pk)
+    query = "#모든"
+    feed.delete()
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+def updateFeed(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    feeds = Feed.objects.all().order_by('-createdDate')
+
+    if request.method == 'POST':
+        form = createFeedForm(request.POST,request.FILES,instance=feed)
+        feed.music = request.POST.get("music")
+        feed.artist = request.POST.get("artist")
+        feed.createdDate = datetime.now()
+        feed.content = request.POST.get("content")
+        feed.save()
+        feed.feedImg = request.FILES.get("feedImg")
+        if form.is_valid():
+            feed = form.save()
+            query = "#모든"
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+    else:
+        form = createFeedForm(instance=feed)
+        ctx = {'form': form, 'feed': feed}
+
+        return render(request, template_name='form.html', context=ctx)
+    
 @login_required
 def feedLike(request, pk):
     feed = get_object_or_404(Feed, id=pk)
