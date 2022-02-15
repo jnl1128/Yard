@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 import datetime
@@ -68,12 +69,14 @@ class Certification(models.Model):
     def year(self):
         return self.createdDate.strftime('%Y')
 
+
 class HashTag(models.Model):
     name = models.CharField(verbose_name="해쉬태그 종류", max_length=20)
     
     def __str__(self):
         return self.name
-   
+
+
 class Feed(models.Model):
     music = models.CharField(verbose_name="피드 음악", max_length=100)
     artist = models.CharField(verbose_name="피드 가수", max_length=100)
@@ -82,6 +85,7 @@ class Feed(models.Model):
     tags = models.ManyToManyField('HashTag', blank=True)
     content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
     feedImg = models.ImageField(upload_to="feedImg", null=True, blank=True)
-    
+    like_users = models.ManyToManyField(User, blank=True, related_name='like_feeds')
+
     def __str__(self):
         return self.music

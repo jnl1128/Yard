@@ -12,13 +12,18 @@ class CustomSignupForm(SignupForm):
     userImg = forms.ImageField(label="유저 이미지", required=False)
 
     def save(self, request):
-        user = super(CustomSignupForm, self).save(request)
+        user = super().save(request)
         user.nickName = self.cleaned_data['nickName']
         user.gender = self.cleaned_data['gender']
         user.birth = self.cleaned_data['birth']
         user.userImg = self.cleaned_data['userImg']
         user.save()
         return user
+
+class SocialRegisterForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('userImg', 'nickName', 'gender', 'birth')
 
 class createFeedForm(forms.ModelForm):
     # music = forms.CharField(
@@ -59,7 +64,7 @@ class createFeedForm(forms.ModelForm):
 class createCertForm(forms.ModelForm):
     class Meta:
         model = Certification
-        fields = ('albumImg', 'music', 'artist', 'userId') 
+        fields = ('albumImg', 'music', 'artist') 
 
 class updateUserInfoForm(forms.ModelForm):
     class Meta: 

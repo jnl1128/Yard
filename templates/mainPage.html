@@ -1,28 +1,35 @@
 {% extends "base.html" %} 
+{% load static %}
 {% block content %} 
-<div class="main-container">
-    <div class="main--text--container">
-        <h1 class="title">Yar:d</h1>
-        <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui omnis autem beatae dolore. Praesentium id blanditiis facilis voluptas cupiditate impedit ipsam tempore, molestias nobis. Labore laudantium maiores accusantium voluptate!</div>
+<div class="main-containter">
+    <div class="main-top" id ="main-top">
+        <div class="main--text--container">
+            <h1 class="title">Yar:d</h1>
+            <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui omnis autem beatae dolore. Praesentium id blanditiis facilis voluptas cupiditate impedit ipsam tempore, molestias nobis. Labore laudantium maiores accusantium voluptate!</div>
+        </div> 
+        <div><img src="{%static 'img/note.png'%}" class="main--img"></div>
     </div> 
-    <img src="../static/img/note.png" class="main--img">
-</div> 
 
+    
+        <a href="#main-scrollBtn" class="main-scrollBtn" id = 'main-scrollBtn'><img src="{% static 'img/moreCertBtn.png'%}" alt=""></a>
+    
 
-    <div class="search-container">
+    <div class="search-container" id = 'search-container'>
         <form class="" action="{% url 'user:search' %}" method="get">
             {% csrf_token %}
             <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
-            <button class="" type="submit">찾기</button>
+            <button class="search-btn" type="submit"><img src="{%static 'img/searchBtn.png' %}" alt=""></button>
         </form>
-        <div class="hashtag--container">
-            <div class="d-flex">
+        <div class="hashtag-container">
                 {% for hashTag in hashTags %}
-                    <button value={{hashTag}}>{{hashTag}}</button>
+                    <button class="hashtag--btn"value={{hashTag}}>{{hashTag}}</button>
                 {% endfor %}
-            </div>
         </div>
     </div>
     
-    
+</div>  
+{% endblock %}
+
+{% block js %}
+<script src = "{% static 'js/mainPage.js'%}"></script>
 {% endblock %}

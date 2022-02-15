@@ -1,17 +1,17 @@
-from asyncio import FastChildWatcher
 from django.shortcuts import render, redirect, get_object_or_404
-import pkg_resources
+
 from .models import *
 from .forms import *
 from django.db.models import Q
-from django.contrib import messages
-from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
+
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse 
 from random import randint
 from datetime import datetime
+
 
 # Create your views here.
 
@@ -47,6 +47,7 @@ def updateInfo(request):
     ctx = {'form':form, 'user':userInfo}
     return render(request, 'updateInfo.html', context=ctx)
 
+
 def mainSearch(request):
     hashTagList = ['','','','']
     len = HashTag.objects.count()
@@ -60,6 +61,42 @@ def mainSearch(request):
             count += 1;
     print(hashTagList) 
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
+
+
+
+
+
+
+
+
+
+
+def myInfoRegister(request):
+    userInstance = request.user
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
+    
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
+
+            return redirect('user:myInfo')
+
+    # GET 요청 (혹은 다른 메소드)이면 기본 폼을 생성한다.
+    else:
+        registerForm = SocialRegisterForm(instance = userInstance)
+
+    context = {
+        'form': registerForm,
+        'userInstance': userInstance,
+    }
+
+    return render(request, 'myInfoRegister.html', context=context)
+
+
 
 
     
@@ -104,7 +141,7 @@ def createFeed(request):
     else:
         form = createFeedForm()
     ctx = {'form': form}
-    return render(request, template_name='form.html', context=ctx)
+    return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -148,8 +185,6 @@ def certificationRegister(request):
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
-def musicSearch(request):
-    return render(request, 'musicSearch.html')
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -198,3 +233,18 @@ def updateFeed(request, pk):
         ctx = {'form': form, 'feed': feed}
 
         return render(request, template_name='form.html', context=ctx)
+    
+@login_required
+def feedLike(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    if request.user in feed.like_users.all():
+        feed.like_users.remove(request.user)
+        liked = False
+    else:
+        feed.like_users.add(request.user)
+        liked = True
+    context = {
+		'liked':liked,
+		'count':feed.like_users.count()
+	}
+    return JsonResponse(context)
