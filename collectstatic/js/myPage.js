@@ -8,6 +8,7 @@ const certificate_btn = document.getElementById('certificate-btn')
 function displayMusicInfo(event){
   event.target.childNodes[3].classList.toggle('hidden');
   event.target.childNodes[1].style.filter = 'brightness(50%)'
+  
 }
 function hideMusicInfo(event){
   event.target.childNodes[3].classList.add('hidden')
