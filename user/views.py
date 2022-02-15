@@ -6,8 +6,7 @@ from django.contrib import messages
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -127,7 +126,9 @@ def certificationRegister(request):
 def musicSearch(request):
     return render(request, 'musicSearch.html')
 
-
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
