@@ -44,21 +44,31 @@
         <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
       <div class="feed--content">
-        <p>{{feed.artist}} - {{feed.title}}</p>
-        <p>{{feed.content}}</p>
-        <p>{{feed.tags.all | join:" "}}</p>
+        <p class='feed-title'>{{feed.artist}} - {{feed.music}}</p>
+        <p class='feed-content'>{{feed.content}}</p>
+        <!--<p>{{feed.tags.all | join:" "}}</p>-->
         {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
         {% endif %}
        <!-- <a href="{% url 'user:feedDetail' feed.id%}">{{feed.feedName}}</a>-->
       </div>
     </div>
+    <!--HASHTAG-->
+    <div class="feed-hashtagList">
+      {% for tag in feed.tags.all %}
+      <div class="feed-hashtag" style="margin-left: 300px; margin-top: 0; display: flex; justify-content: start;">{{tag}}</div>
+      {% endfor %}
+    </div>
     {% else %}
     <div class="feed-container">
       <div class="feed--content-my">
-          <p>{{feed.artist}} - {{feed.title}}</p>
-          <p>{{feed.content}}</p>
-          <p>{{feed.tags.all | join:" "}}</p>
+        <div class="feed--btn-my">
+          <a href="">삭제</a>
+          <a href="">수정</a>
+        </div>
+          <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
+          <p class="feed-content">{{feed.content}}</p>
+          <!--<p>{{feed.tags.all | join:" "}}</p>-->
           {% if feed.feedImg %}
             <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
           {% endif %}
@@ -72,6 +82,12 @@
         {% endif %}
         <p class="feed--userName">{{feed.userId.nickName}}</p>
       </div>
+    </div>
+    <!--HASHTAG-->
+    <div class="feed-hashtagList">
+      {% for tag in feed.tags.all %}
+      <div class="feed-hashtag" style="margin-left: 900px; margin-top: 0; display: flex; justify-content: end;">{{tag}}</div>
+      {% endfor %}
     </div>
     {% endif %}
     {% empty %}

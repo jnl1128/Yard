@@ -9,7 +9,7 @@
 }
 
 .feed-container{
-  margin: 50px 100px;
+  margin: 50px 100px 20px 100px;
   display: flex;
   flex-direction: row;
 }
@@ -104,4 +104,38 @@
   flex-direction: column;
   text-align: center;
   margin-top: 30px;
+}
+
+.feed--btn-my{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.feed--btn-my>a{
+  margin-left: 10px;
+  color: white;
+}
+
+.feed-title{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.feed-content{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.feed-hashtagList{
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+
+.feed-hashtag{
+  border: 1px solid #fff;
+  background: #440FDA;
+  border-radius: 10px;
+  padding: 5px 20px;
 }
