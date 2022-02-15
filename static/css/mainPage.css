@@ -53,8 +53,31 @@
   padding: 10px;
 }
 
+.search-btn{
+  background: transparent;
+  border: 0;
+}
+
 body h1.title {
   color: white;
+}
+
+
+
+.hashtag-container{
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+  width: 800px;
+}
+
+.hashtag--btn{
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: lavender;
+  border: 2px solid #fff;
+  margin-left: 10px;
+  font-size: 20px;
 }
 
 @keyframes up-down {

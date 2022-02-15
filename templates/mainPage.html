@@ -18,14 +18,12 @@
         <form class="" action="{% url 'user:search' %}" method="get">
             {% csrf_token %}
             <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
-            <button class="" type="submit">찾기</button>
+            <button class="search-btn" type="submit"><img src="{%static 'img/searchBtn.png' %}" alt=""></button>
         </form>
-        <div class="hashtag--container">
-            <div class="d-flex">
+        <div class="hashtag-container">
                 {% for hashTag in hashTags %}
-                    <button value={{hashTag}}>{{hashTag}}</button>
+                    <button class="hashtag--btn"value={{hashTag}}>{{hashTag}}</button>
                 {% endfor %}
-            </div>
         </div>
     </div>
     
