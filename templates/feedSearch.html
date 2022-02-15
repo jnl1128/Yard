@@ -15,11 +15,12 @@
             </script>      
         </section>
         {% endif %} -->
+        {% if request.user.id %}
         <div class="d-flex">
           <a href="{% url 'user:searchMyFeed' %}"><button value="myFeed">내 글 모아보기</button></a>
           <button>좋아요 모아보기</button>
         </div>
-  
+        {% endif %}
     {% for feed in feeds %}
     {% if request.user.id != feed.userId.id%}
     <div class="feed-container">
@@ -31,6 +32,7 @@
         <p>{{feed.artist}} - {{feed.title}}</p>
         <p>{{feed.content}}</p>
         <p>{{feed.tags.all | join:" "}}</p>
+        <p>{{feed.createdDate}}</p>
         {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
         {% endif %}
@@ -40,9 +42,12 @@
     {% else %}
     <div class="feed-container">
       <div class="feed--content-my">
+          <a href="{% url 'user:deleteFeed' feed.id %}"><span class="detail-ud">삭제</span></a>
+          <a href="{% url 'user:updateFeed' feed.id %}"><span class="detail-ud">수정</span></a>
           <p>{{feed.artist}} - {{feed.title}}</p>
           <p>{{feed.content}}</p>
           <p>{{feed.tags.all | join:" "}}</p>
+          <p>{{feed.createdDate}}</p>
           {% if feed.feedImg %}
             <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
           {% endif %}
@@ -56,6 +61,7 @@
     {% endif %}
     {% empty %}
     <div class="">
+      {% if request.user.id %}
       <p class="text-center my_search_text">
         해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
         <a href="{% url 'user:createFeed' %}">
@@ -64,6 +70,16 @@
           </button>
         </a>
       </p>
+      {% else %}
+      <p class="text-center my_search_text">
+        로그인/회원가입 후 피드를 작성해보세요!
+        <a href="">
+          <button class="btn btn-secondary my-2 my-sm-0 center-block" type="submit">
+            로그인하러가기
+          </button>
+        </a>
+      </p>
+      {% endif %}
     </div>
     <a href="{% url 'user:main' %}">메인으로 이동하기</a>
     {% endfor %}

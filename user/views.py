@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse 
 from random import randint
-
+from datetime import datetime
 
 # Create your views here.
 
@@ -48,18 +48,18 @@ def updateInfo(request):
     return render(request, 'updateInfo.html', context=ctx)
 
 def mainSearch(request):
-    arr = ['','','','']
+    hashTagList = ['','','','']
     len = HashTag.objects.count()
     count = 0
     while (count < 4):
         random_object = HashTag.objects.all()[randint(0, len - 1)]
-        if random_object.name in arr: 
+        if random_object.name in hashTagList: 
             continue
         else:
-            arr[count]=random_object.name
+            hashTagList[count]=random_object.name
             count += 1;
-    print(arr) 
-    return render(request, 'mainPage.html', {'hashTags':arr})
+    print(hashTagList) 
+    return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
 
     
@@ -169,3 +169,36 @@ def searchMyFeed(request):
     query = "내가 쓴글"
     
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+def deleteFeed(request, pk):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    feed = Feed.objects.get(id=pk)
+    query = "#모든"
+    feed.delete()
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+def updateFeed(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    feeds = Feed.objects.all().order_by('-createdDate')
+
+    if request.method == 'POST':
+        form = createFeedForm(request.POST,request.FILES,instance=feed)
+        feed.music = request.POST.get("music")
+        feed.artist = request.POST.get("artist")
+        feed.feedImg = request.FILES.get("poster")
+        feed.createdDate = datetime.now()
+        feed.content = request.POST.get("content")
+        feed.save()
+        if form.is_valid():
+            feed = form.save()
+            query = "#모든"
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+    else:
+        form = createFeedForm(instance=feed)
+        ctx = {'form': form, 'feed': feed}
+
+        return render(request, template_name='form.html', context=ctx)
