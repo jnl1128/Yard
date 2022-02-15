@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+<div class="updateInfo-container">
+  <form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
+    {% csrf_token %}
+      <div class="updateInfo-img">
+      <div>유저 이미지</div><div class="">{{form.userImg}}</div>
+      </div>
+      <div class="updateInfo-nickName">
+        <div>유저 별명</div><div>{{form.nickName}}</div>
+      </div>
+
+      <button class="updateInfo-btn" type="submit">update</button>
+
+
+  </form>
+  <div class="updateInfo-password">
+    <a href="/accounts/password/change">비밀번호 변경</a>
+    <a href="/accounts/password/reset">비밀번호 초기화</a>
+    <a href="/accounts/social/connections">소셜 계정 연결</a>
+  </div>
+</div>
+{% endblock %}

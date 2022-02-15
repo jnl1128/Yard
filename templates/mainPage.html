@@ -16,7 +16,11 @@
             <button class="" type="submit">찾기</button>
         </form>
         <div class="hashtag--container">
-            
+            <div class="d-flex">
+                {% for hashTag in hashTags %}
+                    <button value={{hashTag}}>{{hashTag}}</button>
+                {% endfor %}
+            </div>
         </div>
     </div>
     
