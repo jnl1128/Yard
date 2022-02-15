@@ -145,23 +145,17 @@ def searchMyFeed(request):
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
 
-
 @login_required
 def feedLike(request, pk):
-	# pk = request.POST.get('pk', None)
-    feed = get_object_or_404(Feed, pk=pk)
-    
+    feed = get_object_or_404(Feed, id=pk)
     if request.user in feed.like_users.all():
         feed.like_users.remove(request.user)
         liked = False
     else:
         feed.like_users.add(request.user)
         liked = True
-	
     context = {
 		'liked':liked,
 		'count':feed.like_users.count()
 	}
-
-
     return JsonResponse(context)
