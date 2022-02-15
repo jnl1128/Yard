@@ -79,17 +79,12 @@ def searchResult(request):
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
         if query[0] == '#':
             tagId = HashTag.objects.filter(name=query)
-            feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+            try:
+                feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+            except:
+                pass
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        # try:
-            # music = Music.objects.get(title=query)
         feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
-        # except:
-        #     try:
-        #         artist = Artist.objects.get(name=query)
-        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
-        #     except:
-        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
    
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
