@@ -188,10 +188,10 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.feedImg = request.FILES.get("poster")
         feed.createdDate = datetime.now()
         feed.content = request.POST.get("content")
         feed.save()
+        feed.feedImg = request.FILES.get("feedImg")
         if form.is_valid():
             feed = form.save()
             query = "#모든"
