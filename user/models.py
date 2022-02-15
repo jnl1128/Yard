@@ -85,6 +85,7 @@ class Feed(models.Model):
     tags = models.ManyToManyField('HashTag', blank=True)
     content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
     feedImg = models.ImageField(upload_to="feedImg", null=True, blank=True)
-    
+    like_users = models.ManyToManyField(User, blank=True, related_name='like_feeds')
+
     def __str__(self):
         return self.music

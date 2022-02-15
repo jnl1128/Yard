@@ -1,17 +1,14 @@
-from asyncio import FastChildWatcher
 from django.shortcuts import render, redirect, get_object_or_404
 
-import user
-import pkg_resources
 from .models import *
 from .forms import *
 from django.db.models import Q
-from django.contrib import messages
-from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import JsonResponse
+
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse 
 from random import randint
 
 
@@ -50,22 +47,32 @@ def updateInfo(request):
     ctx = {'form':form, 'user':userInfo}
     return render(request, 'updateInfo.html', context=ctx)
 
-def myInfoRegister(request):
-    userInstance = request.user
+
 def mainSearch(request):
-    arr = ['','','','']
+    hashTagList = ['','','','']
     len = HashTag.objects.count()
     count = 0
     while (count < 4):
         random_object = HashTag.objects.all()[randint(0, len - 1)]
-        if random_object.name in arr: 
+        if random_object.name in hashTagList: 
             continue
         else:
-            arr[count]=random_object.name
+            hashTagList[count]=random_object.name
             count += 1;
-    print(arr) 
-    return render(request, 'mainPage.html', {'hashTags':arr})
+    print(hashTagList) 
+    return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
+
+
+
+
+
+
+
+
+
+def myInfoRegister(request):
+    userInstance = request.user
     if request.method == 'POST':
         registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
     
@@ -90,8 +97,7 @@ def mainSearch(request):
     return render(request, 'myInfoRegister.html', context=context)
 
 
-def mainSearch(request):
-    return render(request, 'mainPage.html')
+
 
     
 def searchResult(request):
@@ -140,7 +146,7 @@ def createFeed(request):
     else:
         form = createFeedForm()
     ctx = {'form': form}
-    return render(request, template_name='form.html', context=ctx)
+    return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -187,9 +193,7 @@ def certificationRegister(request):
 def musicSearch(request):
     return render(request, 'musicSearch.html')
 
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -205,3 +209,19 @@ def searchMyFeed(request):
     query = "내가 쓴글"
     
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+@login_required
+def feedLike(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    if request.user in feed.like_users.all():
+        feed.like_users.remove(request.user)
+        liked = False
+    else:
+        feed.like_users.add(request.user)
+        liked = True
+    context = {
+		'liked':liked,
+		'count':feed.like_users.count()
+	}
+    return JsonResponse(context)

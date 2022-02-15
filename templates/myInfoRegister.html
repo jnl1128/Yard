@@ -9,8 +9,11 @@
 
     <form class="infoRegister" method="POST" action="{% url 'user:myInfoRegister' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        
+        {% if user.userImg %}
         <img class="info-userImg" src="{{user.userImg.url}}"  width="100" height="100" alt="">
+        {% else %}
+        <img class="info-userImg" src="{% static 'img/default.jpeg'%}"  width="100" height="100" alt="">
+        {% endif %}
         {{ form.as_p }}
         <button class="primaryAction" type="submit">{% trans "제출하기" %}</button>
     </form>
