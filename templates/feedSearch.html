@@ -59,11 +59,6 @@
     <div class="">
       <p class="text-center my_search_text">
         해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
-        
-          <button type='button'class="btn btn-secondary my-2 my-sm-0 center-block"  data-bs-toggle="modal" data-bs-target="#feedForm">
-            <i class="fas fa-plus-square"></i>
-          </button>
-        
       </p>
     </div>
     <a href="{% url 'user:main' %}">메인으로 이동하기</a>
@@ -109,23 +104,6 @@
             <button type="submit" class="save btn btn-default">Save</button>
           </a>
         </form>
-        <!--<form id='feed-create' data-csrfmiddlewaretoken="{{ csrf_token }}">  form태그에 id와 datascrfmiddlewaretoken을 추가
-          <div class="form-group">                                           Recipient를 모두 title로 변경하고, input 태그에 name속성 추가
-            <label for="title" class="col-form-label">Title</label>
-            <input type="text" name="title" class="form-control" id="title">
-          </div>
-          <div class="form-group">                                           Message 모두 content로 변경하고, input 태그에 name속성 추가
-            <label for="content" class="col-form-label">Content</label>
-            <textarea class="form-control" name="content" id="content"></textarea>
-          </div>-->
-
-          <!-- Modal footer를 form 태그 안으로 이동 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button> //** 버튼내용 수정
-            <button type="submit" class="btn btn-primary">만들기</button>                      //** 버튼내용 수정
-          </div>
-           여기까지 
-        </form>-->
       </div>
     </div>
   </div>
@@ -138,38 +116,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
 {% block js %}
-<script>
-
-  $('#feed-create').submit((event) => {
-    event.preventDefault() 
-    
-    $.ajax({
-      url: '/createFeed/',
-      method: 'POST',
-      data: { 
-        title: $(`input#title`).val(),
-        content: $(`textarea#content-text`).val(),
-        csrfmiddlewaretoken: $(event.currentTarget).data('csrfmiddlewaretoken')   // 장고 security와 관련해서 아무나 feed를 생성하지 못하도록 form 액션을 할 때는, csrf_token이 필요
-      },
-      dataType: "json",  // json => "javascript object notation"
-      success(response) {
-        console.log(response)
-        window.location.href = '/feeds/'   //** redirect
-      },
-      error(response, status, error) {
-        console.log(response, status, error);
-      }
-    })
-  })
-
-
-</script>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"
-></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   $(document).ready($(".musicList").empty());
 
