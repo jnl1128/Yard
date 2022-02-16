@@ -114,7 +114,7 @@
     {% endfor %}
 </div>
 <!-- 피드 등록 폼 modal -->
-<div id="feedForm" class="modal fade">
+<div id="feedForm" class="modal fade" style="color: black;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -149,9 +149,7 @@
         </button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
           {% csrf_token %} {{ form.as_p }}
-          <a href="/mypage">
-            <button type="submit" class="save btn btn-default">Save</button>
-          </a>
+          <button type="submit" class="save btn btn-default">Save</button>
         </form>
       </div>
     </div>

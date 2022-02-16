@@ -144,22 +144,24 @@ def searchResult(request):
     tags = None
     
     current_user = request.user
-    form = createFeedForm()
-    print(current_user)
-    print(request.method)
+    #form = createFeedForm()
+    #print(current_user)
+    #print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
             feed = form.save(commit=False)
             feed.userId = current_user
             feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
             form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
+            
             return redirect("user:feedList")
             
     else:
-        #form = createFeedForm()
-        #feeds = Feed.objects.all().order_by('-createdDate')
+        form = createFeedForm()
+        feeds = Feed.objects.all().order_by('-createdDate')
         query = "#모든"
         #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
     
@@ -179,7 +181,7 @@ def searchResult(request):
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+        return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -295,9 +297,12 @@ def feedList(request):
             feed = form.save(commit=False)
             feed.userId = current_user
             feed.save()
-            form = createFeedForm()
+            feed.tags.set(form.cleaned_data['tags'])
+            #print(form.cleaned_data['tags'])
+            #print(feed.tags)
+            #form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
             return redirect("user:feedList")
     else:
-            form = createFeedForm()
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+        form = createFeedForm()
+        return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
