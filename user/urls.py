@@ -1,3 +1,4 @@
+from operator import ne
 from user import views
 from django.urls import path, include
 from django.conf import settings
@@ -25,4 +26,5 @@ urlpatterns = [
   path('updateFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('feed/<int:pk>/', views.feedDetail, name="feedDetail"),
   path('search/<int:pk>/like/', views.feedLike, name='feedLike'),
+  path('list/',views.feedList, name='feedList'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

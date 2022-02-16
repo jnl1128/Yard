@@ -136,8 +136,8 @@ def createFeed(request):
             feed.save()
             feeds = Feed.objects.all().order_by('-createdDate')
             query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-            
+            return redirect("user:feedList")
+
     else:
         form = createFeedForm()
     ctx = {'form': form}
@@ -203,12 +203,11 @@ def searchMyFeed(request):
 
 
 def deleteFeed(request, pk):
-    feeds = Feed.objects.all().order_by('-createdDate')
     feed = Feed.objects.get(id=pk)
-    query = "#모든"
     feed.delete()
     
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+    return redirect("user:feedList")
+
 
 
 def updateFeed(request, pk):
@@ -225,13 +224,11 @@ def updateFeed(request, pk):
         feed.feedImg = request.FILES.get("feedImg")
         if form.is_valid():
             feed = form.save()
-            query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            return redirect("user:feedList")
 
     else:
         form = createFeedForm(instance=feed)
         ctx = {'form': form, 'feed': feed}
-
         return render(request, template_name='form.html', context=ctx)
     
 @login_required
@@ -248,3 +245,8 @@ def feedLike(request, pk):
 		'count':feed.like_users.count()
 	}
     return JsonResponse(context)
+
+def feedList(request):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    query = "#모든"
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
