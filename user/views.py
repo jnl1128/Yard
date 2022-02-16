@@ -62,6 +62,17 @@ def mainSearch(request):
     print(hashTagList) 
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
+def myInfoRegister(request):
+    userInstance = request.user
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
+    
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
 
 
 
@@ -107,41 +118,44 @@ def searchResult(request):
     artist = None
     tags = None
     
-    if ('q' in request.GET):
-        query = request.GET.get('q')
-        if query=="":
-            query = "#모든"
-        if query=="#모든":
-            feeds = Feed.objects.all().order_by('-createdDate')
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        if query[0] == '#':
-            tagId = HashTag.objects.filter(name=query)
-            try:
-                feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
-            except:
-                pass
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
-   
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-
-def createFeed(request):
     current_user = request.user
+    form = createFeedForm()
     print(current_user)
+    print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
             feed = form.save(commit=False)
             feed.userId = current_user
             feed.save()
+            form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
             query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             
     else:
-        form = createFeedForm()
-    ctx = {'form': form}
-    return render(request, template_name='feedSearch.html', context=ctx)
+        #form = createFeedForm()
+        #feeds = Feed.objects.all().order_by('-createdDate')
+        query = "#모든"
+        #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+    
+        if ('q' in request.GET):
+            query = request.GET.get('q')
+            if query=="":
+                query = "#모든"
+            if query=="#모든":
+                feeds = Feed.objects.all().order_by('-createdDate')
+                return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+            if query[0] == '#':
+                tagId = HashTag.objects.filter(name=query)
+                try:
+                    feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+                except:
+                    pass
+                return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+            feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
+
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)

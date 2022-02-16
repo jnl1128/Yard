@@ -16,10 +16,14 @@ urlpatterns = [
   path('mypage/<int:pk>/update/', views.certUpdate, name='certUpdate'),
   path('mypage/<int:pk>/delete/', views.certDelete, name='certDelete'),
   path('register/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
+
   path('search/',views.searchResult, name='search'),
+  path('search/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('search/myFeed',views.searchMyFeed, name='searchMyFeed'),
-  path('createFeed/', views.createFeed, name="createFeed"),
-  path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
+
+  #path('createFeed/', views.createFeed, name="createFeed"),
+  #path('createFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
+
   path('deleteFeed/<int:pk>',views.deleteFeed, name="deleteFeed"),
   path('updateFeed/<int:pk>', views.updateFeed, name="updateFeed"),
   path('updateFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
