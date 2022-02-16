@@ -116,3 +116,10 @@
   align-items: center;
   flex-direction: column;
 }
+
+.preview-img-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  border-bottom: 0 !important;
+}

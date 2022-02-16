@@ -24,7 +24,10 @@
       </p>-->
 
       <div class="account--social">
-        <a href="{% provider_login_url 'google' %}">Login with <span>Google</span></a>
+        <a href="{% provider_login_url 'google' %}">
+          <button class='btn-social-login' style='background:#D93025'><i class="xi-3x xi-google"></i></button>
+          <div>Login with Google</div>
+        </a>
         <a href="{% provider_login_url 'naver' %}">Login with <span>Naver</span></a>
       </div>
 

@@ -1,19 +1,16 @@
-from asyncio import FastChildWatcher
 from django.shortcuts import render, redirect, get_object_or_404
 
-import user
-import pkg_resources
 from .models import *
 from .forms import *
 from django.db.models import Q
-from django.contrib import messages
-from .forms import *
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.http import JsonResponse
-from random import randint
 
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse 
+from random import randint
+from datetime import datetime
 
 
 # Create your views here.
@@ -50,22 +47,32 @@ def updateInfo(request):
     ctx = {'form':form, 'user':userInfo}
     return render(request, 'updateInfo.html', context=ctx)
 
-def myInfoRegister(request):
-    userInstance = request.user
+
 def mainSearch(request):
-    arr = ['','','','']
+    hashTagList = ['','','','']
     len = HashTag.objects.count()
     count = 0
     while (count < 4):
         random_object = HashTag.objects.all()[randint(0, len - 1)]
-        if random_object.name in arr: 
+        if random_object.name in hashTagList: 
             continue
         else:
-            arr[count]=random_object.name
+            hashTagList[count]=random_object.name
             count += 1;
-    print(arr) 
-    return render(request, 'mainPage.html', {'hashTags':arr})
+    print(hashTagList) 
+    return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
+
+
+
+
+
+
+
+
+
+def myInfoRegister(request):
+    userInstance = request.user
     if request.method == 'POST':
         registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
     
@@ -90,8 +97,7 @@ def mainSearch(request):
     return render(request, 'myInfoRegister.html', context=context)
 
 
-def mainSearch(request):
-    return render(request, 'mainPage.html')
+
 
     
 def searchResult(request):
@@ -110,17 +116,12 @@ def searchResult(request):
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
         if query[0] == '#':
             tagId = HashTag.objects.filter(name=query)
-            feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+            try:
+                feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+            except:
+                pass
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        # try:
-            # music = Music.objects.get(title=query)
         feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
-        # except:
-        #     try:
-        #         artist = Artist.objects.get(name=query)
-        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query) | Q(artist=artist.id))
-        #     except:
-        #         feeds = Feed.objects.all().filter(Q(feedName__icontains=query))
    
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
 
@@ -140,7 +141,7 @@ def createFeed(request):
     else:
         form = createFeedForm()
     ctx = {'form': form}
-    return render(request, template_name='form.html', context=ctx)
+    return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -184,12 +185,6 @@ def certificationRegister(request):
         form = createCertForm()
     return render(request, 'certificationRegister.html', {'form': form})
 
-def musicSearch(request):
-    return render(request, 'musicSearch.html')
-
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -205,3 +200,51 @@ def searchMyFeed(request):
     query = "내가 쓴글"
     
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+def deleteFeed(request, pk):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    feed = Feed.objects.get(id=pk)
+    query = "#모든"
+    feed.delete()
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+
+def updateFeed(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    feeds = Feed.objects.all().order_by('-createdDate')
+
+    if request.method == 'POST':
+        form = createFeedForm(request.POST,request.FILES,instance=feed)
+        feed.music = request.POST.get("music")
+        feed.artist = request.POST.get("artist")
+        feed.createdDate = datetime.now()
+        feed.content = request.POST.get("content")
+        feed.save()
+        feed.feedImg = request.FILES.get("feedImg")
+        if form.is_valid():
+            feed = form.save()
+            query = "#모든"
+            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+
+    else:
+        form = createFeedForm(instance=feed)
+        ctx = {'form': form, 'feed': feed}
+
+        return render(request, template_name='form.html', context=ctx)
+    
+@login_required
+def feedLike(request, pk):
+    feed = get_object_or_404(Feed, id=pk)
+    if request.user in feed.like_users.all():
+        feed.like_users.remove(request.user)
+        liked = False
+    else:
+        feed.like_users.add(request.user)
+        liked = True
+    context = {
+		'liked':liked,
+		'count':feed.like_users.count()
+	}
+    return JsonResponse(context)
