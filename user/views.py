@@ -130,8 +130,7 @@ def searchResult(request):
             feed.save()
             form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
-            query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+            return redirect("user:feedList")
             
     else:
         #form = createFeedForm()
@@ -156,6 +155,24 @@ def searchResult(request):
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+
+# def createFeed(request):
+#     current_user = request.user
+#     print(current_user)
+#     if request.method == 'POST':
+#         form = createFeedForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             feed = form.save(commit=False)
+#             feed.userId = current_user
+#             feed.save()
+#             feeds = Feed.objects.all().order_by('-createdDate')
+#             query = "#모든"
+#             return redirect("user:feedList")
+
+#     else:
+#         form = createFeedForm()
+#     ctx = {'form': form}
+#     return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -217,12 +234,11 @@ def searchMyFeed(request):
 
 
 def deleteFeed(request, pk):
-    feeds = Feed.objects.all().order_by('-createdDate')
     feed = Feed.objects.get(id=pk)
-    query = "#모든"
     feed.delete()
     
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+    return redirect("user:feedList")
+
 
 
 def updateFeed(request, pk):
@@ -239,13 +255,11 @@ def updateFeed(request, pk):
         feed.feedImg = request.FILES.get("feedImg")
         if form.is_valid():
             feed = form.save()
-            query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            return redirect("user:feedList")
 
     else:
         form = createFeedForm(instance=feed)
         ctx = {'form': form, 'feed': feed}
-
         return render(request, template_name='form.html', context=ctx)
     
 @login_required
@@ -262,3 +276,21 @@ def feedLike(request, pk):
 		'count':feed.like_users.count()
 	}
     return JsonResponse(context)
+
+def feedList(request):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    query = "#모든"
+    form = createFeedForm()
+    current_user = request.user
+    if request.method == 'POST':
+        form = createFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            form = createFeedForm()
+            feeds = Feed.objects.all().order_by('-createdDate')
+            return redirect("user:feedList")
+    else:
+            form = createFeedForm()
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
