@@ -110,7 +110,32 @@ def myInfoRegister(request):
 
 
 
+def myInfoRegister(request):
+    userInstance = request.user
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
     
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
+
+            return redirect('user:myInfo')
+
+    # GET 요청 (혹은 다른 메소드)이면 기본 폼을 생성한다.
+    else:
+        registerForm = SocialRegisterForm(instance = userInstance)
+
+    context = {
+        'form': registerForm,
+        'userInstance': userInstance,
+    }
+
+    return render(request, 'myInfoRegister.html', context=context)
+
+
 def searchResult(request):
     feeds = None
     query = None
@@ -155,24 +180,6 @@ def searchResult(request):
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
             return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
-
-# def createFeed(request):
-#     current_user = request.user
-#     print(current_user)
-#     if request.method == 'POST':
-#         form = createFeedForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             feed = form.save(commit=False)
-#             feed.userId = current_user
-#             feed.save()
-#             feeds = Feed.objects.all().order_by('-createdDate')
-#             query = "#모든"
-#             return redirect("user:feedList")
-
-#     else:
-#         form = createFeedForm()
-#     ctx = {'form': form}
-#     return render(request, template_name='feedSearch.html', context=ctx)
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
