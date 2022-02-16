@@ -3,11 +3,11 @@
 
 {%block content%}
 
-  <div class="info-btn">
+  <div class="info-top">
     {% if user.userImg %}
-    <img class="info-userImg" src="{{user.userImg.url}}"  width="200" height="200" alt="">
+    <img class="info-userImg" src="{{user.userImg.url}}" alt="">
     {% else %}
-    <img class="info-userImg" src="{% static 'img/default.jpeg' %}"  width="200" height="200" alt="">
+    <img class="info-userImg" src="{% static 'img/default.jpeg' %}" alt="">
     {% endif %}
     <a href="{% url 'user:updateInfo' %}" class="info-updateBtn">수정</a>
   </div>

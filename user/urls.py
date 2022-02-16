@@ -8,8 +8,8 @@ urlpatterns = [
   path('', view=views.mainSearch, name="main"),
   path('mypage/', view=views.myPage, name="myPage"),
 
-  path('myinfo/', view=views.myInfo, name="myInfo"),
-  path('updateinfo/', view=views.updateInfo, name="updateInfo"),
+  path('myInfo/', view=views.myInfo, name="myInfo"),
+  path('updateInfo/', view=views.updateInfo, name="updateInfo"),
   path('myInfo/register/', view=views.myInfoRegister, name="myInfoRegister"),
   path('register/', views.certificationRegister, name='certificationRegister'),
   path('mypage/<int:pk>/', views.certDetail, name='certDetail'),

@@ -6,13 +6,13 @@
   <form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
     {% csrf_token %}
       <div class="updateInfo-img" id = "updateInfo-img">
-      <div>유저 이미지</div><div class="">{{form.userImg}}</div>
+        <div></div><div class="">{{form.userImg}}</div>
       </div>
       <div class="updateInfo-nickName">
         <div>유저 별명</div><div>{{form.nickName}}</div>
       </div>
 
-      <button class="updateInfo-btn" type="submit">update</button>
+      <button class="updateSubmit-btn" type="submit">update</button>
 
 
   </form>

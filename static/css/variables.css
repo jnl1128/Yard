@@ -6,4 +6,30 @@
   --d-gray: #7e7e7e;
   --gray: rgb(82, 82, 82);
   --pink: #f9275f;
+
+
+  /*버튼 통일*/
+  --btn-bg: #440FDA;
+  --btn-br: 1rem;
+  --btn-b: 0.2rem solid #fff;
+  --btn-fs: 2rem;
+  --btn-p: 0.5rem 2rem;
+
+  /*이미지 통일*/
+  --img-b: 0.2rem solid #fff;
+  --img-br: 50%;
+
+  /*폼 프레임 통일*/
+  --form-br: 2rem;
+  --form-b: 0.2rem solid #fff;
+  --form-p: 4rem;  
+  --form-fs: 2rem;
+  --form-w: 50%;
+
+
+  /*폼 컨텐트 통일*/
+  --form-inner-line: 0.1rem solid #E1D2FA;
+  --form-inner-m: 2rem 4rem;
+  --form-inner-input-bg: transparent;
+  --form-inner-input-b: 0.1rem solid #fff;
 }

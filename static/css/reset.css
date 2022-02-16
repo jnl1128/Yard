@@ -90,3 +90,8 @@ video {
   font-size: 100%;
   vertical-align: baseline;
 }
+
+a{
+  text-decoration: none;
+  color: white;
+}
