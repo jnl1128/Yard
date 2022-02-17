@@ -3,50 +3,36 @@
 {% block content %}
 
 
-<div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage" src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
+<div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage"
+			src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
 
 <div class="certDetail-container">
 	<div class="certDetail-img">
 		<div class="certDetail-img-front"><img src="{{ cert.albumImg.url }}" height="440" width="400"></div>
-		<div class="certDetail-img-back" style='background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{ cert.albumImg.url }})'>
-			<img class="cert-stamp"src="{%static 'img/note.png'%}" alt="">
+		<div class="certDetail-img-back"
+			style='background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{ cert.albumImg.url }})'>
+			<img class="cert-stamp" src="{%static 'img/note.png'%}" alt="">
 		</div>
 	</div>
 	<div class="certDetail-info">
 		<div class="music-info">
-			<div class="index">곡</div><div>{{cert.music}}</div>
+			<div class="index">Listening</div>
+			<div>{{cert.createdDate | date:'Y.m.d'}} ~</div>
 		</div>
 		<div class="music-info">
-			<div class="index">아티스트</div><div>{{cert.artist}}</div>
+			<div class="index">곡</div>
+			<div>{{cert.music}}</div>
 		</div>
 		<div class="music-info">
-			<div class="index">발급일</div><div>{{cert.createdDate | date:'Y.m.d'}}</div>
+			<div class="index">아티스트</div>
+			<div>{{cert.artist}}</div>
 		</div>
+	</div>
+
+	<div class="update-delete-button">
+		<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
+		<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
 	</div>
 </div>
 
-
-<!--
-<div class="cert-left">
-	<div class=album-img>
-		{% if cert.albumImg %}
-		<img src="{{cert.albumImg.url}}" height="220" width="200">
-		{% else %}
-		<img src="https://picsum.photos/seed/{{cert.id}}/200/220?">
-		{% endif %}
-	</div>
-
-	
-</div>
-
-<div class="cert-right">
-	<h4>Listening {{cert.createdDate | date:'Y.m.d'}} ~</h4>
-	<br>
-	<h1>곡 {{cert.music}}</h1>
-	<div>가수 {{cert.artist}}</div>
-
-	<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
-	<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
-</div>
--->
 {% endblock %}
