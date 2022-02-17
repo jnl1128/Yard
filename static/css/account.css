@@ -19,35 +19,98 @@
   display: flex;
   flex-direction: column;
   border: 1px solid white;
-  border-radius: 20px;
-  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0 40px;
   width: 50%;
+  min-width: 30em;
+  max-width: 33em;
   justify-content: center;
+  box-shadow: 10px 10px 13px 4px rgba(0, 0, 0, 0.25);
 }
-.account--social{
-  display: flex;
-  flex-direction: column;
+
+.logoBox {
+  margin-bottom: 3em;
 }
 
 .account--social a{
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-  text-align: center;
+  margin-bottom: 1em;
 }
+
+.account--social a,
+#id_login,
+#id_password,
+button.primaryAction{
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 4px 10px;
+  width: 22em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.account--social a img {
+  margin-right: 1rem;
+}
+
+.account--social a span{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  padding-top: 0.25em;
+  text-align: center;
+  color: black;
+}
+
 .account--or{
   display: flex;
   flex-direction: row;
-  margin: 80px 0;
+  margin: 1em 0;
+  color: black;
 }
 
 .account--or hr{
   border: none;
   height: 1px;
-  background-color: white;
+  background-color: black;
 }
 
+.login.center-container {
+  color: black;
+}
+
+.login.center-container input:first-child{
+  margin-bottom: 1em;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  width: 22em;
+  height: 2.5em;
+}
+
+button.primaryAction {
+  font-size: 16px;
+  padding-top: 0.5em;
+  margin: 0.4em;
+  background-color: rgba(219, 86, 231, 0.78);
+  border: white;
+  color: white;
+}
+
+.button.secondaryAction {
+  color: rgba(0, 102, 255, 1);
+}
+
+.loginText {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}
 
 .info-btn{
   margin: 0 auto;
@@ -109,7 +172,12 @@
   display: flex;
   flex-direction: row;
   margin: 0 auto;
+}
 
+.center-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .preview-img-div{
