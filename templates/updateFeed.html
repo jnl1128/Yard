@@ -73,10 +73,10 @@
           <a href="{% url 'user:deleteFeed' feed.id %}">삭제</a>
           <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
           <div class=" my-2 my-md-0 ml-5">
-            <a type="button" class="btn btn-outline-primary center-block btn-lg" data-bs-toggle="modal" data-bs-target="#aboutModal"
+            <a type="button" class="btn btn-outline-primary center-block btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"
                         href="{% url 'user:updateFeed' feed.id %}">수정!</a>  
           </div>
-          <div class="modal fade" id="aboutModal">
+          <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -268,5 +268,8 @@
     }
   }
 
+  $(document).ready(function() {
+	$("#myModal").modal("show");
+    });
 </script>
 {% endblock %}

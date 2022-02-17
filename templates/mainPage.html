@@ -16,7 +16,6 @@
 
     <div class="search-container" id = 'search-container'>
         <form class="" action="{% url 'user:search' %}" method="get">
-            {% csrf_token %}
             <input class="search" type="search" placeholder="가수 및 제목으로 커뮤니티를 검색해보세요!" aria-label="Search" name="q">
             <button class="search-btn" type="submit"><img src="{%static 'img/searchBtn.png' %}" alt=""></button>
         </form>

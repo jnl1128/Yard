@@ -30,4 +30,5 @@ urlpatterns = [
   path('search/<int:pk>/like/', views.feedLike, name='feedLike'),
   path('list/',views.feedList, name='feedList'),
   path('list/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
+  
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
