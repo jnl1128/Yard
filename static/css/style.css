@@ -5,6 +5,7 @@
 @import "./feed.css";
 @import "./account.css";
 @import "./certificate.css";
+@import './variables.css';
 
 * {
   box-sizing: border-box;

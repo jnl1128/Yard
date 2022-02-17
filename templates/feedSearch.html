@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 
+
 <div class="feed-middle-menu">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
-  <a href="{% url 'user:main' %}">메인으로 이동하기</a>
 </div>
 <div class="feed-list">
 	<!-- {% if messages %}
@@ -16,6 +16,12 @@
         {% endif %} -->
 
         <div class="feed-addContainer">
+          {% if request.user.id %}
+          <div class="feed-filterBtn">
+            <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
+            <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
+          </div>
+          {% endif %}
           <div class="feed-add">
             {% if request.user.userImg %}
             <img src="{{ request.user.userImg.url }}" class="feed--userImg" alt="userImg">
@@ -25,12 +31,6 @@
               <input type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm"/>
             
           </div>
-          {% if request.user.id %}
-          <div class="feed-filterBtn">
-            <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-            <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
-          </div>
-          {% endif %}
       </div>
 
     {% for feed in feeds %}
@@ -181,6 +181,9 @@
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
+
+
+
 {% block js %}
 <script src = '{% static "js/feedLike.js"%}'></script>
 <script>

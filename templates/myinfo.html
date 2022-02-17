@@ -3,18 +3,21 @@
 
 {%block content%}
 
-  <div class="info-btn">
-    {% if user.userImg %}
-    <img class="info-userImg" src="{{user.userImg.url}}"  width="200" height="200" alt="">
-    {% else %}
-    <img class="info-userImg" src="{% static 'img/default.jpeg' %}"  width="200" height="200" alt="">
-    {% endif %}
-    <a href="{% url 'user:updateInfo' %}" class="info-updateBtn">수정</a>
-  </div>
-  <div class="info-container">
-    <div><div class="index">이메일</div><div class="info-email">{{user.email}}</div></div>
-    <div><div class="index">별명</div><div class="info-nickName">{{user.nickName}}</div></div>
-    <div><div class="index">성별</div><div class="info-gender">{{user.gender}}</div></div>
-    <div><div class="index">생년월일</div><div class="info-birth">{{user.birth}}</div></div>
+  
+  <div class="info-container white-form">
+    <div class="info-btn center-container">
+      {% if user.userImg %}
+      <img class="info-userImg" src="{{user.userImg.url}}"  width="200" height="200" alt="">
+      {% else %}
+      <img class="info-userImg" src="{% static 'img/default.jpeg' %}"  width="200" height="200" alt="">
+      {% endif %}
+      <a href="{% url 'user:updateInfo' %}" class="info-updateBtn">수정</a>
+      <div><div class="info-nickName">{{user.nickName}}</div></div>
+    </div>
+    <div class="center-container">
+      <div><div class="index">이메일</div><div class="info-email">{{user.email}}</div></div>
+      <div><div class="index">성별</div><div class="info-gender">{{user.gender}}</div></div>
+      <div><div class="index">생년월일</div><div class="info-birth">{{user.birth}}</div></div>
+    </div>
   </div>
 {%endblock%}

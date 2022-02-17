@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {%block content%}
-<div class="updateInfo-container" id = 'updateInfo-container'>
+<div class="updateInfo-container white-form" id = 'updateInfo-container'>
   <div class="preview-img-div" id = 'preview-img-div'></div>
   <form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
     {% csrf_token %}
