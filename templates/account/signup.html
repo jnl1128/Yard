@@ -1,5 +1,5 @@
 {% extends "account/base.html" %}
-
+{% load static %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
@@ -8,20 +8,22 @@
 <div class="account-container">
   <div class="account--greeting">
     <p>Welcome</p>
-    <img src="../../static/img/note.png" alt="">
+    <img src="{% static 'img/note.png' %}" alt="">
   </div>
-  <div class="account-form">
-    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-
-
-      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-    </form>
+  <div class="account-form white-form center-container">
+      <div class="center-container logoBox">
+        <img src="{%static 'img/logoPurple.png' %}" width="150px">
+      </div>
+      <form class="signup center-container" id="signup_form" method="post" action="{% url 'account_signup' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit" class="form-white-btn form-submit-btn">{% trans "회원가입" %}</button>
+        <p class="Roboto">{% blocktrans %}이미 회원이라면 <a class="button secondaryAction" href="{{ login_url }}">로그인</a>{% endblocktrans %}</p>
+      </form>
+    </div>
   </div>
 </div>
 
