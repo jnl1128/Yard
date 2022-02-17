@@ -239,7 +239,19 @@ def searchMyFeed(request):
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
     query = "내가 쓴글"
     
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+    if request.method == 'POST':
+        form = createFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
+            feeds = Feed.objects.all().order_by('-createdDate')
+            return redirect("user:feedList")
+    else:
+        form = createFeedForm()
+    
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 
 def deleteFeed(request, pk):
@@ -298,9 +310,6 @@ def feedList(request):
             feed.userId = current_user
             feed.save()
             feed.tags.set(form.cleaned_data['tags'])
-            #print(form.cleaned_data['tags'])
-            #print(feed.tags)
-            #form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
             return redirect("user:feedList")
     else:
