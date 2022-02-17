@@ -72,27 +72,6 @@
         <div class="feed--btn-my">
           <a href="{% url 'user:deleteFeed' feed.id %}">삭제</a>
           <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
-          
-          <div class="modal fade" id="aboutModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"피로그래밍 16기</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">파이팅!!</h5>
-                        <p class="text-center fw-bold">즐거운 부트스트랩^^.</p>
-                        <p class="text-center fw-bold text-primary">너무힘들어요,,</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal">Download</button>
-                        <button type="button" class="btn btn-primary btn-lg"
-                            data-bs-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
           <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
           <p class="feed-content">{{feed.content}}</p>

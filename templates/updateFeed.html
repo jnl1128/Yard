@@ -143,7 +143,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" style="color: black;">피드 등록하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <a href="{% url 'user:feedList' %}"><button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button></a>
       </div>
       <div class="modal-body">
         <form class="searchDiv" action="methods" enctype="multipart/form-data">
@@ -269,7 +269,7 @@
   }
 
   $(document).ready(function() {
-	$("#myModal").modal("show");
+	$("#feedForm").modal("show");
     });
 </script>
 {% endblock %}
