@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from .models import *
 from .forms import *
 from django.db.models import Q
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse 
 from random import randint
 from datetime import datetime
 
@@ -61,53 +59,6 @@ def mainSearch(request):
             count += 1;
     print(hashTagList) 
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
-
-def myInfoRegister(request):
-    userInstance = request.user
-    if request.method == 'POST':
-        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
-    
-        if registerForm.is_valid():
-            userInstance.userImg = registerForm.cleaned_data['userImg']
-            userInstance.nickName = registerForm.cleaned_data['nickName']
-            userInstance.gender = registerForm.cleaned_data['gender']
-            userInstance.birth = registerForm.cleaned_data['birth']
-            userInstance.save()
-
-
-
-
-
-
-
-
-
-def myInfoRegister(request):
-    userInstance = request.user
-    if request.method == 'POST':
-        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
-    
-        if registerForm.is_valid():
-            userInstance.userImg = registerForm.cleaned_data['userImg']
-            userInstance.nickName = registerForm.cleaned_data['nickName']
-            userInstance.gender = registerForm.cleaned_data['gender']
-            userInstance.birth = registerForm.cleaned_data['birth']
-            userInstance.save()
-
-            return redirect('user:myInfo')
-
-    # GET 요청 (혹은 다른 메소드)이면 기본 폼을 생성한다.
-    else:
-        registerForm = SocialRegisterForm(instance = userInstance)
-
-    context = {
-        'form': registerForm,
-        'userInstance': userInstance,
-    }
-
-    return render(request, 'myInfoRegister.html', context=context)
-
-
 
 
 def myInfoRegister(request):
@@ -188,7 +139,7 @@ def feedDetail(request, pk):
     return render(request, template_name='feedDetail.html', context={'feed':feed})
     
 def certDetail(request, pk):
-	cert = Certification.objects.get(id=pk)
+	cert = get_object_or_404(Certification, id=pk)
 	music = cert.music
 
 	ctx = {'music':music, 'cert':cert}
@@ -263,6 +214,7 @@ def deleteFeed(request, pk):
 
 
 def updateFeed(request, pk):
+    print("here!")
     feed = get_object_or_404(Feed, id=pk)
     feeds = Feed.objects.all().order_by('-createdDate')
 
@@ -280,8 +232,8 @@ def updateFeed(request, pk):
 
     else:
         form = createFeedForm(instance=feed)
-        ctx = {'form': form, 'feed': feed}
-        return render(request, template_name='form.html', context=ctx)
+        ctx = {'form': form, 'feed': feed, 'feeds':feeds}
+        return render(request, template_name='updateFeed.html', context=ctx)
     
 @login_required
 def feedLike(request, pk):
@@ -315,3 +267,14 @@ def feedList(request):
     else:
         form = createFeedForm()
         return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+
+
+@csrf_exempt
+def updateFeedAjax(request):
+    req = json.loads(request.body)
+    reqId = req['id']
+    feed = get_object_or_404(Feed, id=reqId)
+    form = createFeedForm(instance=feed)
+    ctx = {'form': form, 'feed': feed}
+    
+    return JsonResponse(ctx)
