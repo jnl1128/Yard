@@ -214,6 +214,7 @@ def deleteFeed(request, pk):
 
 
 def updateFeed(request, pk):
+    print("here!")
     feed = get_object_or_404(Feed, id=pk)
     feeds = Feed.objects.all().order_by('-createdDate')
 
@@ -231,8 +232,8 @@ def updateFeed(request, pk):
 
     else:
         form = createFeedForm(instance=feed)
-        ctx = {'form': form, 'feed': feed}
-        return render(request, template_name='form.html', context=ctx)
+        ctx = {'form': form, 'feed': feed, 'feeds':feeds}
+        return render(request, template_name='updateFeed.html', context=ctx)
     
 @login_required
 def feedLike(request, pk):
@@ -266,3 +267,14 @@ def feedList(request):
     else:
         form = createFeedForm()
         return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+
+
+@csrf_exempt
+def updateFeedAjax(request):
+    req = json.loads(request.body)
+    reqId = req['id']
+    feed = get_object_or_404(Feed, id=reqId)
+    form = createFeedForm(instance=feed)
+    ctx = {'form': form, 'feed': feed}
+    
+    return JsonResponse(ctx)
