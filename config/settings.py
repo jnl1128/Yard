@@ -146,8 +146,6 @@ ACCOUNT_FORMS = {'signup': 'user.forms.CustomSignupForm'}
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
@@ -179,3 +177,6 @@ EMAIL_PORT = local_settings.EMAIL['EMAIL_PORT']
 EMAIL_HOST = local_settings.EMAIL['EMAIL_HOST']
 EMAIL_HOST_USER = local_settings.EMAIL['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = local_settings.EMAIL['EMAIL_HOST_PASSWORD']
+
+ACCOUNT_SIGNUP_REDIRECT_URL = '/myInfo/register'
+LOGIN_REDIRECT_URL = '/'
