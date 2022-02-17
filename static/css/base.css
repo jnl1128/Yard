@@ -6,6 +6,7 @@ header {
   color: white;
   font-size: 30px;
   background-color: transparent;
+  width: 100vw;
 }
 
 .dropdown {
@@ -52,7 +53,11 @@ main {
 }
 
 .nav--input {
-  border: 5px solid white;
-  border-radius: 10px;
-  background-color: transparent;
+  border: 1px solid rgba(144, 102, 211, 0.6);
+  border-radius: 1rem;
+  background-color: rgba(144, 102, 211, 0.6);
+  font-size: 1.4rem;
+  width: 65rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
