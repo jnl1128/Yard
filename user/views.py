@@ -62,6 +62,17 @@ def mainSearch(request):
     print(hashTagList) 
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
+def myInfoRegister(request):
+    userInstance = request.user
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
+    
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
 
 
 
@@ -99,7 +110,32 @@ def myInfoRegister(request):
 
 
 
+def myInfoRegister(request):
+    userInstance = request.user
+    if request.method == 'POST':
+        registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
     
+        if registerForm.is_valid():
+            userInstance.userImg = registerForm.cleaned_data['userImg']
+            userInstance.nickName = registerForm.cleaned_data['nickName']
+            userInstance.gender = registerForm.cleaned_data['gender']
+            userInstance.birth = registerForm.cleaned_data['birth']
+            userInstance.save()
+
+            return redirect('user:myInfo')
+
+    # GET 요청 (혹은 다른 메소드)이면 기본 폼을 생성한다.
+    else:
+        registerForm = SocialRegisterForm(instance = userInstance)
+
+    context = {
+        'form': registerForm,
+        'userInstance': userInstance,
+    }
+
+    return render(request, 'myInfoRegister.html', context=context)
+
+
 def searchResult(request):
     feeds = None
     query = None
@@ -107,41 +143,45 @@ def searchResult(request):
     artist = None
     tags = None
     
-    if ('q' in request.GET):
-        query = request.GET.get('q')
-        if query=="":
-            query = "#모든"
-        if query=="#모든":
-            feeds = Feed.objects.all().order_by('-createdDate')
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        if query[0] == '#':
-            tagId = HashTag.objects.filter(name=query)
-            try:
-                feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
-            except:
-                pass
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-        feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
-   
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
-
-def createFeed(request):
     current_user = request.user
-    print(current_user)
+    #form = createFeedForm()
+    #print(current_user)
+    #print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
             feed = form.save(commit=False)
             feed.userId = current_user
             feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
+            form = createFeedForm()
             feeds = Feed.objects.all().order_by('-createdDate')
-            query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            
+            return redirect("user:feedList")
             
     else:
         form = createFeedForm()
-    ctx = {'form': form}
-    return render(request, template_name='feedSearch.html', context=ctx)
+        feeds = Feed.objects.all().order_by('-createdDate')
+        query = "#모든"
+        #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+    
+        if ('q' in request.GET):
+            query = request.GET.get('q')
+            if query=="":
+                query = "#모든"
+            if query=="#모든":
+                feeds = Feed.objects.all().order_by('-createdDate')
+                return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+            if query[0] == '#':
+                tagId = HashTag.objects.filter(name=query)
+                try:
+                    feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
+                except:
+                    pass
+                return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
+            feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
+
+        return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
@@ -203,12 +243,11 @@ def searchMyFeed(request):
 
 
 def deleteFeed(request, pk):
-    feeds = Feed.objects.all().order_by('-createdDate')
     feed = Feed.objects.get(id=pk)
-    query = "#모든"
     feed.delete()
     
-    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+    return redirect("user:feedList")
+
 
 
 def updateFeed(request, pk):
@@ -225,13 +264,11 @@ def updateFeed(request, pk):
         feed.feedImg = request.FILES.get("feedImg")
         if form.is_valid():
             feed = form.save()
-            query = "#모든"
-            return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds})
+            return redirect("user:feedList")
 
     else:
         form = createFeedForm(instance=feed)
         ctx = {'form': form, 'feed': feed}
-
         return render(request, template_name='form.html', context=ctx)
     
 @login_required
@@ -248,3 +285,24 @@ def feedLike(request, pk):
 		'count':feed.like_users.count()
 	}
     return JsonResponse(context)
+
+def feedList(request):
+    feeds = Feed.objects.all().order_by('-createdDate')
+    query = "#모든"
+    form = createFeedForm()
+    current_user = request.user
+    if request.method == 'POST':
+        form = createFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
+            #print(form.cleaned_data['tags'])
+            #print(feed.tags)
+            #form = createFeedForm()
+            feeds = Feed.objects.all().order_by('-createdDate')
+            return redirect("user:feedList")
+    else:
+        form = createFeedForm()
+        return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
