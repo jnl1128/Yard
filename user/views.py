@@ -126,9 +126,6 @@ def certificationRegister(request):
 def musicSearch(request):
     return render(request, 'musicSearch.html')
 
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def addMusicAjax(request):
@@ -149,6 +146,7 @@ def searchMyFeed(request):
 @login_required
 def feedLike(request, pk):
     feed = get_object_or_404(Feed, id=pk)
+
     if request.user in feed.like_users.all():
         feed.like_users.remove(request.user)
         liked = False

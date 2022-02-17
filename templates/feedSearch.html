@@ -36,10 +36,8 @@
 
 			{% if user in feed.like_users.all %}
 			<i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			{% else %}
-			<i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			{% endif %}
 			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+			{% endif %}
 		</div>
 	</div>
 	{% else %}
@@ -55,10 +53,8 @@
 
 			{% if user in feed.like_users.all %}
 			<i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			{% else %}
-			<i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			{% endif %}
 			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+			{% endif %}
 		</div>
 		<div class="feed--userInfo">
 			<img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
