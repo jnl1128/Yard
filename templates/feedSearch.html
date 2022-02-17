@@ -52,8 +52,13 @@
 			{% if feed.feedImg %}
 			<img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
 			{% endif %}
+
+			{% if request.user.is_authenticated %}
 			{% if user in feed.like_users.all %}
 			<i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+			{% else %}
+			<i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+			{% endif %}
 			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
 			{% endif %}
 		</div>
@@ -78,8 +83,13 @@
 			{% if feed.feedImg %}
 			<img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
 			{% endif %}
+
+			{% if request.user.is_authenticated %}
 			{% if user in feed.like_users.all %}
 			<i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+			{% else %}
+			<i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+			{% endif %}
 			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
 			{% endif %}
 		</div>
