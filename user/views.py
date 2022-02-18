@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from random import randint
-from datetime import datetime
+from django.conf import timezone
 
 
 # Create your views here.
@@ -218,7 +218,7 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.createdDate = datetime.now()
+        feed.createdDate = timezone.now()
         feed.content = request.POST.get("content")
         feed.save()
         feed.feedImg = request.FILES.get("feedImg")
