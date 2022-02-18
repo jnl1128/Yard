@@ -95,9 +95,6 @@ def searchResult(request):
     tags = None
     
     current_user = request.user
-    #form = createFeedForm()
-    #print(current_user)
-    #print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -114,7 +111,6 @@ def searchResult(request):
         form = createFeedForm()
         feeds = Feed.objects.all().order_by('-createdDate')
         query = "#모든"
-        #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
     
         if ('q' in request.GET):
             query = request.GET.get('q')
