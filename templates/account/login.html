@@ -1,0 +1,53 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+<!--{% load account socialaccount %}-->
+{% load socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="account-container">
+  <div class="account--greeting">
+    <p>Welcome</p>
+    <img src="../../static/img/note.png" alt="">
+  </div>
+  <div class="account-form white-form">
+    <div class="center-container logoBox">
+      <img src="../../static/img/logoPurple.png" width="150px">
+    </div>
+    <div class="account--social center-container">
+      <a class="form-white-btn" href="{% provider_login_url 'google' %}">
+        <img src="/static/img/Google.png" height="30px">
+        <span class='form-white-btn-font'>Continue with Google</span>
+      </a>
+      <a class="form-white-btn" href="{% provider_login_url 'naver' %}">
+        <img src="/static/img/Naver.png" height="30px">
+        <span class="form-white-btn-font">Continue with Naver</span>        
+      </a>
+    </div>
+
+    <div class="account--or">
+      <hr width="40%" ><div>or</div><hr width="40%">
+    </div>
+
+    <form class="login center-container" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="form-white-btn primaryAction" type="submit">{% trans "로그인" %}</button>
+      <div style="display: flex;">
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "비밀번호 찾기" %}</a>
+        <div class="Roboto" style="margin-left: 0.5em;">
+          |
+          <span class="Roboto" style="margin-left: 0.5em;">회원이 아니라면? </span><a class="button secondaryAction" href="{% url 'account_signup' %}">{% trans "회원가입" %}</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

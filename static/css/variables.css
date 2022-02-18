@@ -1,0 +1,88 @@
+:root {
+  --l-gray: #f8f8f8;
+  --lm-gray: #f2f2f2;
+  --lmm-gray: #cfcece;
+  --m-gray: #8d98a6;
+  --d-gray: #7e7e7e;
+  --gray: rgb(82, 82, 82);
+  --pink: #f9275f;
+
+  
+}
+
+.white-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0.1rem solid white;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 4rem;
+  width: 35%;
+  min-width: 40rem;
+  box-shadow: 1rem 1rem 1.3rem 0.4rem rgba(0, 0, 0, 0.25);
+  color: black;
+}
+
+.form-white-btn, 
+#id_login,
+#id_password, 
+#id_email, 
+#id_nickName, 
+#id_password1,
+#id_password2{
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 4px 10px;
+  width: 30rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1rem;
+
+}
+
+.form-white-btn-font{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 23px;
+  padding-top: 0.25em;
+  text-align: center;
+  color: black;
+}
+
+.form-submit-btn{
+  font-size: 16px;
+  padding-top: 0.5em;
+  margin: 0.4em;
+  background-color: rgba(219, 86, 231, 0.78);
+  border: white;
+  color: white;
+}
+
+.btn-white {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.textContent {
+  font-size: 2rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.Roboto {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}

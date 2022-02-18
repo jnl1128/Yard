@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    
+  
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    <!--header-->
+    <header class="nav">
+      <div class="nav-logo"><a href="/"><img class="logobtn" src="{%static 'img/logo.png' %}"></a></div>
+      {% if user.is_authenticated %}
+      <div class="nav-btn">
+        <a href="{% url 'user:myPage' %}">뮤직 카드</a>
+        <a href="{% url 'user:myInfo' %}">내 정보</a>
+        <a href="/accounts/logout">로그아웃</a>
+      </div>
+      {% else %}
+      <div class="nav-btn">
+        <a href="">뮤직 카드</a>
+        <a href="/accounts/login">로그인</a>
+      </div>
+      {% endif %}
+    </header>
+
+    {% block body %}
+
+      {% block content %}
+      {% endblock %}
+
+    {% endblock %}
+
+    {% block extra_body %}
+    {% endblock %}
+    <script src="{%static 'js/account.js'%}"></script>
+  </body>
+</html>

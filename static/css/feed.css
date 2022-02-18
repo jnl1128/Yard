@@ -1,0 +1,145 @@
+.feed-list{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 1rem;
+  
+  margin: 50px 500px 50px 100px;
+  height: 200vh;
+}
+
+.feed-container{
+  margin: 50px 100px 20px 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.feed--userInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.feed--userImg{
+  border: 1px solid white;
+  border-radius: 50%;
+  height:100px;
+  width:100px;
+}
+
+.feed--userName{
+  font-size: 25px;
+  text-align: center;
+}
+
+.feed--content{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-left: 40px;
+  padding: 30px 50px;
+}
+
+.feed--content-my{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-right: 40px;
+  padding: 30px 50px;
+}
+
+.feed-addContainer{
+  display: flex;
+  flex-direction: column;
+  /*border: 1px solid #fff;
+  border-radius: 30px;*/
+  margin: 1rem 80px;
+}
+
+.feed-add{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-left: 5px;
+}
+
+.feed-add>img{
+  height: 6rem;
+  width: 6rem;
+  margin-right: 10px;
+
+}
+.feed-add>input{
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background-color: transparent;
+  width: 60%;
+  padding: 10px;
+}
+
+.feed-filterBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding-bottom: 30px;
+
+}
+.feed-my, .feed-like{
+  
+  padding: 5px 5px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  margin:0 5px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.feed-middle-menu{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.feed--btn-my{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.feed--btn-my>a{
+  margin-left: 10px;
+  color: white;
+}
+
+.feed-title{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.feed-content{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.feed-hashtagList{
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+
+.feed-hashtag{
+  border: 1px solid #fff;
+  background: #440FDA;
+  border-radius: 10px;
+  padding: 5px 20px;
+}

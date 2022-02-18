@@ -1,0 +1,81 @@
+.account-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.account--greeting{
+  display: flex;
+  flex-direction: column;
+}
+
+.account--greeting p{
+  font-size: 90px ;
+}
+
+.account-form{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 40px;
+  width: 50%;
+  justify-content: center;
+}
+.account--social{
+  display: flex;
+  flex-direction: column;
+}
+
+.account--social a{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.account--or{
+  display: flex;
+  flex-direction: row;
+  margin: 80px 0;
+}
+
+.account--or hr{
+  border: none;
+  height: 1px;
+  background-color: white;
+}
+
+
+.info-btn{
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  width: 40%;
+}
+.info-updateBtn{
+  position: absolute;
+  margin-top: 100px;
+  right: 100px;
+}
+.info-userImg{
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.info-container{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+  padding: 40px;
+}
