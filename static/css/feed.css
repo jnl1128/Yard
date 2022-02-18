@@ -4,7 +4,9 @@
   text-align: center;
   margin-top: 30px;
 }
-
+.feed-result>p{
+  font-size: 2rem;
+}
 .feedNtag-container{
   display: flex;
   flex-direction: row;
@@ -13,8 +15,9 @@
 }
 
 .feed-list{
-  width: 70% !important;
+  width: 100% !important;
   font-family: Roboto !important;
+  /*margin-right: 5rem;*/
 }
 
 
@@ -43,6 +46,11 @@
   background-color: transparent;
   width: 90%;
   height: 60%;
+  padding-left: 1rem;
+}
+
+.feed-add>input::placeholder{
+  font-size: 1.4rem;
 }
 
 .feed-container{
@@ -142,4 +150,36 @@
 .feed-hashtagList>.hashtag--btn{
   font-size: 1.4rem;
   justify-content: end !important;
+}
+
+
+.tag-list{
+  background-color: #fafafa;
+  justify-content: start !important;
+  display: block !important;
+}
+.tag-list>h1{
+  color: black
+}
+.tag-list>ul{
+  font-size: 2rem;
+  color: black;
+}
+
+
+.empty-feed>p{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.feed-twobtn{
+  display: flex;
+  flex-direction:row;
+  justify-content: end;
+  font-size: 1.4rem;
+
+}
+
+.feed-twobtn>a{
+  margin-left: 1rem;
 }
