@@ -17,6 +17,7 @@ body {
 }
 .mypage-container>h1{
   margin-left: 5rem;
+  font-size: 4rem;
 }
 
 .certificate-list {
@@ -38,11 +39,11 @@ body {
 }
 
 .certificate {
-  height: 400px;
-  width: 340px;
+  height: 40rem;
+  width: 34rem;
   background-size: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 0 auto;
 
   -webkit-filter: grayscale(0) blur(0);
@@ -97,7 +98,7 @@ body {
 }
 
 .year {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -109,7 +110,11 @@ body {
 }
 
 .history {
-  font-size: 20px;
-  padding-left: 50px;
-  padding-bottom: 10px;
+  font-size: 2rem;
+  padding-left: 5rem;
+  padding-bottom: 1rem;
+}
+.plusCert:hover{
+  opacity: 0.8;
+  transition: 0.3s ease-in-out;
 }

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <main class="mypage-container">
-  <h1>My Certificates <a href="{% url 'user:certificationRegister'%}"><img width = '60rem' height="60rem" src="{% static 'img/plus.png' %}"" alt=""></a></h1>
+  <h1>My Certificates <a class='plusCert'href="{% url 'user:certificationRegister'%}"><img  width = '60rem' height="60rem" src="{% static 'img/plus.png' %}" alt=""></a></h1>
   <div class="certificate-btn" id = 'certificate-btn'>
     <img class="certificate-leftBtn" id = 'certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
     <img class="certificate-rightBtn" id = 'certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">  

@@ -157,6 +157,7 @@
   background-color: #fafafa;
   justify-content: start !important;
   display: block !important;
+  opacity: 0.5;
 }
 .tag-list>h1{
   color: black
