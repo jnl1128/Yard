@@ -2,7 +2,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 35px 45px;
+  margin: 3.5rem 7em;/*space-between에서 좌우 7rem 마진*/
   color: white;
   font-size: 30px;
   background-color: transparent;
@@ -40,6 +40,11 @@ header {
 .dropbtn,
 .logobtn {
   transition: 0.5s ease;
+}
+
+.logobtn{
+  width: 8rem;
+  height: 6rem;
 }
 
 .dropbtn:hover,

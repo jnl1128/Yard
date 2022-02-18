@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 100px;
+  margin: 10rem; /*mainpage 마진 기준*/
 }
 
 .main-scrollBtn{
