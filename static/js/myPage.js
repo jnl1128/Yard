@@ -29,31 +29,33 @@ function hideMusicInfo(event){
 
 function slideCert(event){
   let direction = 0;
-  const certificateLen = certificates.length
+  const certificateLen = certificates.length -1 
+  if(certificateLen > 1){
+    certificates.forEach(function(certificate){
+      let temp = Number(certificate.style.left.slice(0,4))
+      if (isNaN(temp)) temp = 0
   
-  certificates.forEach(function(certificate){
-    let temp = Number(certificate.style.left.slice(0,4))
-    if (isNaN(temp)) temp = 0
-
-    if(event.target === certificate_rightBtn){
-      direction = -170;
-      if((temp+direction) < (certificateLen) * direction){
-        return 
+      if(event.target === certificate_rightBtn){
+        direction = -170;
+        if((temp+direction) < (certificateLen) * direction){
+          return 
+        }
       }
-    }
-    else if(event.target === certificate_leftBtn){
-      direction = 170;
-      if(temp == 0  || isNaN(temp)){
-        return 
+      else if(event.target === certificate_leftBtn){
+        direction = 170;
+        if(temp == 0  || isNaN(temp)){
+          return 
+        }
       }
-    }
-    else{
-      return
-    }
-
-    const newLeft  = String(temp + direction)
-    certificate.style.left = newLeft + 'px'
-  })
+      else{
+        return
+      }
+  
+      const newLeft  = String(temp + direction)
+      certificate.style.left = newLeft + 'px'
+    })
+  }
+  
   
 }
 

@@ -1,17 +1,64 @@
-.feed-list{
+.feed-result{
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
+  text-align: center;
+  margin-top: 30px;
+}
+.feed-result>p{
+  font-size: 2rem;
+}
+.feedNtag-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3.5rem 15rem;
+}
+
+.feed-list{
+  width: 100% !important;
+  font-family: Roboto !important;
+  /*margin-right: 5rem;*/
+}
+
+
+.feed-addContainer{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 5rem;
+}
+
+.feed-add{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.feed-add>img{
+  height: 6rem;
+  width: 6rem;
+  margin-right: 1rem;
+}
+.feed-add>input{
+  border: 0.1rem solid black;
   border-radius: 1rem;
-  
-  margin: 50px 500px 50px 100px;
-  height: 200vh;
+  background-color: transparent;
+  width: 90%;
+  height: 60%;
+  padding-left: 1rem;
+}
+
+.feed-add>input::placeholder{
+  font-size: 1.4rem;
 }
 
 .feed-container{
-  margin: 50px 100px 20px 100px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width:  100%;
+  margin-bottom: 3rem;
 }
 
 .feed--userInfo{
@@ -23,10 +70,10 @@
 }
 
 .feed--userImg{
-  border: 1px solid white;
+  border: 0.1rem solid white;
   border-radius: 50%;
-  height:100px;
-  width:100px;
+  height: 6rem;
+  width: 6rem;
 }
 
 .feed--userName{
@@ -35,90 +82,54 @@
 }
 
 .feed--content{
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  border: 1px solid white;
-  border-radius: 20px;
-  margin-left: 40px;
-  padding: 30px 50px;
+  justify-content: space-between !important;
+  border: 0.1rem solid black !important;
+  margin-left: 2rem;
+  width: 100% !important;
+  padding: 2rem !important;
 }
 
 .feed--content-my{
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  border: 1px solid white;
-  border-radius: 20px;
-  margin-right: 40px;
-  padding: 30px 50px;
+  justify-content: space-between !important;
+  border: 0.1rem solid black !important;
+  margin-right: 2rem;
+  width: 100% !important;
+  padding: 2rem !important;
 }
 
-.feed-addContainer{
-  display: flex;
-  flex-direction: column;
-  /*border: 1px solid #fff;
-  border-radius: 30px;*/
-  margin: 1rem 80px;
-}
-
-.feed-add{
+.feed--content-top, .feed--content-bottom{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-left: 5px;
 }
 
-.feed-add>img{
-  height: 6rem;
-  width: 6rem;
-  margin-right: 10px;
+.feed--content-top{
+  justify-content: space-between;
+}
 
+.feed--content-bottom{
+  justify-content: end;
 }
-.feed-add>input{
-  border: 2px solid #fff;
-  border-radius: 10px;
-  background-color: transparent;
-  width: 60%;
-  padding: 10px;
+.feed--content-right{
+  display: flex;
+  flex-direction: column;
 }
+
 
 .feed-filterBtn{
   display: flex;
   flex-direction: row;
   justify-content: end;
-  padding-bottom: 30px;
-
 }
 .feed-my, .feed-like{
-  
-  padding: 5px 5px;
-  border-radius: 10px;
-  background-color: transparent;
-  border: 2px solid #fff;
-  margin:0 5px;
-  font-size: 16px;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: rgba(68, 15, 218, 0.8);
+  border: 0.1rem solid rgba(68, 15, 218, 0.8);
+  margin:0 0.5rem;
+  font-size: 1.6rem;
   color: #fff;
 }
 
-.feed-middle-menu{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.feed--btn-my{
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-}
-.feed--btn-my>a{
-  margin-left: 10px;
-  color: white;
-}
 
 .feed-title{
   font-size: 20px;
@@ -136,10 +147,40 @@
   flex-direction: row;
   font-size: 20px;
 }
+.feed-hashtagList>.hashtag--btn{
+  font-size: 1.4rem;
+  justify-content: end !important;
+}
 
-.feed-hashtag{
-  border: 1px solid #fff;
-  background: #440FDA;
-  border-radius: 10px;
-  padding: 5px 20px;
+
+.tag-list{
+  background-color: #fafafa;
+  justify-content: start !important;
+  display: block !important;
+  opacity: 0.5;
+}
+.tag-list>h1{
+  color: black
+}
+.tag-list>ul{
+  font-size: 2rem;
+  color: black;
+}
+
+
+.empty-feed>p{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.feed-twobtn{
+  display: flex;
+  flex-direction:row;
+  justify-content: end;
+  font-size: 1.4rem;
+
+}
+
+.feed-twobtn>a{
+  margin-left: 1rem;
 }

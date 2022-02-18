@@ -1,91 +1,78 @@
 .main-containter{
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .main-top {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 100px;
-}
-
-.main-scrollBtn{
-  position: absolute;
-  top: 80vh;
-  right: 50vw;
-  display: flex;
   justify-content: center;
-  transform: rotate(90deg);
-
+  margin-top: 15rem;
+  font-size: 20rem;
+  vertical-align: bottom;
+  line-height: 100%;
 }
 
-.main--text--container {
-  display: flex;
-  flex-direction: column;
-}
-.main--text--container h1 {
-  font-size: 200px;
-}
-.main--text--container .description {
-  width: 500px;
-  margin-left: 40px;
-}
-
-.main--img {
-  animation: up-down 1.4s infinite ease-in-out alternate;
-}
 
 .search-container {
   display: flex;
   flex-direction: column;
   align-self: center;
-
-  margin-top: 300px;
+  justify-content: center;
 }
-
-.search {
-  border: 20px solid #ffffff;
-  border-radius: 40px;
-  width: 800px;
+.search-container>form{
+  position: relative;
+}
+form>img{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  margin-left: 4rem;
+  margin-top: 3rem;
+  opacity: .5;
+}
+.search-input {
+  border: 1.5rem solid #ffffff;
+  border-radius: 4rem;
+  width: 100%;
   background: transparent;
-  padding: 10px;
+  padding: 2.5rem;
+  padding-left: 10rem;
+  font-size: 2rem;
+  color: #fff;
+  font-family: Roboto !important;
 }
 
-.search-btn{
-  background: transparent;
-  border: 0;
+.search-input::placeholder{
+  color: #fff;
+  vertical-align: middle;
 }
 
-body h1.title {
-  color: white;
+.search-input:focus{
+  outline:none;
 }
-
+.feed-description{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
 
 
 .hashtag-container{
   display: flex;
-  margin-top: 30px;
+  margin-top: 1rem;
   justify-content: center;
   width: 800px;
 }
 
 .hashtag--btn{
-  padding: 5px 20px;
+  padding: 0.5rem 3rem;
   border-radius: 10px;
   background-color: rgba(68, 15, 218, 0.8);
-  border: 1px solid rgba(68, 15, 218, 0.8);
-  margin-left: 10px;
-  font-size: 20px;
+  border: 0.1rem solid rgba(68, 15, 218, 0.8);
+  margin-left: 1rem;
+  font-size: 2rem;
+  font-family: Roboto !important;
   color: white;
-}
-
-@keyframes up-down {
-  from {
-    transform: translatey(20px);
-  }
-  to {
-    transform: translatey(-20px);
-  }
+  align-items: center;
 }
