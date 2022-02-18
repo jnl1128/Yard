@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<main class="">
-  <h1>My Certificates</h1>
+<main class="mypage-container">
+  <h1>My Certificates <a href="{% url 'user:certificationRegister'%}"><img width = '60rem' height="60rem" src="{% static 'img/plus.png' %}"" alt=""></a></h1>
   <div class="certificate-btn" id = 'certificate-btn'>
     <img class="certificate-leftBtn" id = 'certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
     <img class="certificate-rightBtn" id = 'certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">  
   </div>
-  <a href="{% url 'user:certificationRegister'%}">인증서 등록</a>
+  
   <div class="certificate-list">
   {% for certificate in certificates %}
   {% if request.user == certificate.userId %}

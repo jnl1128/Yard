@@ -15,6 +15,9 @@ body {
     rgba(125, 8, 135, 0.78) 100%
   );
 }
+.mypage-container>h1{
+  margin-left: 5rem;
+}
 
 .certificate-list {
   display: flex;
@@ -101,7 +104,8 @@ body {
 .history-container {
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
+  margin-left: 10rem;
+  padding-left: 2rem;
 }
 
 .history {
