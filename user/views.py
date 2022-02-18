@@ -37,7 +37,7 @@ def updateInfo(request):
         if form.is_valid():
             userInfo.userImg = form.cleaned_data['userImg']
             userInfo.nickName = form.cleaned_data['nickName']
-            
+
             userInfo.save()
             return redirect('user:myInfo')
     else:
@@ -47,17 +47,19 @@ def updateInfo(request):
 
 
 def mainSearch(request):
+    # 랜덤 샘플링
+    # 랜덤 정렬. 4-5개 뽑는다.
     hashTagList = ['','','','']
     len = HashTag.objects.count()
     count = 0
     while (count < 4):
         random_object = HashTag.objects.all()[randint(0, len - 1)]
-        if random_object.name in hashTagList: 
+        if random_object.name in hashTagList:
             continue
         else:
             hashTagList[count]=random_object.name
             count += 1;
-    print(hashTagList) 
+    print(hashTagList)
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
 
@@ -65,7 +67,7 @@ def myInfoRegister(request):
     userInstance = request.user
     if request.method == 'POST':
         registerForm = SocialRegisterForm(request.POST, request.FILES, instance = userInstance)
-    
+
         if registerForm.is_valid():
             userInstance.userImg = registerForm.cleaned_data['userImg']
             userInstance.nickName = registerForm.cleaned_data['nickName']
@@ -93,7 +95,7 @@ def searchResult(request):
     music = None
     artist = None
     tags = None
-    
+
     current_user = request.user
     #form = createFeedForm()
     #print(current_user)
@@ -106,38 +108,40 @@ def searchResult(request):
             feed.save()
             feed.tags.set(form.cleaned_data['tags'])
             form = createFeedForm()
+            # TODO : pagination.
+            # 피드가 50개 이상.
             feeds = Feed.objects.all().order_by('-createdDate')
-            
+
             return redirect("user:feedList")
-            
+
     else:
         form = createFeedForm()
         feeds = Feed.objects.all().order_by('-createdDate')
         query = "#모든"
         #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
-    
+
         if ('q' in request.GET):
-            query = request.GET.get('q')
+            query = request.GET.get('q') # None, ''
             if query=="":
                 query = "#모든"
             if query=="#모든":
                 feeds = Feed.objects.all().order_by('-createdDate')
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
-            if query[0] == '#':
+            if query[0] == '#':  # TODO : error 발생!
                 tagId = HashTag.objects.filter(name=query)
                 try:
                     feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
                 except:
                     pass
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
-            feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
+            feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')
 
         return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 def feedDetail(request, pk):
     feed = Feed.objects.get(id=pk)
     return render(request, template_name='feedDetail.html', context={'feed':feed})
-    
+
 def certDetail(request, pk):
 	cert = get_object_or_404(Certification, id=pk)
 	music = cert.music
@@ -182,14 +186,14 @@ def addMusicAjax(request):
     req = json.loads(request.body)
     title = req['music']
     artist = req['artist']
-    
+
     return JsonResponse({'music': title, 'artist': artist})
 
 def searchMyFeed(request):
     current_user = request.user
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
     query = "내가 쓴글"
-    
+
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -201,14 +205,16 @@ def searchMyFeed(request):
             return redirect("user:feedList")
     else:
         form = createFeedForm()
-    
+
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
-
+@login_required
 def deleteFeed(request, pk):
+
     feed = Feed.objects.get(id=pk)
+    request.user.id == feed.user_id
     feed.delete()
-    
+
     return redirect("user:feedList")
 
 
@@ -216,6 +222,7 @@ def deleteFeed(request, pk):
 def updateFeed(request, pk):
     print("here!")
     feed = get_object_or_404(Feed, id=pk)
+    # TODO : 업데이트 시점에, 모든 피드를 다 불러오는
     feeds = Feed.objects.all().order_by('-createdDate')
 
     if request.method == 'POST':
@@ -234,7 +241,7 @@ def updateFeed(request, pk):
         form = createFeedForm(instance=feed)
         ctx = {'form': form, 'feed': feed, 'feeds':feeds}
         return render(request, template_name='updateFeed.html', context=ctx)
-    
+
 @login_required
 def feedLike(request, pk):
     feed = get_object_or_404(Feed, id=pk)
@@ -276,5 +283,5 @@ def updateFeedAjax(request):
     feed = get_object_or_404(Feed, id=reqId)
     form = createFeedForm(instance=feed)
     ctx = {'form': form, 'feed': feed}
-    
+
     return JsonResponse(ctx)
