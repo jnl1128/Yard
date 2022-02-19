@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from random import randint
-from datetime import datetime
+from django.utils import timezone
 
 
 # Create your views here.
@@ -90,9 +90,6 @@ def myInfoRegister(request):
 def searchResult(request):
     feeds = None
     query = None
-    music = None
-    artist = None
-    tags = None
     
     current_user = request.user
     if request.method == 'POST':
@@ -124,7 +121,7 @@ def searchResult(request):
                 try:
                     feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
                 except:
-                    pass
+                    feeds = None;
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
@@ -216,7 +213,7 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.createdDate = datetime.now()
+        feed.createdDate = timezone.now()
         feed.content = request.POST.get("content")
         feed.save()
         feed.feedImg = request.FILES.get("feedImg")
