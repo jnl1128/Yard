@@ -56,7 +56,7 @@ $(document).ready(
 
     function getMusicHtml(title, artist) {
         let musicHtml = `<div class="songs">
-            <input class="form-check-input" type="checkbox" value="" id="musicChoice">
+            <input class="form-check-input" type="checkbox" value="" id="musicChoice"  name="musicChoice" onclick='doOpenCheck(this)'>
             <label class="form-check-label" for="musicChoice" id="musicInfo">
                 ${title}
                 |

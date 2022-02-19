@@ -178,7 +178,11 @@
           " onclick="registerMusic()">노래 등록
         </button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }}
+          {% csrf_token %}
+           <!--{{ form.as_p }}-->
+           <div>
+              {{form.tags}}
+           </div>
           <button type="submit" class="save btn btn-default">Save</button>
         </form>
       </div>
