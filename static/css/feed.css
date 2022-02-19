@@ -16,7 +16,7 @@
 
 .feed-list{
   width: 100% !important;
-  font-family: Roboto !important;
+  font-family: Roboto;
   /*margin-right: 5rem;*/
 }
 
@@ -120,7 +120,7 @@
   flex-direction: row;
   justify-content: end;
 }
-.feed-my, .feed-like{
+.feed-my, .feed-like, .feed-heart{
   padding: 0.5rem;
   border-radius: 1rem;
   background-color: rgba(68, 15, 218, 0.8);
@@ -130,6 +130,14 @@
   color: #fff;
 }
 
+.feed-heart{
+  background: transparent;
+  color: black;
+  padding: 0.5rem 1rem;
+}
+.feed-heart>span{
+  font-family: 'Roboto';
+}
 
 .feed-title{
   font-size: 20px;
@@ -141,6 +149,8 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+
 
 .feed-hashtagList{
   display: flex;

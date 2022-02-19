@@ -53,6 +53,7 @@
         </div>
       </div>
       <div class="feed--content-bottom">
+        <div class="feed-heart">
         {% if request.user.is_authenticated %}
           {% if user in feed.like_users.all %}
           <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
@@ -60,7 +61,8 @@
           <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
           {% endif %}
           <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-          {% endif %}
+        {% endif %}
+        </div>
         <div class="feed-hashtagList">
           {% for tag in feed.tags.all %}
           <div class="hashtag--btn">{{tag}}
@@ -96,6 +98,7 @@
       </div>
     </div>
     <div class="feed--content-bottom">
+      <div class="feed-heart">
       {% if request.user.is_authenticated %}
         {% if user in feed.like_users.all %}
         <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
@@ -103,7 +106,8 @@
         <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
         {% endif %}
         <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-        {% endif %}
+      {% endif %}
+      </div> 
       <div class="feed-hashtagList">
         {% for tag in feed.tags.all %}
         <div class="hashtag--btn">{{tag}}
