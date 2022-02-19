@@ -37,7 +37,7 @@
   margin-top: 60px;
   
 }
-.certDetail-img-back {
+.certDetail-img-back{
   transform: rotateY(180deg);
   background-size:cover;
   background-position: center;
@@ -55,3 +55,46 @@
   text-align: center;
 }
 
+.cert-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.cert-box{
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction:column;
+}
+
+.cert-box>h1{
+  text-align: center;
+
+}
+
+.cert-registerForm{
+  display: flex;
+  flex-direction: column;
+}
+.cert-music{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cert-music-input{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+}
+
+.musicListList{
+  font-size: 1.4rem;
+}
+
+#id_music, #id_artist{
+  border: 0 !important;
+  background-color: #fafafa;
+  width: 100% !important;
+}

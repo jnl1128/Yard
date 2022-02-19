@@ -2,7 +2,6 @@ const infoContainer = document.getElementById('preview-img-div')
 
 const imgInput = document.getElementById('updateInfo-img')
 imgInput.childNodes[2].className = 'image-container'
-
 const imgTag = imgInput.childNodes[2].querySelector('a').href
 
 const currImg = document.createElement('img')
@@ -24,6 +23,7 @@ newImg.addEventListener('change', showPreview)
 function showPreview(event){
   if(event.target.files.length > 0){
     const src = URL.createObjectURL(event.target.files[0]);
+    console.log(src)
     const preview = document.getElementById('preview-img');
     preview.src = src;
     preview.style.display = "block";
