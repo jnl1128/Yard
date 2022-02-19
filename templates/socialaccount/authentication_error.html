@@ -1,0 +1,17 @@
+{% extends "socialaccount/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="center-container">
+  <div class="white-form center-container">
+    <div class="center-container logoBox">
+      <img src="{%static 'img/logoPurple.png' %}" width="150px">
+    </div>
+    <p class="form-white-btn-font title">{% trans "소셜 계정 연결 실패" %}</p>
+
+    <p class="form-white-btn-font textContent">{% trans "소셜 계정 연결 과정에서 문제가 발생했습니다." %}</p>
+    <a class="form-white-btn form-submit-btn" href="/">{% trans '메인으로 돌아가기' %}</a>
+  </div>
+</div>
+{% endblock %}
