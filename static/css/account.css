@@ -15,20 +15,6 @@
   font-size: 90px ;
 }
 
-.account-form{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid white;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 0 40px;
-  width: 50%;
-  min-width: 30em;
-  max-width: 33em;
-  justify-content: center;
-  box-shadow: 10px 10px 13px 4px rgba(0, 0, 0, 0.25);
-}
-
 .logoBox {
   margin-bottom: 3em;
 }
@@ -36,7 +22,7 @@
 .account--social a{
   margin-bottom: 1em;
 }
-
+/*
 .account--social a,
 #id_login,
 #id_password,
@@ -49,22 +35,13 @@ button.primaryAction{
   display: flex;
   justify-content: center;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
+}*/
 
 .account--social a img {
   margin-right: 1rem;
 }
 
-.account--social a span{
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 23px;
-  padding-top: 0.25em;
-  text-align: center;
-  color: black;
-}
+
 
 .account--or{
   display: flex;
@@ -106,12 +83,7 @@ button.primaryAction {
   color: rgba(0, 102, 255, 1);
 }
 
-.loginText {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-}
-
+/*
 .info-btn{
   margin: 0 auto;
   position: relative;
@@ -119,7 +91,7 @@ button.primaryAction {
   flex-direction: row;
   margin-bottom: 50px;
   width: 40%;
-}
+}*/
 .info-updateBtn{
   position: absolute;
   margin-top: 100px;
@@ -133,33 +105,22 @@ button.primaryAction {
 
 .info-container{
   display: flex;
-  flex-direction: column;
-  border: 1px solid #fff;
-  border-radius: 30px;
-  width: 50%;
+  flex-direction: row !important;
   margin: 0 auto;
   text-align: center;
-  font-size: 20px;
-  padding: 40px;
+  font-size: 2rem;
+  padding: 4rem !important;
 }
 
 .info-container>div{
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
   margin: 20px 40px;
   border-bottom: 1px solid #E1D2FA;
 }
 
 .updateInfo-container{
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  justify-content: center;
   margin: 0 auto;
-  border: solid 1px #fff;
-  border-radius: 10px;;
-  padding: 40px;
+  padding: 4rem;
 }
 .updateInfo-container>div, .updateInfo-container>form>div{
   display: flex;

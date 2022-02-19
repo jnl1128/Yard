@@ -185,7 +185,6 @@ def searchMyFeed(request):
     current_user = request.user
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
     query = "내가 쓴글"
-    
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -197,7 +196,6 @@ def searchMyFeed(request):
             return redirect("user:feedList")
     else:
         form = createFeedForm()
-    
     return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
 
 
@@ -210,7 +208,6 @@ def deleteFeed(request, pk):
 
 
 def updateFeed(request, pk):
-    print("here!")
     feed = get_object_or_404(Feed, id=pk)
     feeds = Feed.objects.all().order_by('-createdDate')
 

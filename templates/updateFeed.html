@@ -1,13 +1,11 @@
-{% extends "searchBase.html" %} 
-{% load static %}
-{% block content %}
+{% extends "searchBase.html" %} {% load static %} {% block content %}
 
 <div class="feed-middle-menu">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
   <a href="{% url 'user:main' %}">메인으로 이동하기</a>
 </div>
 <div class="feed-list">
-	<!-- {% if messages %}
+  <!-- {% if messages %}
         <section id="messages">
             <script type="text/javascript">
                 alert('검색어는 2글자 이상 입력해주세요.');
@@ -15,112 +13,186 @@
         </section>
         {% endif %} -->
 
-        <div class="feed-addContainer">
-          <div class="feed-add">
-            {% if request.user.userImg %}
-            <img src="{{ request.user.userImg.url }}" class="feed--userImg" alt="userImg">
-            {% else %}
-            <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
-            {% endif %}
-              <input type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm"/>
-            
-          </div>
-          {% if request.user.id %}
-          <div class="feed-filterBtn">
-            <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-            <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
-          </div>
-          {% endif %}
-      </div>
-
-    {% for feed in feeds %}
-    
-    {% if request.user.id != feed.userId.id%}
-    <div class="feed-container">
-      <div class="feed--userInfo">
-        {% if feed.userId.userImg %}
-        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
-        {% else %}
-        <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
-        {% endif %}
-        <p class="feed--userName">{{feed.userId.nickName}}</p>
-      </div>
-      <div class="feed--content">
-        <p class='feed-title'>{{feed.artist}} - {{feed.music}}</p>
-        <p class='feed-content testContent'>{{feed.content}}</p>
-        <p>{{feed.createdDate}}</p>
-        {% if feed.feedImg %}
-          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
-        {% endif %}
-        {% if user in feed.like_users.all %}
-			  <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			  {% else %}
-			  <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			  {% endif %}
-			  <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-      </div>
+  <div class="feed-addContainer">
+    <div class="feed-add">
+      {% if request.user.userImg %}
+      <img
+        src="{{ request.user.userImg.url }}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% else %}
+      <img
+        src="{% static 'img/default.jpeg' %}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% endif %}
+      <input
+        type="text"
+        type="submit"
+        placeholder="글을 작성하려면 누르세요"
+        data-bs-toggle="modal"
+        data-bs-target="#feedForm"
+      />
     </div>
-    <!--HASHTAG-->
-    <div class="feed-hashtagList">
-      {% for tag in feed.tags.all %}
-      <div class="feed-hashtag" style="margin-left: 300px; margin-top: 0; display: flex; justify-content: start;">{{tag}}</div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="feed-container">
-      <div class="feed--content-my">
-        <div class="feed--btn-my">
-          <a href="{% url 'user:deleteFeed' feed.id %}">삭제</a>
-          <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
-        </div>
-        </div>
-          <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
-          <p class="feed-content testContent">{{feed.content}}</p>
-          <p>{{feed.createdDate}}</p>
-          {% if feed.feedImg %}
-            <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
-          {% endif %}
-         {% if user in feed.like_users.all %}
-			  <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			  {% else %}
-			  <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
-			  {% endif %}
-			<span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-      </div>
-      <div class="feed--userInfo">
-        {% if feed.userId.userImg %}
-        <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
-        {% else %}
-        <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
-        {% endif %}
-        <p class="feed--userName">{{feed.userId.nickName}}</p>
-      </div>
-    </div>
-    <!--HASHTAG-->
-    <div class="feed-hashtagList">
-      {% for tag in feed.tags.all %}
-      <div class="feed-hashtag" style="margin-left: 900px; margin-top: 0; display: flex; justify-content: end;">{{tag}}</div>
-      {% endfor %}
+    {% if request.user.id %}
+    <div class="feed-filterBtn">
+      <a href="{% url 'user:searchMyFeed' %}"
+        ><button class="feed-my" value="myFeed">내 글 모아보기</button></a
+      >
+      <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
     </div>
     {% endif %}
-    {% empty %}
+  </div>
 
-    <div class="">
-      <p class="text-center my_search_text">
-        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
-      </p>
-    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
+  {% for feed in feeds %} {% if request.user.id != feed.userId.id%}
+  <div class="feed-container">
+    <div class="feed--userInfo">
+      {% if feed.userId.userImg %}
+      <img
+        src="{{ feed.userId.userImg.url }}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% else %}
+      <img
+        src="{% static 'img/default.jpeg' %}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% endif %}
+      <p class="feed--userName">{{feed.userId.nickName}}</p>
     </div>
-    
+    <div class="feed--content">
+      <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
+      <p class="feed-content">{{feed.content}}</p>
+      <p>{{feed.createdDate}}</p>
+      {% if feed.feedImg %}
+      <img src="{{feed.feedImg.url}}" width="100" height="100" alt="" />
+      {% endif %} {% if user in feed.like_users.all %}
+      <i
+        class="fas fa-heart likeButton"
+        data-id="{{ feed.id }}"
+        style="color: red"
+      ></i>
+      {% else %}
+      <i
+        class="far fa-heart likeButton"
+        data-id="{{ feed.id }}"
+        style="color: red"
+      ></i>
+      {% endif %}
+      <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+    </div>
+  </div>
+  <!--HASHTAG-->
+  <div class="feed-hashtagList">
+    {% for tag in feed.tags.all %}
+    <div
+      class="feed-hashtag"
+      style="
+        margin-left: 300px;
+        margin-top: 0;
+        display: flex;
+        justify-content: start;
+      "
+    >
+      {{tag}}
+    </div>
     {% endfor %}
+  </div>
+  {% else %}
+  <div class="feed-container">
+    <div class="feed--content-my">
+      <div class="feed--btn-my">
+        <a href="{% url 'user:deleteFeed' feed.id %}">삭제</a>
+        <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
+      </div>
+      <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
+      <p class="feed-content">{{feed.content}}</p>
+      <p>{{feed.createdDate}}</p>
+      {% if feed.feedImg %}
+      <img src="{{feed.feedImg.url}}" width="100" height="100" alt="" />
+      {% endif %} {% if user in feed.like_users.all %}
+      <i
+        class="fas fa-heart likeButton"
+        data-id="{{ feed.id }}"
+        style="color: red"
+      ></i>
+      {% else %}
+      <i
+        class="far fa-heart likeButton"
+        data-id="{{ feed.id }}"
+        style="color: red"
+      ></i>
+      {% endif %}
+      <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+    </div>
+    <div class="feed--userInfo">
+      {% if feed.userId.userImg %}
+      <img
+        src="{{ feed.userId.userImg.url }}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% else %}
+      <img
+        src="{% static 'img/default.jpeg' %}"
+        class="feed--userImg"
+        alt="userImg"
+      />
+      {% endif %}
+      <p class="feed--userName">{{feed.userId.nickName}}</p>
+    </div>
+  </div>
+  <!--HASHTAG-->
+  <div class="feed-hashtagList">
+    {% for tag in feed.tags.all %}
+    <div
+      class="feed-hashtag"
+      style="
+        margin-left: 900px;
+        margin-top: 0;
+        display: flex;
+        justify-content: end;
+      "
+    >
+      {{tag}}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %} {% empty %}
+
+  <div class="">
+    <p class="text-center my_search_text">
+      해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
+    </p>
+    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
+  </div>
+
+  {% endfor %}
 </div>
 <!-- 피드 등록 폼 modal -->
-<div id="feedForm" class="modal fade" style="color: black;">
+<div
+  id="feedForm"
+  class="modal fade"
+  style="color: black"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" style="color: black;">피드 등록하기</h5>
-        <a href="{% url 'user:feedList' %}"><button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button></a>
+        <h5 class="modal-title" style="color: black">피드 등록하기</h5>
+        <a href="{% url 'user:feedList' %}"
+          ><button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button
+        ></a>
       </div>
       <div class="modal-body">
         <form class="searchDiv" action="methods" enctype="multipart/form-data">
@@ -146,7 +218,8 @@
             color: white;
           "
           onclick="registerMusic()"
-        >노래 등록
+        >
+          노래 등록
         </button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
           {% csrf_token %} {{ form.as_p }}
@@ -162,9 +235,8 @@
   crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-{% endblock %}
-{% block js %}
-<script src = '{% static "js/feedLike.js"%}'></script>
+{% endblock %} {% block js %}
+<script src='{% static "js/feedLike.js"%}'></script>
 <script>
   $(document).ready($(".musicList").empty());
 
@@ -244,13 +316,13 @@
       }
     }
   }
-
+  
   $(document).ready(function() {
 	  $("#feedForm").modal("show");
   });
 
   function autolink() {
-    var container = document.getElementsByClassName("testContent");
+    var container = document.getElementsByClassName("feed-content");
 	  for (let i = 0; i < container.length; i++) {
 		var doc = container[i].innerHTML;
 		var regURL = new RegExp("(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)","gi");
