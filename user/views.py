@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from random import randint
-from django.conf import timezone
+from datetime import datetime
 
 
 # Create your views here.
@@ -181,6 +181,7 @@ def addMusicAjax(request):
     
     return JsonResponse({'music': title, 'artist': artist})
 
+@login_required
 def searchMyFeed(request):
     current_user = request.user
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
@@ -215,7 +216,7 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.createdDate = timezone.now()
+        feed.createdDate = datetime.now()
         feed.content = request.POST.get("content")
         feed.save()
         feed.feedImg = request.FILES.get("feedImg")
@@ -271,3 +272,22 @@ def updateFeedAjax(request):
     ctx = {'form': form, 'feed': feed}
     
     return JsonResponse(ctx)
+
+
+@login_required
+def searchLikedFeed(request):
+    current_user = request.user
+    feeds = Feed.objects.all().filter(like_users=current_user.id).order_by('-createdDate')
+    query = "내가 좋아요 한 글"
+    if request.method == 'POST':
+        form = createFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
+            feeds = Feed.objects.all().order_by('-createdDate')
+            return redirect("user:feedList")
+    else:
+        form = createFeedForm()
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})

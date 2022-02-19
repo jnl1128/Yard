@@ -22,7 +22,7 @@
     {% if request.user.id %}
     <div class="feed-filterBtn">
       <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-      <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
+      <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like">좋아요 모아보기</button></a>
     </div>
     {% endif %}
   </div>
