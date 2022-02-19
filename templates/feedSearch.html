@@ -107,9 +107,29 @@
         {% endif %}
       <div class="feed-hashtagList">
         {% for tag in feed.tags.all %}
-        <div class="hashtag--btn">{{tag}}
-        </div>
+        <div id="hashTag" class="hashtag--btn">{{tag}}</div>
         {% endfor %}
+        {% if feed.inputTags %}
+          <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
+          <script>
+            const hashTag = document.querySelector("#newHash").innerHTML;
+            console.log(hashTag);
+            addInputTag(hashTag);
+            function addInputTag(tags) {
+              console.log("!!")
+              const hashTagArray = tags.split(' ');
+             
+              for (let i=0; i < hashTagArray.length; i++) {
+                const newDiv = document.createElement('div');
+                newDiv.setAttribute("class", "hashtag--btn");
+                const newText = document.createTextNode(hashTagArray[i]);
+                newDiv.appendChild(newText);
+                const tagDiv = document.querySelector('.feed-hashtagList');
+                tagDiv.append(newDiv);
+              };
+            }
+        </script>
+        {% endif %}
       </div>
     </div>
     
@@ -265,6 +285,22 @@
       if (obj[i] != chk) {
         obj[i].checked = false;
       }
+    }
+  }
+
+  function hashTagsToArray(tags) {
+    console.log("!!")
+    const hashTagArray = str.split(" ");
+    
+    for (let i = 0; i < hashTagArray.length; i++){
+      //const element = document.querySelector(`.hashTag`);
+      const newDiv = document.createElement('div');
+      newDiv.setAttribute("class", "hashtag--btn");
+      const newText = document.createTextNode(hashTagArray[i]);
+      newDiv.appendChild(newText);
+      const tagDiv = document.querySelector('.feed-hashtagList');
+      tagDiv.append(newDiv);
+    
     }
   }
 
