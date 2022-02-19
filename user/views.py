@@ -90,9 +90,6 @@ def myInfoRegister(request):
 def searchResult(request):
     feeds = None
     query = None
-    music = None
-    artist = None
-    tags = None
     
     current_user = request.user
     if request.method == 'POST':
@@ -124,7 +121,7 @@ def searchResult(request):
                 try:
                     feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
                 except:
-                    pass
+                    feeds = None;
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
