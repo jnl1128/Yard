@@ -3,13 +3,11 @@ const input = document.querySelector('.nav--searchBtn')
 const searchBtn = document.getElementById('nav--searchBtn')
 
 function  enterInput(){
-  console.log('enter')
   searchBtn.style.zIndex = 100;
   console.log(searchBtn.style.zIndex)
 }
 
 function leaveInput(){
-  console.log(searchBtn.style.zIndex)
   input.placeholder = input.value
   searchBtn.style.zIndex = 0;
 }

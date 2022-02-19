@@ -1,11 +1,12 @@
 @import "./reset.css";
+
 @import "./myPage.css";
 @import "./base.css";
 @import "./mainPage.css";
 @import "./feed.css";
 @import "./account.css";
 @import "./certificate.css";
-@import './variables.css';
+@import "./variables.css";
 
 * {
   box-sizing: border-box;
@@ -29,7 +30,7 @@ body {
     180deg,
     #361c82 14.58%,
     rgba(219, 86, 231, 0.78) 100%
-  ) ;
+  );
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -38,7 +39,6 @@ a {
   text-decoration: none;
   color: white;
 }
-
 input:focus{
   outline: none !important;
 }

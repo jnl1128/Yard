@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from random import randint
-from datetime import datetime
+from django.utils import timezone
 
 
 # Create your views here.
@@ -90,14 +90,8 @@ def myInfoRegister(request):
 def searchResult(request):
     feeds = None
     query = None
-    music = None
-    artist = None
-    tags = None
     
     current_user = request.user
-    #form = createFeedForm()
-    #print(current_user)
-    #print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -114,7 +108,6 @@ def searchResult(request):
         form = createFeedForm()
         feeds = Feed.objects.all().order_by('-createdDate')
         query = "#모든"
-        #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
     
         if ('q' in request.GET):
             query = request.GET.get('q')
@@ -128,7 +121,7 @@ def searchResult(request):
                 try:
                     feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
                 except:
-                    pass
+                    feeds = None;
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
@@ -185,6 +178,7 @@ def addMusicAjax(request):
     
     return JsonResponse({'music': title, 'artist': artist})
 
+@login_required
 def searchMyFeed(request):
     current_user = request.user
     feeds = Feed.objects.all().filter(userId=current_user.id).order_by('-createdDate')
@@ -219,7 +213,7 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.createdDate = datetime.now()
+        feed.createdDate = timezone.now()
         feed.content = request.POST.get("content")
         feed.save()
         feed.feedImg = request.FILES.get("feedImg")
@@ -275,3 +269,22 @@ def updateFeedAjax(request):
     ctx = {'form': form, 'feed': feed}
     
     return JsonResponse(ctx)
+
+
+@login_required
+def searchLikedFeed(request):
+    current_user = request.user
+    feeds = Feed.objects.all().filter(like_users=current_user.id).order_by('-createdDate')
+    query = "내가 좋아요 한 글"
+    if request.method == 'POST':
+        form = createFeedForm(request.POST, request.FILES)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.userId = current_user
+            feed.save()
+            feed.tags.set(form.cleaned_data['tags'])
+            feeds = Feed.objects.all().order_by('-createdDate')
+            return redirect("user:feedList")
+    else:
+        form = createFeedForm()
+    return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
