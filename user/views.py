@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from random import randint
-from datetime import datetime
+from django.conf import timezone
 
 
 # Create your views here.
@@ -95,9 +95,6 @@ def searchResult(request):
     tags = None
     
     current_user = request.user
-    #form = createFeedForm()
-    #print(current_user)
-    #print(request.method)
     if request.method == 'POST':
         form = createFeedForm(request.POST, request.FILES)
         if form.is_valid():
@@ -114,7 +111,6 @@ def searchResult(request):
         form = createFeedForm()
         feeds = Feed.objects.all().order_by('-createdDate')
         query = "#모든"
-        #return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
     
         if ('q' in request.GET):
             query = request.GET.get('q')
@@ -219,7 +215,7 @@ def updateFeed(request, pk):
         form = createFeedForm(request.POST,request.FILES,instance=feed)
         feed.music = request.POST.get("music")
         feed.artist = request.POST.get("artist")
-        feed.createdDate = datetime.now()
+        feed.createdDate = timezone.now()
         feed.content = request.POST.get("content")
         feed.save()
         feed.feedImg = request.FILES.get("feedImg")
