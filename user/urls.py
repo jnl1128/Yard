@@ -21,6 +21,7 @@ urlpatterns = [
   path('search/',views.searchResult, name='search'),
   path('search/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),
   path('search/myFeed',views.searchMyFeed, name='searchMyFeed'),
+  path('search/likedFeed',views.searchLikedFeed, name='searchLikedFeed'),
   path('deleteFeed/<int:pk>',views.deleteFeed, name="deleteFeed"),
   path('updateFeed/<int:pk>', views.updateFeed, name="updateFeed"),
   path('updateFeed/addMusicAjax/', views.addMusicAjax, name='addMusicAjax'),

@@ -51,7 +51,7 @@ class createFeedForm(forms.ModelForm):
     
     class Meta:
         model = Feed
-        fields = ['music', 'artist', 'tags', 'content', 'feedImg']
+        fields = ['music', 'artist', 'tags', 'inputTags','content', 'feedImg']
     
     
     

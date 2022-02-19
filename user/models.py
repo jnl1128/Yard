@@ -83,6 +83,7 @@ class Feed(models.Model):
     createdDate = models.DateTimeField(verbose_name="피드 생성일",auto_now_add=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저 id")
     tags = models.ManyToManyField('HashTag', blank=True)
+    inputTags = models.CharField(verbose_name="나만의 해시태그를 작성해보세요 ex)#Yar:d 짱 #야드핫플", max_length=50, blank=True ,null=True)
     content = models.TextField(verbose_name="피드 내용", blank=True, null=True)
     feedImg = models.ImageField(upload_to="feedImg", null=True, blank=True)
     like_users = models.ManyToManyField(User, blank=True, related_name='like_feeds')

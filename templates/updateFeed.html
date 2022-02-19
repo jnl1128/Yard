@@ -1,268 +1,225 @@
-{% extends "searchBase.html" %} {% load static %} {% block content %}
 
-<div class="feed-middle-menu">
+{% extends "searchBase.html" %}
+{% load static %}
+{% block content %}
+<div class="feed-result">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
-  <a href="{% url 'user:main' %}">메인으로 이동하기</a>
+  <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
 </div>
-<div class="feed-list">
-  <!-- {% if messages %}
-        <section id="messages">
-            <script type="text/javascript">
-                alert('검색어는 2글자 이상 입력해주세요.');
-            </script>     
-        </section>
-        {% endif %} -->
 
+
+<div class="feedNtag-container">
+<div class="feed-list white-form">
   <div class="feed-addContainer">
     <div class="feed-add">
       {% if request.user.userImg %}
-      <img
-        src="{{ request.user.userImg.url }}"
-        class="feed--userImg"
-        alt="userImg"
-      />
+      <img src="{{ request.user.userImg.url }}" class="feed--userImg" alt="userImg">
       {% else %}
-      <img
-        src="{% static 'img/default.jpeg' %}"
-        class="feed--userImg"
-        alt="userImg"
-      />
+      <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
       {% endif %}
-      <input
-        type="text"
-        type="submit"
-        placeholder="글을 작성하려면 누르세요"
-        data-bs-toggle="modal"
-        data-bs-target="#feedForm"
-      />
+      <input type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
+
     </div>
     {% if request.user.id %}
     <div class="feed-filterBtn">
-      <a href="{% url 'user:searchMyFeed' %}"
-        ><button class="feed-my" value="myFeed">내 글 모아보기</button></a
-      >
+      <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
       <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
     </div>
-    {% endif %}
-  </div>
 
-  {% for feed in feeds %} {% if request.user.id != feed.userId.id%}
+
+  {% for feed in feeds %}
+
+  {% if request.user.id != feed.userId.id%}
   <div class="feed-container">
     <div class="feed--userInfo">
       {% if feed.userId.userImg %}
-      <img
-        src="{{ feed.userId.userImg.url }}"
-        class="feed--userImg"
-        alt="userImg"
-      />
+      <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
       {% else %}
-      <img
-        src="{% static 'img/default.jpeg' %}"
-        class="feed--userImg"
-        alt="userImg"
-      />
+      <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
       {% endif %}
       <p class="feed--userName">{{feed.userId.nickName}}</p>
     </div>
-    <div class="feed--content">
-      <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
-      <p class="feed-content">{{feed.content}}</p>
-      <p>{{feed.createdDate}}</p>
-      {% if feed.feedImg %}
-      <img src="{{feed.feedImg.url}}" width="100" height="100" alt="" />
-      {% endif %} {% if user in feed.like_users.all %}
-      <i
-        class="fas fa-heart likeButton"
-        data-id="{{ feed.id }}"
-        style="color: red"
-      ></i>
-      {% else %}
-      <i
-        class="far fa-heart likeButton"
-        data-id="{{ feed.id }}"
-        style="color: red"
-      ></i>
-      {% endif %}
-      <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+    <div class="feed--content white-form">
+      <div class="feed--content-top">
+        <div class="feed--content-left">
+          <p class='feed-title'>{{feed.artist}} - {{feed.music}}</p>
+          <p class='feed-content'>{{feed.content}}</p>
+          <p>{{feed.createdDate}}</p> 
+        </div>
+        <div class="feed--content-right">
+          {% if feed.feedImg %}
+          <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+          {% endif %}
+        </div>
+      </div>
+      <div class="feed--content-bottom">
+        {% if request.user.is_authenticated %}
+          {% if user in feed.like_users.all %}
+          <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+          {% else %}
+          <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+          {% endif %}
+          <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+          {% endif %}
+        <div class="feed-hashtagList">
+          {% for tag in feed.tags.all %}
+          <div class="hashtag--btn">{{tag}}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
     </div>
   </div>
-  <!--HASHTAG-->
-  <div class="feed-hashtagList">
-    {% for tag in feed.tags.all %}
-    <div
-      class="feed-hashtag"
-      style="
-        margin-left: 300px;
-        margin-top: 0;
-        display: flex;
-        justify-content: start;
-      "
-    >
-      {{tag}}
-    </div>
-    {% endfor %}
-  </div>
+  
   {% else %}
   <div class="feed-container">
-    <div class="feed--content-my">
-      <div class="feed--btn-my">
-        <a href="{% url 'user:deleteFeed' feed.id %}">삭제</a>
-        <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
+  <div class="feed--content-my white-form">
+    <div class="feed-twobtn">
+      <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
+      <a href="{% url 'user:deleteFeed'  feed.id %}">삭제</a>
+    </div>
+    
+    <div class="feed--content-top">
+      <div class="feed--content-left">
+        <p class='feed-title'>{{feed.artist}} - {{feed.music}}</p>
+        <p class='feed-content'>{{feed.content}}</p>
+        <p>{{feed.createdDate}}</p> 
       </div>
-      <p class="feed-title">{{feed.artist}} - {{feed.music}}</p>
-      <p class="feed-content">{{feed.content}}</p>
-      <p>{{feed.createdDate}}</p>
-      {% if feed.feedImg %}
-      <img src="{{feed.feedImg.url}}" width="100" height="100" alt="" />
-      {% endif %} {% if user in feed.like_users.all %}
-      <i
-        class="fas fa-heart likeButton"
-        data-id="{{ feed.id }}"
-        style="color: red"
-      ></i>
-      {% else %}
-      <i
-        class="far fa-heart likeButton"
-        data-id="{{ feed.id }}"
-        style="color: red"
-      ></i>
-      {% endif %}
-      <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+      <div class="feed--content-right">
+        <!--<div class="feed-twobtn">
+          <div class="feed-update"><a href="">수정</a></div><div class="feed-delete"><a href="">삭제</a></div>
+        </div>-->
+        {% if feed.feedImg %}
+        <img src="{{feed.feedImg.url}}" width="100" height="100" alt="">
+        {% endif %}
+      </div>
     </div>
-    <div class="feed--userInfo">
-      {% if feed.userId.userImg %}
-      <img
-        src="{{ feed.userId.userImg.url }}"
-        class="feed--userImg"
-        alt="userImg"
-      />
-      {% else %}
-      <img
-        src="{% static 'img/default.jpeg' %}"
-        class="feed--userImg"
-        alt="userImg"
-      />
-      {% endif %}
-      <p class="feed--userName">{{feed.userId.nickName}}</p>
+    <div class="feed--content-bottom">
+      {% if request.user.is_authenticated %}
+        {% if user in feed.like_users.all %}
+        <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+        {% else %}
+        <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
+        {% endif %}
+        <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
+        {% endif %}
+      <div class="feed-hashtagList">
+        {% for tag in feed.tags.all %}
+        <div class="hashtag--btn">{{tag}}
+        </div>
+        {% endfor %}
+      </div>
     </div>
+    
   </div>
-  <!--HASHTAG-->
-  <div class="feed-hashtagList">
-    {% for tag in feed.tags.all %}
-    <div
-      class="feed-hashtag"
-      style="
-        margin-left: 900px;
-        margin-top: 0;
-        display: flex;
-        justify-content: end;
-      "
-    >
-      {{tag}}
-    </div>
-    {% endfor %}
+  <div class="feed--userInfo">
+    {% if feed.userId.userImg %}
+    <img src="{{ feed.userId.userImg.url }}" class="feed--userImg" alt="userImg">
+    {% else %}
+    <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
+    {% endif %}
+    <p class="feed--userName">{{feed.userId.nickName}}</p>
+    <!--<div class="feed-twobtn">
+      <a href="">수정</a>
+      <a href="">삭제</a>
+    </div>-->
   </div>
-  {% endif %} {% empty %}
+</div>
+  {% endif %}
+  
+  {% empty %}
 
-  <div class="">
-    <p class="text-center my_search_text">
+  <div class="empty-feed">
+    <p class="my_search_text">
       해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
     </p>
-    <a href="{% url 'user:main' %}">메인으로 이동하기</a>
+    <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
   </div>
 
+
+    {% endfor %}
+</div>
+
+<!--<div class="white-form tag-list">
+  <h1>추천 태그</h1>
+  {% for feed in feeds %}
+  {% for tag in feed.tags.all %}
+  <ul>{{tag}}</ul>
   {% endfor %}
+  {% endfor %}
+</div>-->
 </div>
 <!-- 피드 등록 폼 modal -->
-<div
-  id="feedForm"
-  class="modal fade"
-  style="color: black"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" style="color: black">피드 등록하기</h5>
-        <a href="{% url 'user:feedList' %}"
-          ><button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button
-        ></a>
-      </div>
-      <div class="modal-body">
-        <form class="searchDiv" action="methods" enctype="multipart/form-data">
-          <label for="songinfo">음악 검색</label>
-          <input
-            type="text"
-            id="songinfo"
-            class="whatToSearch"
-            placeholder="검색"
-            autocomplete="off"
-          />
-          <input type="text" style="display: none" />
-          <button type="button" onclick="addMusicList()">검색</button>
-        </form>
-        <div class="musicListList"></div>
+<div id="feedForm" class="modal fade" style="color: black" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: black">피드 등록하기</h5>
+                <a href="{% url 'user:feedList' %}"><button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button></a>
+            </div>
+            <div class="modal-body">
+                <form class="searchDiv" action="methods" enctype="multipart/form-data">
+                    <label for="songinfo">음악 검색</label>
+                    <input type="text" id="songinfo" class="whatToSearch" placeholder="검색" autocomplete="off" />
+                    <input type="text" style="display: none" />
+                    <button type="button" onclick="addMusicList()">검색</button>
+                </form>
+                <div class="musicListList"></div>
 
-        <button
-          id="registerMusic"
-          style="
+                <button id="registerMusic" style="
+
             border-radius: 1rem;
             border-width: 0.1rem;
             background-color: cornflowerblue;
             color: white;
-          "
-          onclick="registerMusic()"
-        >
-          노래 등록
-        </button>
-        <form method="POST" class="post-form" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit" class="save btn btn-default">Save</button>
-        </form>
-      </div>
+            onclick="registerMusic()">
+                    노래 등록
+                </button>
+                <form method="POST" class="post-form" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    {% bootstrap_form form %}
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"
-></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+<
+  crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-{% endblock %} {% block js %}
+{% endblock %}
+{% block js %}
 <script src='{% static "js/feedLike.js"%}'></script>
 <script>
-  $(document).ready($(".musicList").empty());
+    $(document).ready($(".musicList").empty());
 
-  function addMusicList() {
-    let musicKeyWord = $("#songinfo").val();
-    $(".musicList").empty();
-    $(".musicListList").empty();
-    $.ajax({
-      type: "GET",
-      url:
-        "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" +
-        musicKeyWord +
-        "&api_key=91921c9761d97539ea8147f4599b5f3e&format=json",
-      success: function (response) {
-        let musicList = response["results"]["trackmatches"]["track"];
-        for (let i = 0; i < musicList.length; i++) {
-          let albumTitle = musicList[i]["name"];
-          let albumArtist = musicList[i]["artist"];
-          getMusicHtml(albumTitle, albumArtist);
-        }
-      },
-    });
-  }
+    function addMusicList() {
+        let musicKeyWord = $("#songinfo").val();
+        $(".musicList").empty();
+        $(".musicListList").empty();
+        $.ajax({
+            type: "GET",
+            url:
+                "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" +
+                musicKeyWord +
+                "&api_key=91921c9761d97539ea8147f4599b5f3e&format=json",
+            success: function (response) {
+                let musicList = response["results"]["trackmatches"]["track"];
+                for (let i = 0; i < musicList.length; i++) {
+                    let albumTitle = musicList[i]["name"];
+                    let albumArtist = musicList[i]["artist"];
+                    getMusicHtml(albumTitle, albumArtist);
+                }
+            },
+        });
+    }
 
-  function getMusicHtml(title, artist) {
-    let musicHtml = `<div class="songs">
+    function getMusicHtml(title, artist) {
+        let musicHtml = `<div class="songs">
             <input name="musicChoice" class="form-check-input" type="checkbox" value=""  onclick='doOpenCheck(this)' id="musicChoice">
             <label class="form-check-label" for="musicChoice" id="musicInfo">
                 ${title}
@@ -270,55 +227,72 @@
                 ${artist}
             </label>
         </div>`;
-    $(".musicListList").append(musicHtml);
-  }
-
-  let registerMusicBtn = document.querySelector("#registerMusic");
-  registerMusicBtn.addEventListener("click", registerMusic());
-
-  function registerMusic() {
-    let listedMusic = document.querySelectorAll(".songs");
-    for (let i = 0; i < listedMusic.length; i++) {
-      if (listedMusic[i].querySelector("#musicChoice").checked) {
-        let checkedMusic = listedMusic[i];
-        let musicInfo = checkedMusic.querySelector("#musicInfo").innerHTML;
-        let musicTitle = musicInfo.split("|")[0].trim();
-        let musicArtist = musicInfo.split("|")[1].trim();
-
-        onClickMusic(musicTitle, musicArtist);
-      }
+        $(".musicListList").append(musicHtml);
     }
-  }
 
-  const onClickMusic = async (music, artist) => {
-    console.log(music);
-    const url = "addMusicAjax/";
-    const { data } = await axios.post(url, {
-      music,
-      artist,
+    let registerMusicBtn = document.querySelector("#registerMusic");
+    registerMusicBtn.addEventListener("click", registerMusic());
+
+    function registerMusic() {
+        let listedMusic = document.querySelectorAll(".songs");
+        for (let i = 0; i < listedMusic.length; i++) {
+            if (listedMusic[i].querySelector("#musicChoice").checked) {
+                let checkedMusic = listedMusic[i];
+                let musicInfo = checkedMusic.querySelector("#musicInfo").innerHTML;
+                let musicTitle = musicInfo.split("|")[0].trim();
+                let musicArtist = musicInfo.split("|")[1].trim();
+
+                onClickMusic(musicTitle, musicArtist);
+            }
+        }
+    }
+
+    const onClickMusic = async (music, artist) => {
+        console.log(music);
+        const url = "addMusicAjax/";
+        const { data } = await axios.post(url, {
+            music,
+            artist,
+        });
+        musicHandleResponse(data.music, data.artist);
+    };
+
+    const musicHandleResponse = (music, artist) => {
+        const titleInput = document.querySelector("#id_music");
+        const artistInput = document.querySelector("#id_artist");
+
+        titleInput.value = music;
+        artistInput.value = artist;
+    };
+
+    function doOpenCheck(chk) {
+        var obj = document.getElementsByName("musicChoice");
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i] != chk) {
+                obj[i].checked = false;
+            }
+        }
+    }
+
+
+    $(document).ready(function () {
+        $("#feedForm").modal("show");
     });
-    musicHandleResponse(data.music, data.artist);
-  };
 
-  const musicHandleResponse = (music, artist) => {
-    const titleInput = document.querySelector("#id_music");
-    const artistInput = document.querySelector("#id_artist");
-
-    titleInput.value = music;
-    artistInput.value = artist;
-  };
-
-  function doOpenCheck(chk) {
-    var obj = document.getElementsByName("musicChoice");
-    for (var i = 0; i < obj.length; i++) {
-      if (obj[i] != chk) {
-        obj[i].checked = false;
-      }
+    function autolink() {
+        var container = document.getElementsByClassName("feed-content");
+        for (let i = 0; i < container.length; i++) {
+            var doc = container[i].innerHTML;
+            var regURL = new RegExp(
+                "(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)",
+                "gi"
+            );
+            container[i].innerHTML = doc.replace(
+                regURL,
+                "<a href='$1://$2' target='_blank'>$1://$2</a>"
+            );
+        }
     }
-  }
-
-  $(document).ready(function () {
-    $("#feedForm").modal("show");
-  });
+    autolink();
 </script>
 {% endblock %}

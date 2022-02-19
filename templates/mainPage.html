@@ -8,7 +8,7 @@
         
         <form class="" action="{% url 'user:search' %}" method="get">
             <img id = 'search-btn-main' src="{% static 'img/search.png'%}" alt="">
-            <input class="search-input" type="search" placeholder="가수 곡 #해시태그로 검색해보세요" aria-label="Search" name="q">
+            <input class="search-input" type="search" placeholder="가수, 곡, #해시태그로 검색해보세요" aria-label="Search" name="q">
         </form>
         <div class="hashtag-container">
                 {% for hashTag in hashTags %}
