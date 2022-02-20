@@ -2,18 +2,61 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 35px 45px;
-  color: white;
-  font-size: 30px;
+  align-items: center;
+  margin: 2rem 15rem;/*space-between에서 좌우 7rem 마진*/
   background-color: transparent;
 }
-
-.navBtn {
-  display: flex;
-  flex-direction: row;
-  margin-right: 10px;
-  justify-content: space-around;
+.nav-btn>a{
+  padding-left: 2rem;
+  font-size: 2rem;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.5s ease;
 }
+.nav-btn>a:hover{
+  color: #fff;
+  text-shadow: 1px 1px 2px white, 0 0 1em white;
+}
+.logobtn{
+  transition: 0.5s ease;
+  width: 8rem;
+  height: 6rem;
+}
+
+
+.logobtn:hover {
+  opacity: 0.3;
+}
+
 main {
   margin-top: 100px;
+}
+
+.nav--input {
+  border: 1px solid rgba(144, 102, 211, 0.6);
+  border-radius: 1rem;
+  background-color: rgba(144, 102, 211, 0.6);
+  font-size: 1.4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 4rem;
+  padding-right: 10rem;
+  position: relative;
+  color: #fff;
+}
+.nav--input::placeholder{
+  color: #fff;
+  vertical-align: middle;
+}
+.nav--input:focus{
+  outline:none;
+}
+
+.nav--searchBtn{
+  position: absolute;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  z-index: 0;
+  width: 2rem;
+  height: 2rem;
 }

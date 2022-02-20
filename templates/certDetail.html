@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage"
+<div class="certDetail-title boldfont"><a href="{% url 'user:myPage' %}"><img class="RE-mypage"
 			src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
 
 <div class="certDetail-container">
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="certDetail-info">
-		<div class="music-info listening">
+		<div class="music-info .boldfont">
 			<div class="index">Listening</div>
 			<div>{{cert.createdDate | date:'Y.m.d'}} ~</div>
 		</div>
