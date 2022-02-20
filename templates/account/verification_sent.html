@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+<div class="center-container">
+    <div class="white-form center-container">
+        <div class="center-container logoBox">
+            <img src="{%static 'img/logoPurple.png' %}" width="150px">
+        </div>
+    
+    <p class="form-white-btn-font title">{% trans "이메일 주소 인증" %}</p>
+
+    <p class="form-white-btn-font textContent">{% blocktrans %}이메일 주소로 인증 링크를 보내드렸습니다. <br> 확인이 안된다면 스팸함을 확인해주세요.{% endblocktrans %}</p>
+
+    </div>
+</div>
+{% endblock %}
