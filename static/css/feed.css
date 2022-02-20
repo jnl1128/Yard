@@ -1,17 +1,70 @@
-.feed-list{
+.feed-result{
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
-  border-radius: 30px;
-  
-  margin: 50px 100px;
-  height: 200vh;
+  text-align: center;
+  margin-top: 30px;
+}
+.feed-result>p{
+  font-size: 2rem;
+}
+.feedNtag-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3.5rem 25rem;
+}
+
+.feed-list{
+  width: 100% !important;
+  font-family: Roboto !important;
+  /*border-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;*/
+}
+
+.feed-list.small{
+  width: 70% !important;
+}
+
+
+.feed-addContainer{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 5rem;
+}
+
+.feed-add{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.feed-add>img{
+  height: 6rem;
+  width: 6rem;
+  margin-right: 1rem;
+}
+.feed-add>input{
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  background-color: transparent;
+  width: 90%;
+  height: 60%;
+  padding-left: 1rem;
+}
+
+.feed-add>input::placeholder{
+  font-size: 1.4rem;
 }
 
 .feed-container{
-  margin: 50px 100px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  margin-bottom: 3rem;
+  min-width: 40rem;
 }
 
 .feed--userInfo{
@@ -19,36 +72,202 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  align-items: center;
 }
 
 .feed--userImg{
-  border: 1px solid white;
+  border: 0.1rem solid white;
   border-radius: 50%;
-  height:100px;
-  width:100px;
-  margin-bottom: 10px;
+  height: 6rem;
+  width: 6rem;
 }
 
 .feed--userName{
   font-size: 25px;
+  text-align: center;
 }
 
 .feed--content{
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  border: 1px solid white;
-  border-radius: 20px;
-  margin-left: 40px;
-  padding: 30px 50px;
+  justify-content: space-between !important;
+  border: 0.1rem solid black !important;
+  margin-left: 2rem;
+  width: 100% !important;
+  padding: 2rem !important;
 }
 
 .feed--content-my{
+  justify-content: space-between !important;
+  border: 0.1rem solid black !important;
+  margin-right: 2rem;
+  width: 100% !important;
+  padding: 2rem !important;
+}
+
+.feed--content-top, .feed--content-bottom{
   display: flex;
-  flex-direction: column;
-  width: 100vw;
-  border: 1px solid white;
-  border-radius: 20px;
-  margin-right: 40px;
-  padding: 30px 50px;
+  flex-direction: row;
+}
+
+.feed--content-top{
+  justify-content: space-between;
+}
+
+.feed--content-bottom{
+  justify-content: start;
+}
+.feed--content-right{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.feed-filterBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.feed-my, .feed-like, .feed-heart{
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: rgba(68, 15, 218, 0.8);
+  border: 0.1rem solid rgba(68, 15, 218, 0.8);
+  margin:0 0.5rem;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+
+.feed-heart{
+  background: transparent;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 2rem;
+}
+.feed-heart>div:last-child{
+  margin-left: 1rem;
+  font-family: 'Roboto';
+}
+
+
+.feed-title{
+  font-size: 20px;
+  font-weight: bold;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  font-family: Roboto;
+}
+
+
+.feed-content{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.feed--content-left>img{
+  min-width: 10rem;
+  max-width: 20rem;
+  min-height: 10rem;
+}
+
+
+.feed-hashtagList{
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+.feed-hashtagList>.hashtag--btn{
+  font-size: 1.4rem;
+  margin-right: 0;
+
+}
+
+.feed-hashtagList>.hashtag--btn:first-child{
+  margin-left: 0;
+  
+}
+
+.tag-list.tagClose{
+ animation: fade-out 1s;
+ animation-fill-mode: forwards;
+
+}
+.tag-list{
+  position: absolute;
+  min-width: 10rem;
+  top: 30rem;
+  right: 14rem;
+  border: 0.1rem solid white;
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 2rem;
+  animation: fade-in 1s;
+  animation-fill-mode: forwards;
+}
+.tag-list>ul{
+  font-size: 2rem;
+  color: black;
+}
+
+
+.empty-feed>p{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.feed-twobtn{
+  display: flex;
+  flex-direction:row;
+  justify-content: end;
+  font-size: 1.4rem;
+
+}
+
+.feed-twobtn>a{
+  margin-left: 1rem;
+}
+
+.tag-list-btn{
+  z-index: 500;
+  position: absolute;
+  margin-left: 97rem;
+  top: 25rem;
+  background-color: #fafafa;
+  color: black;
+  font-size: 2rem;
+  padding: 1rem 1rem 1rem 4rem;
+  border-radius: 2rem;
+}
+.tag-list-btn.open{
+  transform: rotate(0deg)
+}
+
+
+.tag-list-btn:hover{
+  opacity: .5;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
 }

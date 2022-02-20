@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'user',
+    'bootstrap4',
 ] + CUSTOM_APPS
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,8 +146,6 @@ AUTH_USER_MODEL = "user.User"
 ACCOUNT_FORMS = {'signup': 'user.forms.CustomSignupForm'}
 
 SITE_ID = 1
-
-LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -179,3 +178,6 @@ EMAIL_PORT = local_settings.EMAIL['EMAIL_PORT']
 EMAIL_HOST = local_settings.EMAIL['EMAIL_HOST']
 EMAIL_HOST_USER = local_settings.EMAIL['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = local_settings.EMAIL['EMAIL_HOST_PASSWORD']
+
+ACCOUNT_SIGNUP_REDIRECT_URL = '/myInfo/register'
+LOGIN_REDIRECT_URL = '/'
