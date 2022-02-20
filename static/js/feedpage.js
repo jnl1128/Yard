@@ -7,7 +7,7 @@ console.log(tagList)
 function toggleTagList(){
   tagBtn.classList.toggle('open')
   tagList.classList.toggle('tagClose')
-  //feedContainer.classList.toggle('small')
+  feedContainer.classList.toggle('small')
 }
 
 tagBtn.addEventListener('click', toggleTagList)

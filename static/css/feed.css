@@ -109,15 +109,13 @@
 }
 
 .feed--content-top{
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
 .feed--content-bottom{
   justify-content: start;
-}
-.feed--content-right{
-  display: flex;
-  flex-direction: row;
 }
 
 
@@ -165,14 +163,14 @@
 
 
 .feed-content{
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .feed--content-left>img{
-  min-width: 10rem;
-  max-width: 20rem;
-  min-height: 10rem;
+  max-height: 15rem;
+  max-width: 100%;
+  
 }
 
 
@@ -205,7 +203,7 @@
   border: 0.1rem solid white;
   background-color: transparent;
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 5rem;
   animation: fade-in 1s;
   animation-fill-mode: forwards;
 }
