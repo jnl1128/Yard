@@ -19,7 +19,6 @@ header {
 }
 .logobtn{
   transition: 0.5s ease;
-  width: 8rem;
   height: 6rem;
 }
 
