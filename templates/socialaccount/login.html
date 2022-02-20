@@ -1,5 +1,5 @@
 {% extends "socialaccount/base.html" %}
-
+{% load static %}
 {% load i18n %}
 
 {% block content %}
@@ -21,7 +21,7 @@
 
     <form method="post">
       {% csrf_token %}
-      <button class="form-white-btn form-submit-btn" type="submit">{% trans "계속하기" %}</button>
+      <button class="form-white-btn form-submit-btn float-on-hover" type="submit">{% trans "계속하기" %}</button>
     </form>
   </div>
 </div>
