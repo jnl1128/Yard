@@ -27,19 +27,19 @@
 
                         {{ emailaddress.email }}
                         {% if emailaddress.verified %}
-                        <span style="border: black 1px solid; border-radius: 0.3rem;" class="verified">{% trans "인증됨" %}</span>
+                        <span style="border: black 1px solid; border-radius: 0.3rem; padding: 0 0.5rem;" class="verified">{% trans "인증됨" %}</span>
                         {% else %}
-                        <span style="border: black 1px solid; border-radius: 0.3rem;" class="unverified">{% trans "인증 필요" %}</span>
+                        <span style="border: black 1px solid; border-radius: 0.3rem; padding: 0 0.5rem;" class="unverified">{% trans "인증 필요" %}</span>
                         {% endif %}
-                        {% if emailaddress.primary %}<span style="border: black 1px solid; border-radius: 0.3rem;" class="primary">{% trans "대표 메일" %}</span>{% endif %}
+                        {% if emailaddress.primary %}<span style="border: black 1px solid; border-radius: 0.3rem; padding: 0 0.5rem;" class="primary">{% trans "대표 메일" %}</span>{% endif %}
                     </label>
                 </div>
                 {% endfor %}
 
                 <div class="buttonHolder" style="display: flex">
-                    <button class="secondaryAction form-white-btn form-submit-btn" style="width:12rem; font-size: 1.6rem;" type="submit" name="action_primary" >{% trans '대표메일 설정' %}</button>
-                    <button class="secondaryAction form-white-btn form-submit-btn" style="width:10rem; font-size: 1.6rem;" type="submit" name="action_send" >{% trans '재인증하기' %}</button>
-                    <button class="primaryAction form-white-btn form-submit-btn" style="width:6rem; font-size: 1.6rem;" type="submit" name="action_remove" >{% trans '제거' %}</button>
+                    <button class="secondaryAction form-white-btn form-submit-btn float-on-hover" style="width:12rem; font-size: 1.6rem;" type="submit" name="action_primary" >{% trans '대표메일 설정' %}</button>
+                    <button class="secondaryAction form-white-btn form-submit-btn float-on-hover" style="width:10rem; font-size: 1.6rem;" type="submit" name="action_send" >{% trans '재인증하기' %}</button>
+                    <button class="primaryAction form-white-btn form-submit-btn float-on-hover" style="width:6rem; font-size: 1.6rem;" type="submit" name="action_remove" >{% trans '제거' %}</button>
                 </div>
 
             </fieldset>
@@ -56,7 +56,7 @@
             <form class="center-container" method="post" action="{% url 'account_email' %}" class="add_email">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button name="action_add" class="form-white-btn form-submit-btn" type="submit">{% trans "이메일 주소 추가" %}</button>
+                <button name="action_add" class="form-white-btn form-submit-btn float-on-hover" type="submit">{% trans "이메일 주소 추가" %}</button>
             </form>
         {% endif %}
 

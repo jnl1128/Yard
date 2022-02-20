@@ -1,3 +1,4 @@
+from logging import PlaceHolder
 from re import M
 from allauth.account.forms import SignupForm
 from django import forms
@@ -7,7 +8,7 @@ YEARS= [x for x in range(1940,2030)]
 
 class CustomSignupForm(SignupForm):
     userImg = forms.ImageField(label="유저 이미지", required=False)
-    nickName = forms.CharField(label="닉네임", max_length=30, required=True)
+    nickName = forms.CharField(label="닉네임", max_length=7, required=True, widget= forms.TextInput(attrs={'placeholder':'별명'}))
     gender = forms.ChoiceField(label="성별", choices=GENDER_CHOICES, required=True)
     birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=True)
 

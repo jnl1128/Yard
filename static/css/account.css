@@ -72,7 +72,7 @@ button.primaryAction{
 
 button.primaryAction {
   font-size: 16px;
-  padding-top: 0.5em;
+  padding-top: 1.2rem;
   margin: 0.4em;
   background-color: rgba(219, 86, 231, 0.78);
   border: white;
@@ -146,4 +146,17 @@ button.primaryAction {
   flex-direction: row;
   justify-content: center !important;
   border-bottom: 0 !important;
+}
+
+#id_userImg {
+  padding-left: 20%;
+}
+
+a.socialaccount_provider {
+  font-size:medium; 
+  color: black;
+  border: black 1px solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 2rem;
 }
