@@ -11,13 +11,19 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3.5rem 15rem;
+  margin: 3.5rem 25rem;
 }
 
 .feed-list{
-  width: 70% !important;
+  width: 100% !important;
   font-family: Roboto !important;
-  /*margin-right: 5rem;*/
+  /*border-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;*/
+}
+
+.feed-list.small{
+  width: 70% !important;
 }
 
 
@@ -57,8 +63,8 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width:  100%;
   margin-bottom: 3rem;
+  min-width: 40rem;
 }
 
 .feed--userInfo{
@@ -107,11 +113,11 @@
 }
 
 .feed--content-bottom{
-  justify-content: end;
+  justify-content: start;
 }
 .feed--content-right{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 
@@ -130,12 +136,20 @@
   color: #fff;
 }
 
+
 .feed-heart{
   background: transparent;
   color: black;
-  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 2rem;
 }
-.feed-heart>span{
+.feed-heart>div:last-child{
+  margin-left: 1rem;
   font-family: 'Roboto';
 }
 
@@ -143,6 +157,10 @@
 .feed-title{
   font-size: 20px;
   font-weight: bold;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  font-family: Roboto;
 }
 
 
@@ -151,6 +169,11 @@
   font-weight: bold;
 }
 
+.feed--content-left>img{
+  min-width: 10rem;
+  max-width: 20rem;
+  min-height: 10rem;
+}
 
 
 .feed-hashtagList{
@@ -160,18 +183,31 @@
 }
 .feed-hashtagList>.hashtag--btn{
   font-size: 1.4rem;
-  justify-content: end !important;
+  margin-right: 0;
+
 }
 
+.feed-hashtagList>.hashtag--btn:first-child{
+  margin-left: 0;
+  
+}
 
+.tag-list.tagClose{
+ animation: fade-out 1s;
+ animation-fill-mode: forwards;
+
+}
 .tag-list{
-  background-color: #fafafa;
-  justify-content: start !important;
-  display: block !important;
-  opacity: 0.5;
-}
-.tag-list>h1{
-  color: black
+  position: absolute;
+  min-width: 10rem;
+  top: 30rem;
+  right: 14rem;
+  border: 0.1rem solid white;
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 2rem;
+  animation: fade-in 1s;
+  animation-fill-mode: forwards;
 }
 .tag-list>ul{
   font-size: 2rem;
@@ -194,4 +230,44 @@
 
 .feed-twobtn>a{
   margin-left: 1rem;
+}
+
+.tag-list-btn{
+  z-index: 500;
+  position: absolute;
+  margin-left: 97rem;
+  top: 25rem;
+  background-color: #fafafa;
+  color: black;
+  font-size: 2rem;
+  padding: 1rem 1rem 1rem 4rem;
+  border-radius: 2rem;
+}
+.tag-list-btn.open{
+  transform: rotate(0deg)
+}
+
+
+.tag-list-btn:hover{
+  opacity: .5;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
