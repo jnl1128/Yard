@@ -1,19 +1,19 @@
-.certDetail-title{
+.certDetail-title {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.RE-mypage{
-  transform: scaleX(-1); 
+.RE-mypage {
+  transform: scaleX(-1);
 }
-.certDetail-container{
+.certDetail-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
   margin-top: 80px;
 }
-.certDetail-img{
+.certDetail-img {
   position: relative;
   width: 400px;
   height: 440px;
@@ -22,30 +22,30 @@
   transform-style: preserve-3d;
 }
 
-.certDetail-img:hover{
+.certDetail-img:hover {
   transform: rotateY(180deg);
-  transition: .9s ease-in-out;
+  transition: 0.9s ease-in-out;
 }
-.certDetail-img-front, .certDetail-img-back {
+.certDetail-img-front,
+.certDetail-img-back {
   width: 100%;
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
 }
 
-.cert-stamp{
+.cert-stamp {
   margin-top: 60px;
-  
 }
 .certDetail-img-back {
   transform: rotateY(180deg);
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   background-color: #ffffff;
-  background-color: rgba( 255, 255, 255, 0.5 );
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.certDetail-info{
+.certDetail-info {
   display: flex;
   flex-direction: column;
   border: 1px solid white;
@@ -55,3 +55,7 @@
   text-align: center;
 }
 
+.certDetail-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

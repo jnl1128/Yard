@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="certDetail-info">
-		<div class="music-info">
+		<div class="music-info listening">
 			<div class="index">Listening</div>
 			<div>{{cert.createdDate | date:'Y.m.d'}} ~</div>
 		</div>
@@ -27,12 +27,14 @@
 			<div class="index">아티스트</div>
 			<div>{{cert.artist}}</div>
 		</div>
+
+		<div class="certDetail-buttons">
+			<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
+			<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
+		</div>
 	</div>
 
-	<div class="update-delete-button">
-		<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
-		<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
-	</div>
+
 </div>
 
 {% endblock %}
