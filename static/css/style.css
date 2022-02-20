@@ -7,10 +7,15 @@
 @import "./account.css";
 @import "./certificate.css";
 @import "./variables.css";
+@import "./certDetail.css";
 
 * {
   box-sizing: border-box;
   font-family: "Roboto";
+}
+
+.boldfont {
+  font-family: "Shrikhand", cursive;
 }
 
 html {
@@ -39,6 +44,6 @@ a {
   text-decoration: none;
   color: white;
 }
-input:focus{
+input:focus {
   outline: none !important;
 }

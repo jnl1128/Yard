@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage"
+<div class="certDetail-title boldfont"><a href="{% url 'user:myPage' %}"><img class="redirect-mypage-btn"
 			src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
 
 <div class="certDetail-container">
@@ -15,9 +15,12 @@
 		</div>
 	</div>
 	<div class="certDetail-info">
-		<div class="music-info">
-			<div class="index">Listening</div>
-			<div>{{cert.createdDate | date:'Y.m.d'}} ~</div>
+		<div class="music-info listen-box">
+			<div class="listen-box">
+				<span class="index boldfont listening">Listening</span>
+				<br />
+				<span class="boldfont listen-date">{{cert.createdDate | date:'Y.m.d'}} ~</span>
+			</div>
 		</div>
 		<div class="music-info">
 			<div class="index">곡</div>
@@ -27,12 +30,22 @@
 			<div class="index">아티스트</div>
 			<div>{{cert.artist}}</div>
 		</div>
+
+		<div class="music-info sns-and-buttons">
+			<div class="sns-all">
+				<div class="sns-box"><i class="fab fa-twitter"></i></div>
+				<div class="sns-box"><i class="fab fa-facebook-f"></i></div>
+				<div class="sns-box"><i class="fab fa-kaggle"></i></div>
+			</div>
+
+			<div class="certDetail-buttons">
+				<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
+				<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
+			</div>
+		</div>
 	</div>
 
-	<div class="update-delete-button">
-		<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
-		<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
-	</div>
+
 </div>
 
 {% endblock %}

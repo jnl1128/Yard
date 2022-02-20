@@ -1,22 +1,28 @@
 @import "./reset.css";
+
 @import "./myPage.css";
 @import "./base.css";
 @import "./mainPage.css";
 @import "./feed.css";
 @import "./account.css";
 @import "./certificate.css";
+@import "./variables.css";
 
 * {
   box-sizing: border-box;
   font-family: "Roboto";
 }
 
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
 body {
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  height: 200vh;
   width: 100vw;
+  height: 100%;
   margin: 0;
   overflow-x: hidden;
   color: white !important; /*임시*/
@@ -24,10 +30,15 @@ body {
     180deg,
     #361c82 14.58%,
     rgba(219, 86, 231, 0.78) 100%
-  ) !important;
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {
   text-decoration: none;
   color: white;
+}
+input:focus{
+  outline: none !important;
 }

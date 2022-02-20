@@ -1,99 +1,41 @@
-.certDetail-title{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.RE-mypage{
-  transform: scaleX(-1); 
-}
-.certDetail-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 80px;
-}
-.certDetail-img{
-  position: relative;
-  width: 400px;
-  height: 440px;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.certDetail-img:hover{
-  transform: rotateY(180deg);
-  transition: .9s ease-in-out;
-}
-.certDetail-img-front, .certDetail-img-back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-}
-
-.cert-stamp{
-  margin-top: 60px;
-  
-}
-.certDetail-img-back{
-  transform: rotateY(180deg);
-  background-size:cover;
-  background-position: center;
-  background-color: #ffffff;
-  background-color: rgba( 255, 255, 255, 0.5 );
-}
-
-.certDetail-info{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 40px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.cert-container{
+.cert-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
 }
 
-.cert-box{
+.cert-box {
   font-size: 1.4rem;
-  display: flex;
-  flex-direction:column;
-}
-
-.cert-box>h1{
-  text-align: center;
-
-}
-
-.cert-registerForm{
   display: flex;
   flex-direction: column;
 }
-.cert-music{
+
+.cert-box > h1 {
+  text-align: center;
+}
+
+.cert-registerForm {
+  display: flex;
+  flex-direction: column;
+}
+.cert-music {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.cert-music-input{
+.cert-music-input {
   display: flex;
   flex-direction: row;
   width: 100%;
-
 }
 
-.musicListList{
+.musicListList {
   font-size: 1.4rem;
 }
 
-#id_music, #id_artist{
+#id_music,
+#id_artist {
   border: 0 !important;
   background-color: #fafafa;
   width: 100% !important;
