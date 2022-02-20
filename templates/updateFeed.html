@@ -1,6 +1,6 @@
-
 {% extends "searchBase.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block content %}
 <div class="feed-result">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
@@ -25,6 +25,7 @@
       <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
       <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
     </div>
+    {% endif %}
 
 
   {% for feed in feeds %}
@@ -60,7 +61,7 @@
           <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
           {% endif %}
           <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-          {% endif %}
+        {% endif %}
         <div class="feed-hashtagList">
           {% for tag in feed.tags.all %}
           <div class="hashtag--btn">{{tag}}
@@ -103,12 +104,38 @@
         <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
         {% endif %}
         <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-        {% endif %}
+      {% endif %}
       <div class="feed-hashtagList">
         {% for tag in feed.tags.all %}
-        <div class="hashtag--btn">{{tag}}
-        </div>
+        <div id="hashTag" class="hashtag--btn">{{tag}}</div>
         {% endfor %}
+        {% if feed.inputTags %}
+          <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
+          <script>
+            const usersTag = document.querySelector("#newHash").innerHTML;
+            addInputTag(usersTag);
+            
+            function addInputTag(tags) {
+              const hashTagArray = tags.split(' ');
+             
+              for (let i=0; i < hashTagArray.length; i++) {
+                const choiceTags = document.querySelectorAll('.hashtag--btn');
+                for (let k=0; k < choiceTags.length; k++) {
+                  if (hashTagArray[i] != choiceTags[i].innerText) {
+                    const newDiv = document.createElement('div');
+                    newDiv.setAttribute("class", "hashtag--btn");
+                    const newText = document.createTextNode(hashTagArray[i]);
+                    newDiv.appendChild(newText);
+                    const tagDiv = document.querySelector('.feed-hashtagList');
+                    tagDiv.append(newDiv);                    
+                  }
+                  else {
+                  }
+                }
+              };
+            }
+          </script>
+        {% endif %}
       </div>
     </div>
     
@@ -138,7 +165,7 @@
   </div>
 
 
-    {% endfor %}
+  {% endfor %}
 </div>
 
 <!--<div class="white-form tag-list">
@@ -169,12 +196,11 @@
                 <div class="musicListList"></div>
 
                 <button id="registerMusic" style="
-
-            border-radius: 1rem;
-            border-width: 0.1rem;
-            background-color: cornflowerblue;
-            color: white;
-            onclick="registerMusic()">
+                  border-radius: 1rem;
+                  border-width: 0.1rem;
+                  background-color: cornflowerblue;
+                  color: white;"
+                  onclick="registerMusic()">
                     노래 등록
                 </button>
                 <form method="POST" class="post-form" enctype="multipart/form-data">
@@ -187,7 +213,6 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-<
   crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
