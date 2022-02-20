@@ -2,15 +2,7 @@
 {% load static %}
 {% block content %}
 
-
-
 <div class="certDetail-title"><a href="{% url 'user:myPage' %}"><img class="RE-mypage" src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
-<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();"><img src="{%static 'img/icon-twitter.png'%}" alt=""></a>
-<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();"><img src="{%static 'img/icon-facebook.png'%}" alt=""></a>    
-<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();"><img src="{%static 'img/icon-kakao.png'%}" alt=""></a>    
-	
-<div class="certDetail-title boldfont"><a href="{% url 'user:myPage' %}"><img class="redirect-mypage-btn"
-			src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
 
 <div class="certDetail-container">
 	<div class="certDetail-img">
@@ -39,9 +31,11 @@
 
 		<div class="music-info sns-and-buttons">
 			<div class="sns-all">
-				<div class="sns-box"><i class="fab fa-twitter"></i></div>
-				<div class="sns-box"><i class="fab fa-facebook-f"></i></div>
-				<div class="sns-box"><i class="fab fa-kaggle"></i></div>
+				<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();"><img src="{%static 'img/icon-twitter.png'%}" alt=""></a>
+				<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();"><img src="{%static 'img/icon-facebook.png'%}" alt=""></a>
+				<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();"><img src="{%static 'img/icon-kakao.png'%}" alt=""></a>
+				<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
+				<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
 			</div>
 
 			<div class="certDetail-buttons">
