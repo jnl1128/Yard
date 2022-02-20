@@ -1,0 +1,5 @@
+{% load i18n %}
+{% load account %}
+
+{% user_display user as user_display %}
+<p class="form-white-btn-font" style="margin: 0.5rem 0;">{% blocktrans %} 현재 {{ user_display }} 계정으로 로그인 중{% endblocktrans %}</p>

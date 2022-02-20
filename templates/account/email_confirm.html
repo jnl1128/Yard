@@ -1,0 +1,39 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+<div class="center-container">
+    <div class="white-form center-container">
+        <div class="center-container logoBox">
+            <img src="{%static 'img/logoPurple.png' %}" width="150px">
+        </div>
+        <p class="form-white-btn-font title">{% trans "이메일 주소 확인" %}</p>
+
+        {% if confirmation %}
+
+        {% user_display confirmation.email_address.user as user_display %}
+
+        <p class="form-white-btn-font textContent">{% blocktrans with confirmation.email_address.email as email %}이메일 : <a class="Roboto" style="color: blue;" href="mailto:{{ email }}">{{ email }}</a>{% endblocktrans %}</p>
+
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+        {% csrf_token %}
+            <button class="form-white-btn form-submit-btn float-on-hover" type="submit">{% trans '확인' %}</button>
+        </form>
+
+        {% else %}
+
+        {% url 'account_email' as email_url %}
+
+        <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+
+        {% endif %}
+
+        {% endblock %}
+
+    </div>
+</div>  

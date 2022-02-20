@@ -11,21 +11,28 @@
     <img src="{% static 'img/note.png' %}" alt="">
   </div>
   <div class="account-form white-form center-container">
-      <div class="center-container logoBox">
-        <img src="{%static 'img/logoPurple.png' %}" width="150px">
-      </div>
+      <div class="preview-img-div" id ='preview-img-div'></div>
       <form class="signup center-container" id="signup_form" method="post" action="{% url 'account_signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="updateInfo-img center-container" id = "updateInfo-img">
+          <p class="form-white-btn-font textContent">프로필 이미지</p><div class="img-upload" style="margin-bottom: 1.5rem;">{{form.userImg}}</div>
+        </div>
+        <p>{{form.email}}</p>
+        <p>{{form.password1}}</p>
+        <p>{{form.password2}}</p>
+        <p>{{form.nickName}}</p>
+        <p>성별 : {{form.gender}} | 생년월일 : {{form.birth}}</p>
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button type="submit" class="form-white-btn form-submit-btn">{% trans "회원가입" %}</button>
+        <button type="submit" class="form-white-btn form-submit-btn float-on-hover">{% trans "회원가입" %}</button>
         <p class="Roboto">{% blocktrans %}이미 회원이라면 <a class="button secondaryAction" href="{{ login_url }}">로그인</a>{% endblocktrans %}</p>
       </form>
     </div>
   </div>
 </div>
+{% endblock %}
 
-
+{% block js %}
+<script src='{% static "js/updateInfo.js" %}'></script>
 {% endblock %}
