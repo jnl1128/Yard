@@ -1,6 +1,7 @@
 {% extends "searchBase.html" %}
 {% load static %}
 {% block content %}
+{% load bootstrap4 %}
 <div class="feed-result">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
   <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
@@ -22,7 +23,7 @@
     {% if request.user.id %}
     <div class="feed-filterBtn">
       <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-      <a href="#"><button class="feed-like">좋아요 모아보기</button></a>
+      <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like">좋아요 모아보기</button></a>
     </div>
     {% endif %}
   </div>
@@ -53,6 +54,7 @@
         </div>
       </div>
       <div class="feed--content-bottom">
+        <div class="feed-heart">
         {% if request.user.is_authenticated %}
           {% if user in feed.like_users.all %}
           <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
@@ -60,7 +62,8 @@
           <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
           {% endif %}
           <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-          {% endif %}
+        {% endif %}
+        </div>
         <div class="feed-hashtagList">
           {% for tag in feed.tags.all %}
           <div class="hashtag--btn">{{tag}}
@@ -96,6 +99,7 @@
       </div>
     </div>
     <div class="feed--content-bottom">
+      <div class="feed-heart">
       {% if request.user.is_authenticated %}
         {% if user in feed.like_users.all %}
         <i class="fas fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
@@ -103,12 +107,33 @@
         <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
         {% endif %}
         <span id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</span>
-        {% endif %}
+      {% endif %}
+      </div> 
       <div class="feed-hashtagList">
         {% for tag in feed.tags.all %}
-        <div class="hashtag--btn">{{tag}}
-        </div>
+        <div id="hashTag" class="hashtag--btn">{{tag}}</div>
         {% endfor %}
+        {% if feed.inputTags %}
+          <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
+          <script>
+            const hashTag = document.querySelector("#newHash").innerHTML;
+            console.log(hashTag);
+            addInputTag(hashTag);
+            function addInputTag(tags) {
+              console.log("!!")
+              const hashTagArray = tags.split(' ');
+             
+              for (let i=0; i < hashTagArray.length; i++) {
+                const newDiv = document.createElement('div');
+                newDiv.setAttribute("class", "hashtag--btn");
+                const newText = document.createTextNode(hashTagArray[i]);
+                newDiv.appendChild(newText);
+                const tagDiv = document.querySelector('.feed-hashtagList');
+                tagDiv.append(newDiv);
+              };
+            }
+        </script>
+        {% endif %}
       </div>
     </div>
     
@@ -174,7 +199,9 @@
           " onclick="registerMusic()">노래 등록
         </button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }}
+
+          {% csrf_token %} {% bootstrap_form form %}
+
           <button type="submit" class="save btn btn-default">Save</button>
         </form>
       </div>
@@ -267,5 +294,31 @@
     }
   }
 
+  function hashTagsToArray(tags) {
+    console.log("!!")
+    const hashTagArray = str.split(" ");
+    
+    for (let i = 0; i < hashTagArray.length; i++){
+      //const element = document.querySelector(`.hashTag`);
+      const newDiv = document.createElement('div');
+      newDiv.setAttribute("class", "hashtag--btn");
+      const newText = document.createTextNode(hashTagArray[i]);
+      newDiv.appendChild(newText);
+      const tagDiv = document.querySelector('.feed-hashtagList');
+      tagDiv.append(newDiv);
+    
+    }
+  }
+
+  function autolink() {
+    var container = document.getElementsByClassName("feed-content");
+	for (let i = 0; i < container.length; i++) {
+		var doc = container[i].innerHTML;
+		var regURL = new RegExp("(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)","gi");
+		container[i].innerHTML = doc.replace(regURL,"<a href='$1://$2' target='_blank'>$1://$2</a>");
+	}
+  }
+
+  autolink();
 </script>
 {% endblock %}
