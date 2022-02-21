@@ -98,7 +98,7 @@
 .sns-all {
   display: flex;
   justify-content: flex-start;
-  width: 70%;
+  width: 100%;
 }
 .sns-box {
   width: 4rem;
