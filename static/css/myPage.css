@@ -14,7 +14,7 @@ body {
     rgba(125, 8, 135, 0.78) 100%
   );
 }
-.mypage-container>h1{
+.mypage-container > h1 {
   margin-left: 5rem;
   font-size: 4rem;
 }
@@ -24,20 +24,24 @@ body {
   flex-direction: row;
   overflow: hidden;
   position: relative;
+  border: 0.1rem solid #fff;
+  background-color: rgba(255,255,255, .5);
+  border-radius: 1rem;
+  padding: 2rem;
+  padding-left: 1rem;
 }
 .certificate-container {
   border: 3px solid #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 30px;
   margin-left: 100px;
   position: relative;
-  left : 0;
-  transition: .3s ease-in-out;
+  left: 0;
+  transition: 0.3s ease-in-out;
 }
 
-.certificate {
+.certificate{
   height: 40rem;
   width: 34rem;
   background-size: cover;
@@ -50,12 +54,15 @@ body {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+.certificate-list>a:first-child{
+  margin-left: 0;
+}
 
 .hidden {
   display: none;
 }
 
-.music-container{
+.music-container {
   position: absolute;
   width: 340px;
   margin: auto;
@@ -77,21 +84,19 @@ body {
   font-weight: bold;
 }
 
-
-
-.certificate-btn .certificate-leftBtn{
+.certificate-btn .certificate-leftBtn {
   z-index: 100;
   position: absolute;
-  left: 10px;
+  left: 10rem;
   margin-top: 150px;
   cursor: pointer;
-  transform: scaleX(-1); 
+  transform: scaleX(-1);
 }
 
-.certificate-btn .certificate-rightBtn{
+.certificate-btn .certificate-rightBtn {
   z-index: 100;
   position: absolute;
-  right: 10px;
+  right: 10rem;
   margin-top: 150px;
   cursor: pointer;
 }
@@ -113,7 +118,23 @@ body {
   padding-left: 5rem;
   padding-bottom: 1rem;
 }
-.plusCert:hover{
+.plusCert:hover {
   opacity: 0.8;
   transition: 0.3s ease-in-out;
+}
+
+a.plusCert {
+  vertical-align: middle;
+}
+
+.exam-infobox {
+  padding-right: 1.5rem !important;
+}
+.exam-snsbox {
+  margin-top: 5rem;
+}
+.exam-snsall {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
 }

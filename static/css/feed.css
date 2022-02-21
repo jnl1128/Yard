@@ -272,3 +272,56 @@
     opacity: 0;
   }
 }
+
+
+
+/*모달 관련 css*/
+#feedForm{
+  margin-top: 3rem;
+}
+#feedForm .form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+#feedForm .searchDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#feedForm .searchDiv>div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+#feedForm .searchDiv>div>button, #registerMusic, .saveFeedForm{
+  margin-left: 5rem;
+  font-size: 16px;
+  background-color: rgba(219, 86, 231, 0.78);
+  border: white;
+  color: white !important;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 30rem;
+  height: 4rem;
+  line-height: 4rem;
+}
+.saveFeedForm{
+  margin: 0 auto;
+}
+
+#registerMusic{
+  margin-left: 36rem;
+}
+
+.form-control{
+  border: none !important;
+}
+
+.post-form #id_music, .post-form #id_artist{
+  border: 0.1rem solid black !important;
+}

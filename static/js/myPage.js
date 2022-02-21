@@ -4,7 +4,6 @@ const certificate_rightBtn = document.getElementById('certificate-rightBtn')
 const certificate_leftBtn = document.getElementById('certificate-leftBtn')
 
 const certificate_btn = document.getElementById('certificate-btn')
-console.log(certificates.length)
 function displayMusicInfo(event){
   event.target.childNodes[3].classList.toggle('hidden');
   event.target.childNodes[1].style.filter = 'brightness(50%)'
@@ -29,10 +28,10 @@ function hideMusicInfo(event){
 
 function slideCert(event){
   let direction = 0;
-  const certificateLen = certificates.length -1 
-  if(certificateLen > 1){
+  const certificateLen = certificates.length
     certificates.forEach(function(certificate){
       let temp = Number(certificate.style.left.slice(0,4))
+      console.log(temp)
       if (isNaN(temp)) temp = 0
   
       if(event.target === certificate_rightBtn){
@@ -54,7 +53,6 @@ function slideCert(event){
       const newLeft  = String(temp + direction)
       certificate.style.left = newLeft + 'px'
     })
-  }
   
   
 }

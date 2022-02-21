@@ -4,7 +4,6 @@ const searchBtn = document.getElementById('nav--searchBtn')
 
 function  enterInput(){
   searchBtn.style.zIndex = 100;
-  console.log(searchBtn.style.zIndex)
 }
 
 function leaveInput(){

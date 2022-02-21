@@ -1,5 +1,6 @@
 const certForm = document.querySelector('.cert-container')
 const imgInput = document.getElementById('updateInfo-img')
+const flipSound = document.getElementById('flip')
 imgInput.childNodes[2].className = 'image-container'
 
 
@@ -26,8 +27,9 @@ const addMusicBtn = document.getElementById('addMusicBtn')
 addMusicBtn.addEventListener('click', addMusicList)
 
 let list = document.querySelector('.musicListList');
-const card = document.querySelector('.certificate-container');
-card.style.display='none'
+const card = document.getElementById('exampleCard');
+console.log(card)
+card.style.display ='none'
 
 $(document).ready(
             $('.musicList').empty()
@@ -83,6 +85,8 @@ $(document).ready(
             }
 
         }
+        flipSound.play()
+
     }
 
     const onClickMusic = async (music, artist) => {
