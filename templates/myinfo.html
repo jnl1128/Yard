@@ -16,10 +16,10 @@
       <div class="index-container"><div style="color: lightslategrey;" class="info-email">{{user.email}}</div></div>
       <div class="index-container" style="border-bottom: 1px solid #E1D2FA;">
         <div class="img-container">
-          <img src="{%static 'img/birthday-cake.png'%}" height="30rem">
+          <img src="{%static 'img/birthday-cake.png'%}" height="30">
         </div>
         <div class="index" style="color: lightslategrey;">{{user.birth|date:'Y.m.d'}}</div></div>
-        <div class="updateInfo-password">
+        <div class="updateInfo-account">
           <a href="/accounts/password/change">비밀번호 변경</a>
           |
           <a href="/accounts/password/reset">비밀번호 초기화</a>

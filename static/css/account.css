@@ -118,7 +118,6 @@ button.primaryAction {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 5vh;
 }
 
 .preview-img-div{
@@ -131,10 +130,6 @@ button.primaryAction {
 img.preview-img {
   width: 15rem !important;
   height: 15rem !important;
-}
-
-.image-container > a {
-
 }
 
 a.socialaccount_provider {
@@ -164,10 +159,8 @@ a.socialaccount_provider {
 }
 
 .index-container>.img-container {
-  border: black 0.1rem solid;
-  border-radius: 50%;
-  padding: 0.35rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  height: 3rem;
 }
 
 .updateInfo-img #userImg-clear_id {
@@ -180,8 +173,12 @@ a.socialaccount_provider {
   top: 5%;
 }
 
-.updateInfo-password {
+.updateInfo-account {
   font-size: small;
   position: absolute;
   bottom: 2.5rem;
+}
+
+.updateInfo-account a {
+  color: navy !important;
 }

@@ -195,3 +195,7 @@
 .feed-twobtn>a{
   margin-left: 1rem;
 }
+
+.feedNtag-container a{
+  color: black !important;
+}
