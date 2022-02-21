@@ -38,7 +38,7 @@
 
 #id_music,
 #id_artist {
-  border: 0 !important;
+  border: 0;
   background-color: #fafafa;
   width: 100% !important;
 }

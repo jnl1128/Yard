@@ -17,7 +17,7 @@
       {% else %}
       <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
       {% endif %}
-      <input type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
+      <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
 
     </div>
     {% if request.user.id %}
@@ -191,26 +191,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="searchDiv" action="methods" enctype="multipart/form-data">
-          <label for="songinfo">음악 검색</label>
-          <input type="text" id="songinfo" class="whatToSearch" placeholder="검색" autocomplete="off" />
-          <input type="text" style="display: none" />
-          <button type="button" onclick="addMusicList()">검색</button>
-        </form>
+        <div class="form-group">
+          <form class="searchDiv" action="methods" enctype="multipart/form-data">
+            <label for="songinfo">음악 검색</label>
+            <div>
+              <input type="text" id="songinfo" style="width: 120%;" class="whatToSearch" placeholder="검색" autocomplete="off" />
+              <input type="text" style="display: none" />
+              <button type="button" class="" style="width: 40%;" onclick="addMusicList()">검색</button>
+            </div>
+          </form>
+        </div>
         <div class="musicListList"></div>
 
-        <button id="registerMusic" style="
-            border-radius: 1rem;
-            border-width: 0.1rem;
-            background-color: cornflowerblue;
-            color: white;
-          " onclick="registerMusic()">노래 등록
-        </button>
+        <button id="registerMusic" style="width: 25%;" onclick="registerMusic()">노래 등록</button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
 
-          {% csrf_token %} {% bootstrap_form form %}
+          {% csrf_token %} {{ form.as_p }}
 
-          <button type="submit" class="save btn btn-default">Save</button>
+          <button type="submit" class="saveFeedForm">Save</button>
         </form>
       </div>
     </div>
@@ -224,9 +222,14 @@
 <script src='{% static "js/feedpage.js"%}'></script>
 <script src='{% static "js/feedLike.js"%}'></script>
 <script>
+  const musicTitleInput = document.querySelector('.musicTitleInput')
+  const musicArtistInput = document.querySelector('.musicArtistInput')
+
+  let musicListListList = document.querySelector('.musicListList')
   $(document).ready($(".musicList").empty());
 
   function addMusicList() {
+    musicListListList.style.display='block';
     let musicKeyWord = $("#songinfo").val();
     $(".musicList").empty();
     $(".musicListList").empty();
@@ -283,6 +286,7 @@
       music,
       artist,
     });
+    
     musicHandleResponse(data.music, data.artist);
   };
 
@@ -292,6 +296,11 @@
 
     titleInput.value = music;
     artistInput.value = artist;
+    
+    musicTitleInput.style.backgroundColor = 'rgba(122, 71, 204, 0.2)'
+    musicArtistInput.style.backgroundColor = 'rgba(122, 71, 204, 0.2)'
+    
+    musicListListList.style.display='none';
   };
 
   function doOpenCheck(chk) {

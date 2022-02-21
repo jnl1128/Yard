@@ -32,7 +32,8 @@
 #id_nickName, 
 #id_password1,
 #id_password2,
-#id_oldpassword{
+#id_oldpassword,
+#id_inputTags{
   border: 1px solid black;
   border-radius: 5px;
   padding: 4px 10px;
