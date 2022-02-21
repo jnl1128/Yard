@@ -16,7 +16,7 @@
       {% else %}
       <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
       {% endif %}
-      <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
+      <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" data-bs-backdrop="static" data-bs-keyboard="false"/>
 
     </div>
     {% if request.user.id %}
@@ -173,8 +173,8 @@
   {% endfor %}
   {% endfor %}
 </div>-->
-<div id ="tag-list-btn"  class="tag-list-btn">추천태그</div>
-<div class="tag-list tagClose" id = 'tag-list'>
+<div id ="tag-list-btn" style="visibility:hidden" class="tag-list-btn">추천태그</div>
+<div class="tag-list tagClose" id = 'tag-list'  style="visibility:hidden">
   {% for feed in feeds %}
   {% for tag in feed.tags.all %}
   <ul class="tag">{{tag}}</ul>
@@ -186,12 +186,12 @@
 
 
 <!-- 피드 등록 폼 modal -->
-<div id="feedForm" class="modal fade" style="color: black;">
+<div id="feedForm" class="modal fade" style="color: black;" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" style="color: black;">피드 등록하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <a href="{% url 'user:feedList' %}" ><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button ></a>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -200,13 +200,13 @@
             <div>
               <input type="text" id="songinfo" style="width: 140%;" class="whatToSearch" placeholder="검색" autocomplete="off" />
               <input type="text" style="display: none" />
-              <button type="button" style="width: 80%;" onclick="addMusicList()">검색</button>
+              <button type="button" class="" style="width: 80%;" onclick="addMusicList()">검색</button>
             </div>
           </form>
         </div>
         <div class="musicListList"></div>
 
-        <button id="registerMusic" class="saveFeedForm" onclick="registerMusic()">노래 등록</button>
+        <button id="registerMusic" class="saveFeedForm"  onclick="registerMusic()">노래 등록</button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
 
           {% csrf_token %} {{ form.as_p }}

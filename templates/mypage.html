@@ -1,19 +1,19 @@
 {% extends 'searchBase.html' %}
 {% load static %}
 {% block content %}
-<main class="mypage-container">
+<main class="mypage-container" style="margin-top: 3rem;">
 	<h1 class="boldfont">My Certificates <a class='plusCert' href="{% url 'user:certificationRegister'%}"><img
 				width='60rem' height="60rem" src="{% static 'img/plus.png' %}" alt=""></a></h1>
 	<div class="certificate-btn" id='certificate-btn'>
 		<img class="certificate-leftBtn" id='certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
 		<img class="certificate-rightBtn" id='certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">
 	</div>
-
 	{% if certificates %}
+	<p>hello</p>
 	<div class="certificate-list">
 		{% for certificate in certificates %}
 		{% if request.user == certificate.userId %}
-
+		
 		<a href="{% url 'user:certDetail' certificate.id %}">
 			<div class="certificate-container">
 				<div class="certificate" style="background-image:url({{ certificate.albumImg.url }})"></div>
@@ -53,7 +53,11 @@
 
 
 	{% else %}
-	<div class="certDetail-container" style="margin-top:3rem; height:80%;">
+	<div class="exam-guide">
+		<h1>뮤직카드 예시</h1>
+	</div>
+
+	<div class="certDetail-container" style="margin-top:2rem; height:80%;">
 		<div class="certDetail-img">
 			<div class="certDetail-img-front"><img src="{%static 'img/exam_albumImg.jpg'%}" height="440" width="400"></div>
 			<div class="certDetail-img-back" style='background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7))'>
@@ -85,6 +89,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="exam-text">
+		<h1>당신만의 노래를 카드로 만들어보세요!</h1>
 	</div>
 	{% endif %}
 </main>

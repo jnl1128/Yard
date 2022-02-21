@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* font-size: 4rem; */
+  font-size: 4rem;
+}
+.certDetail-title a {
+  width: 8rem;
+  height: 8rem;
 }
 .redirect-mypage-btn {
   transform: scaleX(-1);
@@ -39,13 +43,12 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 추가한 코드 */
 .certDetail-container {
   position: relative;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
 
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   padding: 3rem 2rem;
 
@@ -89,36 +92,25 @@
 
 .sns-and-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .sns-all {
   display: flex;
-
-  width: 70%;
-  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
 }
 .sns-box {
-  border: 1px solid white;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-
-  margin-right: 3rem;
-}
-.sns-box i {
-  color: white;
+  width: 4rem;
+  height: 4rem;
+  margin-right: 2.5rem;
 }
 
-.certDetail-buttons{
+.certDetail-buttons {
   display: flex;
   align-items: flex-end;
 }
-.certDetail-buttons button{
+.certDetail-buttons button {
   margin-left: 1rem;
   color: white !important;
   font-size: 1.5rem;
@@ -133,4 +125,9 @@
 .certDetail-buttons button:hover {
   color: #fff;
   text-shadow: 1px 1px 2px white, 0 0 1em white;
+}
+
+.certDetail-buttons a,
+.certDetail-buttons a:visited {
+  color: #fff;
 }

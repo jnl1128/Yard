@@ -18,7 +18,7 @@
         <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
         {% endif %}
         <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
-  
+
       </div>
       {% if request.user.id %}
       <div class="feed-filterBtn">
@@ -27,9 +27,9 @@
       </div>
       {% endif %}
     </div>
-  
+
     {% for feed in feeds %}
-  
+
     {% if request.user.id != feed.userId.id%}
     <div class="feed-container">
       <div class="feed--userInfo">
@@ -48,10 +48,10 @@
             {% if feed.feedImg %}
             <img src="{{feed.feedImg.url}}" alt="">
             {% endif %}
-            <p>{{feed.createdDate}}</p> 
+            <p>{{feed.createdDate}}</p>
           </div>
           <div class="feed--content-right">
-            <div class="feed-heart">  
+            <div class="feed-heart">
               {% if request.user.is_authenticated %}
               <div>
                 {% if user in feed.like_users.all %}
@@ -59,7 +59,7 @@
                 {% else %}
                 <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
                 {% endif %}
-              </div> 
+              </div>
                 <div id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</div>
               {% endif %}
               </div>
@@ -73,10 +73,10 @@
             {% endfor %}
           </div>
         </div>
-        
+
       </div>
     </div>
-    
+
     {% else %}
     <div class="feed-container">
     <div class="feed--content-my white-form">
@@ -87,14 +87,14 @@
           {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}"  alt="">
           {% endif %}
-          <p>{{feed.createdDate}}</p> 
+          <p>{{feed.createdDate}}</p>
         </div>
         <div class="feed--content-right">
           <div class="feed-twobtn">
             <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
             <a href="{% url 'user:deleteFeed'  feed.id %}">삭제</a>
           </div>
-          <div class="feed-heart">  
+          <div class="feed-heart">
               {% if request.user.is_authenticated %}
               <div>
                 {% if user in feed.like_users.all %}
@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="feed--content-bottom">
-         
+
         <div class="feed-hashtagList">
           {% for tag in feed.tags.all %}
           <div id="hashTag" class="hashtag--btn">{{tag}}</div>
@@ -123,7 +123,7 @@
               function addInputTag(tags) {
                 console.log("!!")
                 const hashTagArray = tags.split(' ');
-               
+
                 for (let i=0; i < hashTagArray.length; i++) {
                   const newDiv = document.createElement('div');
                   newDiv.setAttribute("class", "hashtag--btn");
@@ -137,7 +137,7 @@
           {% endif %}
         </div>
       </div>
-      
+
     </div>
     <div class="feed--userInfo">
       {% if feed.userId.userImg %}
@@ -149,16 +149,16 @@
     </div>
   </div>
     {% endif %}
-    
+
     {% empty %}
-  
+
     <div class="empty-feed">
       <p class="my_search_text">
         해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
       </p>
       <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
     </div>
-  
+
     {% endfor %}
   </div>
   <!--
@@ -170,8 +170,8 @@
     {% endfor %}
     {% endfor %}
   </div>-->
-  <div id ="tag-list-btn"  class="tag-list-btn">추천태그</div>
-  <div class="tag-list tagClose" id = 'tag-list'>
+  <div id ="tag-list-btn"  style="visibility:hidden"   class="tag-list-btn">추천태그</div>
+  <div class="tag-list tagClose" id = 'tag-list'  style="visibility:hidden" >
     {% for feed in feeds %}
     {% for tag in feed.tags.all %}
     <ul class="tag">{{tag}}</ul>
@@ -183,12 +183,12 @@
 
 
 <!-- 피드 등록 폼 modal -->
-<div id="feedForm" class="modal fade" style="color: black;">
+<div id="feedForm" class="modal fade " style="color: black;" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" style="color: black;">피드 수정하기</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <a href="{% url 'user:feedList' %}" ><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button ></a>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -222,6 +222,6 @@
 <script src='{% static "js/feedpage.js"%}'></script>
 <script src='{% static "js/feedLike.js"%}'></script>
 <script src = '{%static "js/feed2.js" %}'>
-  
+
 </script>
 {% endblock %}

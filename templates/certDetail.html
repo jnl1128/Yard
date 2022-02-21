@@ -51,27 +51,31 @@
 
 {% block js %}
 <script src="{% static 'js/SNS.js' %}">
-	function shareKakao() {
 
-		// 사용할 앱의 JavaScript 키 설정
-		Kakao.init('1706f71509ba01819512832811f52204')
+</script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+	const urlforKakao = window.location.href
+		function shareKakao() {
 
-		// 카카오링크 버튼 생성
-		Kakao.Link.createDefaultButton({
-			container: '#btnKakao', // 카카오공유버튼ID
-			objectType: 'feed',
-			content: {
-				title: "개발새발", // 보여질 제목
-				description: "개발새발 블로그입니다", // 보여질 설명
-				imageUrl: "http://127.0.0.1:8000", // 콘텐츠 URL
-				link: {
-					mobileWebUrl: "http://127.0.0.1:8000",
-					webUrl: "http://127.0.0.1:8000"
-				}
-			}
-		});
+// 사용할 앱의 JavaScript 키 설정
+Kakao.init('1706f71509ba01819512832811f52204')
+
+// 카카오링크 버튼 생성
+Kakao.Link.createDefaultButton({
+	container: '#btnKakao', // 카카오공유버튼ID
+	objectType: 'feed',
+	content: {
+		title: "야드Yard", // 보여질 제목
+		description: "Yar:d 노래 부심 인증서", // 보여질 설명
+		imageUrl:  urlforKakao, // 콘텐츠 URL
+		link: {
+			mobileWebUrl: urlforKakao,
+			webUrl:  urlforKakao,
+		}
 	}
+});
+}
 </script>
 
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 {% endblock %}
