@@ -1,11 +1,18 @@
 header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  margin: 2rem 15rem;/*space-between에서 좌우 7rem 마진*/
+  margin: 2rem 0; /*space-between에서 좌우 7rem 마진*/
   background-color: transparent;
 }
+header>div{
+  flex-basis: 33.3%;
+}
+.nav-btn{
+  display: flex;
+  justify-content: end;
+}
+
 .nav-btn>a{
   padding-left: 2rem;
   font-size: 2rem;
@@ -19,7 +26,6 @@ header {
 }
 .logobtn{
   transition: 0.5s ease;
-  width: 8rem;
   height: 6rem;
 }
 
@@ -36,6 +42,7 @@ main {
   border: 1px solid rgba(144, 102, 211, 0.6);
   border-radius: 1rem;
   background-color: rgba(144, 102, 211, 0.6);
+  width: 100%;
   font-size: 1.4rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
