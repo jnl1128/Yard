@@ -117,24 +117,24 @@
           <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
           <script>
             const usersTag = document.querySelector("#newHash").innerHTML;
+            const choiceTags = document.querySelectorAll('.hashtag--btn');
+            console.log(choiceTags);
             addInputTag(usersTag);
             
             function addInputTag(tags) {
               const hashTagArray = tags.split(' ');
-             
+
+              //choiceTags 안에서도 동일할 때를 처리해 줘야 함
               for (let i=0; i < hashTagArray.length; i++) {
-                const choiceTags = document.querySelectorAll('.hashtag--btn');
-                for (let k=0; k < choiceTags.length; k++) {
-                  if (hashTagArray[i] != choiceTags[i].innerText) {
-                    const newDiv = document.createElement('div');
-                    newDiv.setAttribute("class", "hashtag--btn");
-                    const newText = document.createTextNode(hashTagArray[i]);
-                    newDiv.appendChild(newText);
-                    const tagDiv = document.querySelector('.feed-hashtagList');
-                    tagDiv.append(newDiv);                    
-                  }
-                  else {
-                  }
+                if (!(hashTagArray[i] in choiceTags)) {
+                  const newDiv = document.createElement('div');
+                  newDiv.setAttribute("class", "hashtag--btn");
+                  const newText = document.createTextNode(hashTagArray[i]);
+                  newDiv.appendChild(newText);
+                  const tagDiv = document.querySelector('.feed-hashtagList');
+                  tagDiv.append(newDiv); 
+                }
+                else {
                 }
               };
             }
