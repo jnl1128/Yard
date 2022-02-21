@@ -4,7 +4,6 @@
 {% load bootstrap4 %}
 <div class="feed-result">
   <p class="my_search_text">검색 결과: <b>"{{query}}"</b></p>
-  <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
 </div>
 
 
@@ -22,8 +21,9 @@
     </div>
     {% if request.user.id %}
     <div class="feed-filterBtn">
-      <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-      <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like">좋아요 모아보기</button></a>
+      <a href="{% url 'user:feedList' %}"><button class="feed-list-btn float-on-hover" value="myFeed">전체 글 보기</button></a>
+      <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my float-on-hover" value="myFeed">내가 쓴 글</button></a>
+      <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like float-on-hover">좋아하는 글</button></a>
     </div>
     {% endif %}
   </div>
@@ -43,14 +43,14 @@
     <div class="feed--content white-form">
       <div class="feed--content-top">
         <div class="feed--content-left">
-          <p class='feed-title'><span>Listening... </span>{{feed.artist}} - {{feed.music}}</p>
-          <p class='feed-content'>{{feed.content}}</p>
+          <p class='feed-title'><img style="padding: 0.8rem 1rem 0 0;" src="{% static 'img/purpleNote.png' %}" height="27" alt="">{{feed.artist}} - {{feed.music}}</p>
+          <p class='feed-content text-break'>{{feed.content}}</p>
           {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}" alt="">
           {% endif %}
-          <p>{{feed.createdDate}}</p> 
         </div>
         <div class="feed--content-right">
+          <p style="font-size: 1.4rem;">{{feed.createdDate|date:"Y-m-d H:i"}}</p>
           <div class="feed-heart">  
             {% if request.user.is_authenticated %}
             <div>
@@ -82,16 +82,19 @@
   <div class="feed--content-my white-form">
     <div class="feed--content-top">
       <div class="feed--content-left">
-        <p class='feed-title'><span>Listening... </span>{{feed.artist}} - {{feed.music}}</p>
-        <p class='feed-content'>{{feed.content}}</p>
+        <p class='feed-title'><img style="padding: 0.8rem 1rem 0 0;" src="{% static 'img/purpleNote.png' %}" height="27" alt="">{{feed.artist}} - {{feed.music}}</p>
+        <p class='feed-content text-break'>{{feed.content}}</p>
         {% if feed.feedImg %}
         <img src="{{feed.feedImg.url}}"  alt="">
         {% endif %}
-        <p>{{feed.createdDate}}</p> 
+        
       </div>
       <div class="feed--content-right">
         <div class="feed-twobtn">
+          <p>{{feed.createdDate|date:"Y-m-d H:i"}}</p>
+          &nbsp;&nbsp;|&nbsp;
           <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
+          &nbsp;&nbsp;|&nbsp;
           <a href="{% url 'user:deleteFeed'  feed.id %}">삭제</a>
         </div>
         <div class="feed-heart">  
@@ -154,7 +157,7 @@
 
   <div class="empty-feed">
     <p class="my_search_text">
-      해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
+      게시글이 아직 없네요, 게시글을 생성해보세요! &nbsp
     </p>
     <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
   </div>
