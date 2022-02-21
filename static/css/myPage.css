@@ -14,7 +14,7 @@ body {
     rgba(125, 8, 135, 0.78) 100%
   );
 }
-.mypage-container>h1{
+.mypage-container > h1 {
   margin-left: 5rem;
   font-size: 4rem;
 }
@@ -37,8 +37,8 @@ body {
   flex-direction: row;
   margin-left: 100px;
   position: relative;
-  left : 0;
-  transition: .3s ease-in-out;
+  left: 0;
+  transition: 0.3s ease-in-out;
 }
 
 .certificate{
@@ -62,7 +62,7 @@ body {
   display: none;
 }
 
-.music-container{
+.music-container {
   position: absolute;
   width: 340px;
   margin: auto;
@@ -84,18 +84,16 @@ body {
   font-weight: bold;
 }
 
-
-
-.certificate-btn .certificate-leftBtn{
+.certificate-btn .certificate-leftBtn {
   z-index: 100;
   position: absolute;
   left: 10rem;
   margin-top: 150px;
   cursor: pointer;
-  transform: scaleX(-1); 
+  transform: scaleX(-1);
 }
 
-.certificate-btn .certificate-rightBtn{
+.certificate-btn .certificate-rightBtn {
   z-index: 100;
   position: absolute;
   right: 10rem;
@@ -120,7 +118,23 @@ body {
   padding-left: 5rem;
   padding-bottom: 1rem;
 }
-.plusCert:hover{
+.plusCert:hover {
   opacity: 0.8;
   transition: 0.3s ease-in-out;
+}
+
+a.plusCert {
+  vertical-align: middle;
+}
+
+.exam-infobox {
+  padding-right: 1.5rem !important;
+}
+.exam-snsbox {
+  margin-top: 5rem;
+}
+.exam-snsall {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
 }
