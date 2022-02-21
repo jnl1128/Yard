@@ -25,7 +25,7 @@ body {
   overflow: hidden;
   position: relative;
   border: 0.1rem solid #fff;
-  background-color: rgba(255,255,255, .5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
   padding: 2rem;
   padding-left: 1rem;
@@ -41,7 +41,7 @@ body {
   transition: 0.3s ease-in-out;
 }
 
-.certificate{
+.certificate {
   height: 40rem;
   width: 34rem;
   background-size: cover;
@@ -54,7 +54,7 @@ body {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.certificate-list>a:first-child{
+.certificate-list > a:first-child {
   margin-left: 0;
 }
 
@@ -131,10 +131,18 @@ a.plusCert {
   padding-right: 1.5rem !important;
 }
 .exam-snsbox {
-  margin-top: 5rem;
+  margin-top: 4.5rem;
 }
 .exam-snsall {
   width: 100% !important;
   display: flex !important;
   justify-content: space-evenly !important;
+}
+
+.exam-text h1 {
+  margin-top: 2rem;
+  text-align: center;
+
+  font-size: 4rem;
+  font-family: "Jua" !important;
 }
