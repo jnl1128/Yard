@@ -26,8 +26,9 @@ const addMusicBtn = document.getElementById('addMusicBtn')
 addMusicBtn.addEventListener('click', addMusicList)
 
 let list = document.querySelector('.musicListList');
-const card = document.querySelector('.certificate-container');
-card.style.display='none'
+const card = document.getElementById('exampleCard');
+console.log(card)
+card.style.display ='none'
 
 $(document).ready(
             $('.musicList').empty()
@@ -83,6 +84,7 @@ $(document).ready(
             }
 
         }
+
     }
 
     const onClickMusic = async (music, artist) => {

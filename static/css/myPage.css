@@ -24,20 +24,24 @@ body {
   flex-direction: row;
   overflow: hidden;
   position: relative;
+  border: 0.1rem solid #fff;
+  background-color: rgba(255,255,255, .5);
+  border-radius: 1rem;
+  padding: 2rem;
+  padding-left: 1rem;
 }
 .certificate-container {
   border: 3px solid #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 30px;
   margin-left: 100px;
   position: relative;
   left: 0;
   transition: 0.3s ease-in-out;
 }
 
-.certificate {
+.certificate{
   height: 40rem;
   width: 34rem;
   background-size: cover;
@@ -49,6 +53,9 @@ body {
   filter: grayscale(0) blur(0);
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
+}
+.certificate-list>a:first-child{
+  margin-left: 0;
 }
 
 .hidden {
@@ -80,7 +87,7 @@ body {
 .certificate-btn .certificate-leftBtn {
   z-index: 100;
   position: absolute;
-  left: 10px;
+  left: 10rem;
   margin-top: 150px;
   cursor: pointer;
   transform: scaleX(-1);
@@ -89,7 +96,7 @@ body {
 .certificate-btn .certificate-rightBtn {
   z-index: 100;
   position: absolute;
-  right: 10px;
+  right: 10rem;
   margin-top: 150px;
   cursor: pointer;
 }

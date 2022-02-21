@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
+  margin-top: 5rem;
 }
 
 .cert-box {
@@ -19,15 +20,16 @@
   display: flex;
   flex-direction: column;
 }
-.cert-music {
+.cert-music{ 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.cert-music-input {
+.cert-music-input{
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: center;
 }
 
 .musicListList {
@@ -36,12 +38,49 @@
 
 #id_music,
 #id_artist {
-  border: 0 !important;
+  border: 0;
   background-color: #fafafa;
   width: 100% !important;
 }
+#addMusicBtn{
+  position: relative;
+}
 
+.whatToSearch{
+  position: relative;
+}
+#addMusicBtn>img{
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  top: 0rem;
+  left: -4rem;
+}
 
 .sns-all>a{
   margin-right: 3rem;
+}
+
+.example{
+  position: absolute;
+  margin-left: 115rem;
+  transition: all 1s ease-in-out;
+}
+
+.exmapleCard{
+  margin-top: 7rem;
+  width: 346px;
+  height: 406px;
+  padding: 0.01rem;
+}
+.createInfo-artist, .createInfo-music{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.createInfo-artist>.form-white-btn, .createInfo-music>.form-white-btn{
+  display: flex;
+  justify-content: center;
 }
