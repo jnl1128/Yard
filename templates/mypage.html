@@ -37,13 +37,11 @@
 		{% endfor %}
 
 	</div>
-	{% else %}
-	<h1>등록된 인증서가 없어요! 인증서 예시페이지 보여주기</h1>
-	<br /><br /><br />
-	{% endif %}
+
+
+
 
 	<h1 class="boldfont">History</h1>
-
 	<div class="history-container">
 		{% for year in years%}
 		<h2>{{year}}</h2>
@@ -57,8 +55,44 @@
 		{% endfor %}
 	</div>
 
-</main>
 
+
+	{% else %}
+	<div class="certDetail-container" style="margin-top:1rem">
+		<div class="certDetail-img">
+			<div class="certDetail-img-front"><img src="{%static 'img/exam_albumImg.jpg'%}" height="440" width="400"></div>
+			<div class="certDetail-img-back" style='background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7))'>
+				<img class="cert-stamp" src="{%static 'img/note.png'%}" alt="">
+			</div>
+		</div>
+		<div class="certDetail-info">
+			<div class="music-info listen-box">
+				<div class="listen-box">
+					<span class="index boldfont listening">Listening</span>
+					<br />
+					<span class="boldfont listen-date">2022.02.21 ~</span>
+				</div>
+			</div>
+			<div class="music-info">
+				<div class="index">곡</div>
+				<div>예뻤어</div>
+			</div>
+			<div class="music-info">
+				<div class="index">아티스트</div>
+				<div>DAY6</div>
+			</div>
+
+			<div class="music-info sns-and-buttons">
+				<div class="sns-all">
+					<div class="sns-box"><img src="{%static 'img/icon-twitter.png'%}" alt=""></a></div>
+					<div class="sns-box"><img src="{%static 'img/icon-facebook.png'%}" alt=""></a></div>
+					<div class="sns-box"><img src="{%static 'img/icon-kakao.png'%}" alt=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</main>
 {% endblock %}
 
 {% block js%}
