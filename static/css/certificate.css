@@ -40,3 +40,8 @@
   background-color: #fafafa;
   width: 100% !important;
 }
+
+
+.sns-all>a{
+  margin-right: 3rem;
+}
