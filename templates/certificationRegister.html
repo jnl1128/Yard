@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'searchBase.html' %}
 {% load static %}
 {% block content %}
 <div class="cert-container register">
@@ -17,7 +17,7 @@
     <button id="registerMusic" class="form-white-btn form-submit-btn">노래 등록</button>
     
     
-    <form method="POST" class="post-form"  enctype="multipart/form-data">
+    <form method="POST" class="post-form certificateForm"  enctype="multipart/form-data">
         {% csrf_token %}
         <div class="createInfo-music">
           <div>노래</div><div class="form-white-btn">{{form.music}}</div>

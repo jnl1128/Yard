@@ -36,8 +36,8 @@
   font-size: 1.4rem;
 }
 
-#id_music,
-#id_artist {
+.certificateForm #id_music,
+.certificateForm #id_artist {
   border: 0;
   background-color: #fafafa;
   width: 100% !important;

@@ -204,7 +204,7 @@
         <div class="musicListList"></div>
 
         <button id="registerMusic" class="saveFeedForm" onclick="registerMusic()">노래 등록</button>
-        <form method="POST" class="post-form" enctype="multipart/form-data">
+        <form method="POST" class="post-form feedForm2" enctype="multipart/form-data">
 
           {% csrf_token %} {{ form.as_p }}
 

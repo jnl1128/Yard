@@ -321,6 +321,9 @@
   border: none !important;
 }
 
-.post-form #id_music, .post-form #id_artist{
+.post-form.feedForm2 #id_music, .post-form.feedForm2 #id_artist{
   border: 0.1rem solid black !important;
+}
+.feedNtag-container a{
+  color: black !important;
 }
