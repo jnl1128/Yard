@@ -31,27 +31,29 @@
 .feed-addContainer{
   display: flex;
   flex-direction: column;
-  margin: 1rem 5rem;
+  margin: 1rem 5rem 5rem 5rem;
 }
 
 .feed-add{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  margin-bottom: 0.5rem;
+  margin-left: 3rem;
 }
 
 .feed-add>img{
-  height: 6rem;
-  width: 6rem;
-  margin-right: 1rem;
+  height: 8.5rem;
+  width: 8.5rem;
+  margin-right: 2rem;
 }
 .feed-add>input{
   border: 0.1rem solid black;
   border-radius: 1rem;
   background-color: transparent;
-  width: 90%;
+  width: 75%;
   height: 60%;
   padding-left: 1rem;
 }
@@ -71,20 +73,22 @@
 .feed--userInfo{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   align-items: center;
+  padding-top: 3rem;
 }
 
 .feed--userImg{
   border: 0.1rem solid white;
   border-radius: 50%;
-  height: 6rem;
-  width: 6rem;
+  height: 8.5rem;
+  width: 8.5rem;
 }
 
 .feed--userName{
-  font-size: 25px;
+  margin-top: 1rem;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -106,6 +110,10 @@
   max-height: none !important;
 }
 
+.feed--content.white-form, .feed--content-my.white-form {
+  max-width: 85%;
+}
+
 .feed--content-top, .feed--content-bottom{
   display: flex;
   flex-direction: row;
@@ -125,14 +133,15 @@
 .feed-filterBtn{
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: center;
 }
-.feed-my, .feed-like, .feed-heart{
-  padding: 0.5rem;
+
+.feed-my, .feed-like, .feed-list-btn {
+  padding: 0.5rem 5rem;
   border-radius: 1rem;
   background-color: rgba(68, 15, 218, 0.8);
   border: 0.1rem solid rgba(68, 15, 218, 0.8);
-  margin:0 0.5rem;
+  margin: 0 0.5rem;
   font-size: 1.6rem;
   color: #fff;
 }
@@ -143,11 +152,11 @@
   color: black;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   border: 0;
   padding: 0;
-  margin: 0;
-  margin-left: 2rem;
+  margin: 0.7rem 0 0 0;
+  font-size: 2.3rem;
 }
 .feed-heart>div:last-child{
   margin-left: 1rem;
@@ -156,24 +165,35 @@
 
 
 .feed-title{
+  display: inline;
   font-size: 20px;
   font-weight: bold;
-  border: 0.1rem solid black;
+  border: 0.1rem solid #440FDA;
   border-radius: 1rem;
-  padding: 0 1rem;
+  padding: 0.8rem 1rem 0.2rem 1rem;
+  margin-bottom: 2rem;
   font-family: Roboto;
 }
 
 
 .feed-content{
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: 2rem;
+}
+
+.feed--content-left {
+  max-width: 70%;
 }
 
 .feed--content-left>img{
   max-height: 15rem;
   max-width: 100%;
-  
+  margin-top: 1.5rem;
+}
+
+.feed--content-bottom {
+  margin-top: 1.5rem;
 }
 
 
@@ -181,7 +201,9 @@
   display: flex;
   flex-direction: row;
   font-size: 20px;
+  flex-wrap: wrap;
 }
+
 .feed-hashtagList>.hashtag--btn{
   font-size: 1.4rem;
   margin-right: 0;
@@ -190,7 +212,10 @@
 
 .feed-hashtagList>.hashtag--btn:first-child{
   margin-left: 0;
-  
+}
+
+#hashTag {
+  margin: 0.7rem;
 }
 
 .tag-list.tagClose{
@@ -229,9 +254,6 @@
 
 }
 
-.feed-twobtn>a{
-  margin-left: 1rem;
-}
 
 .tag-list-btn{
   z-index: 500;
