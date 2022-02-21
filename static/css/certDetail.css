@@ -4,6 +4,10 @@
   align-items: center;
   font-size: 4rem;
 }
+.certDetail-title a {
+  width: 8rem;
+  height: 8rem;
+}
 .redirect-mypage-btn {
   transform: scaleX(-1);
 }
@@ -39,13 +43,12 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 추가한 코드 */
 .certDetail-container {
   position: relative;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
 
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   padding: 3rem 2rem;
 
@@ -122,4 +125,9 @@
 .certDetail-buttons button:hover {
   color: #fff;
   text-shadow: 1px 1px 2px white, 0 0 1em white;
+}
+
+.certDetail-buttons a,
+.certDetail-buttons a:visited {
+  color: #fff;
 }

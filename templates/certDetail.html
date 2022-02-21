@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'searchBase.html' %}
 {% load static %}
 {% block content %}
 
 <div class="certDetail-title boldfont"><a href="{% url 'user:myPage' %}"><img class="RE-mypage"
-			src="{% static 'img/moreCertBtn.png' %}" alt=""></a>My Certificate</div>
+			src="{% static 'img/moreCertBtn.png' %}" alt="" style="transform: rotate(-180deg)"></a>My Certificate</div>
 
 <div class="certDetail-container">
 	<div class="certDetail-img">
@@ -73,7 +73,5 @@
 	}
 </script>
 
-<script src="//developers.kakao.com/sdk/js/kakao.min.js">
-
-</script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 {% endblock %}

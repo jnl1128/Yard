@@ -115,3 +115,19 @@ body {
   opacity: 0.8;
   transition: 0.3s ease-in-out;
 }
+
+a.plusCert {
+  vertical-align: middle;
+}
+
+.exam-infobox {
+  padding-right: 1.5rem !important;
+}
+.exam-snsbox {
+  margin-top: 5rem;
+}
+.exam-snsall {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
+}
