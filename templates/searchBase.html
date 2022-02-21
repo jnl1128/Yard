@@ -44,7 +44,7 @@
 			<img class="nav--searchBtn" id="nav--searchBtn" src="{% static 'img/search.png'%}" alt="">
 			<form class="" action="{% url 'user:search' %}" method="get">
 				{% csrf_token %}
-				<input class="nav--input" type="search" placeholder="가수 노래 #해시태그" aria-label="Search" name="q" />
+				<input class="nav--input" type="search" placeholder="가수, 노래, #해시태그" aria-label="Search" name="q" />
 			</form>
 		</div>
 
