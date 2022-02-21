@@ -44,7 +44,6 @@
 }
 
 .form-white-btn-font{
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 1.5rem;
@@ -57,6 +56,7 @@
 .form-submit-btn{
   font-size: 16px;
   padding-top: 0.5em;
+  padding-bottom: 0.5rem;
   margin: 0.4em;
   background-color: rgba(219, 86, 231, 0.78);
   border: white;

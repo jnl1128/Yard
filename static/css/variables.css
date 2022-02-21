@@ -46,7 +46,6 @@
 }
 
 .form-white-btn-font{
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 1.5rem;
@@ -86,13 +85,6 @@
 .label {
   font-size: 1.5rem;
   font-weight: 500;
-}
-
-.Roboto {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.3rem;
 }
 
 .float-on-hover {

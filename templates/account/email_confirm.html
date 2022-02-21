@@ -18,7 +18,7 @@
 
         {% user_display confirmation.email_address.user as user_display %}
 
-        <p class="form-white-btn-font textContent">{% blocktrans with confirmation.email_address.email as email %}이메일 : <a class="Roboto" style="color: blue;" href="mailto:{{ email }}">{{ email }}</a>{% endblocktrans %}</p>
+        <p class="form-white-btn-font textContent">{% blocktrans with confirmation.email_address.email as email %}이메일 : <a style="color: blue;" href="mailto:{{ email }}">{{ email }}</a>{% endblocktrans %}</p>
 
         <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
         {% csrf_token %}

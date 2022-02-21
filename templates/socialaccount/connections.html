@@ -45,12 +45,12 @@
         </form>
 
         {% else %}
-        <p class="Roboto">{% trans '연결된 소셜 계정이 없습니다.' %}</p>
+        <p >{% trans '연결된 소셜 계정이 없습니다.' %}</p>
         {% endif %}
 
         <p class="form-white-btn-font textContent">{% trans '소셜 계정 추가 연동하기' %}</p>
 
-        <ul class="socialaccount_providers Roboto" style="display: flex; justify-content: space-around;">
+        <ul class="socialaccount_providers" style="display: flex; justify-content: space-around;">
         {% include "socialaccount/snippets/provider_list.html" with process="connect" %}
         </ul>
 

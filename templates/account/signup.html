@@ -26,7 +26,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         <button type="submit" class="form-white-btn form-submit-btn float-on-hover">{% trans "회원가입" %}</button>
-        <p class="Roboto">{% blocktrans %}이미 회원이라면 <a class="button secondaryAction" href="{{ login_url }}">로그인</a>{% endblocktrans %}</p>
+        <p >{% blocktrans %}이미 회원이라면 <a class="button secondaryAction" href="{{ login_url }}">로그인</a>{% endblocktrans %}</p>
       </form>
     </div>
   </div>

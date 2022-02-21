@@ -14,6 +14,7 @@ header>div{
 }
 
 .nav-btn>a{
+  font-family: 'IM_Hyemin-Bold' !important;
   margin-left: 2rem;
   font-size: 2rem;
   color: #fff;

@@ -16,7 +16,6 @@
 
 .feed-list{
   width: 100% !important;
-  font-family: Roboto !important;
   max-height: none !important;
   /*border-right: 0 !important;
   border-top-right-radius: 0 !important;
@@ -87,6 +86,7 @@
 }
 
 .feed--userName{
+  font-family: 'IM_Hyemin-Bold' !important;
   margin-top: 1rem;
   font-size: 2rem;
   text-align: center;
@@ -160,19 +160,18 @@
 }
 .feed-heart>div:last-child{
   margin-left: 1rem;
-  font-family: 'Roboto';
 }
 
 
 .feed-title{
+  font-family: 'IM_Hyemin-Bold' !important;
   display: inline;
   font-size: 20px;
   font-weight: bold;
   border: 0.1rem solid #440FDA;
   border-radius: 1rem;
-  padding: 0.8rem 1rem 0.2rem 1rem;
+  padding: 0.8rem 1rem 0.8rem 1rem;
   margin-bottom: 2rem;
-  font-family: Roboto;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 70%;
