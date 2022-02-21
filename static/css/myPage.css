@@ -124,10 +124,18 @@ a.plusCert {
   padding-right: 1.5rem !important;
 }
 .exam-snsbox {
-  margin-top: 5rem;
+  margin-top: 4.5rem;
 }
 .exam-snsall {
   width: 100% !important;
   display: flex !important;
   justify-content: space-evenly !important;
+}
+
+.exam-text h1 {
+  margin-top: 2rem;
+  text-align: center;
+
+  font-size: 4rem;
+  font-family: "Jua" !important;
 }

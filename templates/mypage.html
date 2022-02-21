@@ -1,7 +1,7 @@
 {% extends 'searchBase.html' %}
 {% load static %}
 {% block content %}
-<main class="mypage-container">
+<main class="mypage-container" style="margin-top: 3rem;">
 	<h1 class="boldfont">My Certificates <a class='plusCert' href="{% url 'user:certificationRegister'%}"><img
 				width='60rem' height="60rem" src="{% static 'img/plus.png' %}" alt=""></a></h1>
 	<div class="certificate-btn" id='certificate-btn'>
@@ -85,6 +85,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="exam-text">
+		<h1>당신만의 노래를 카드로 만들어보세요!</h1>
 	</div>
 	{% endif %}
 </main>
