@@ -3,21 +3,32 @@
 
 {%block content%}
 
-  
-  <div class="info-container white-form">
+<div class="row-container">
+  <div class="info-container white-form" style="position: relative;">
+    <a class="icon-edit" href="{% url 'user:updateInfo' %}"><img src="{%static 'img/icon-edit.png' %}" width="25rem"></a>
     <div class="info-btn center-container">
       {% if user.userImg %}
-      <img class="info-userImg" src="{{user.userImg.url}}"  width="200" height="200" alt="">
+      <img class="info-userImg" src="{{user.userImg.url}}"  width="150" height="150" alt="">
       {% else %}
-      <img class="info-userImg" src="{% static 'img/default.jpeg' %}"  width="200" height="200" alt="">
+      <img class="info-userImg" src="{% static 'img/default.jpeg' %}"  width="150" height="150" alt="">
       {% endif %}
-      <a href="{% url 'user:updateInfo' %}" class="info-updateBtn">수정</a>
       <div><div class="info-nickName">{{user.nickName}}</div></div>
-    </div>
-    <div class="center-container">
-      <div><div class="index">이메일</div><div class="info-email">{{user.email}}</div></div>
-      <div><div class="index">성별</div><div class="info-gender">{{user.gender}}</div></div>
-      <div><div class="index">생년월일</div><div class="info-birth">{{user.birth}}</div></div>
+      <div class="index-container"><div style="color: lightslategrey;" class="info-email">{{user.email}}</div></div>
+      <div class="index-container" style="border-bottom: 1px solid #E1D2FA;">
+        <div class="img-container">
+          <img src="{%static 'img/birthday-cake.png'%}" height="30">
+        </div>
+        <div class="index" style="color: lightslategrey;">{{user.birth|date:'Y.m.d'}}</div></div>
+        <div class="updateInfo-account">
+          <a href="/accounts/password/change">비밀번호 변경</a>
+          |
+          <a href="/accounts/password/reset">비밀번호 초기화</a>
+          |
+          <a href="/accounts/social/connections">소셜 계정 연결</a>
+          |
+          <a href="/accounts/email">이메일 변경</a>
+        </div>
     </div>
   </div>
+</div>
 {%endblock%}
