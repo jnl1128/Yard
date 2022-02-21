@@ -117,11 +117,14 @@ def searchResult(request):
                 feeds = Feed.objects.all().order_by('-createdDate')
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             if query[0] == '#':
-                tagId = HashTag.objects.filter(name=query)
-                try:
-                    feeds = Feed.objects.all().filter(tags=tagId[0].id).order_by('-createdDate')
-                except:
-                    feeds = None;
+                choiceTag = HashTag.objects.filter(name=query)
+                #inputTags 안에서도 검색할 수 있도록#
+                if len(choiceTag) != 0:
+                    feeds = Feed.objects.all().filter(tags=choiceTag[0].id).order_by('-createdDate')
+                elif len(choiceTag) == 0:
+                    feeds = Feed.objects.all().filter(Q(inputTags__icontains=query)).order_by('-createdDate')
+                else:
+                    feeds = None
                 return render(request, 'feedSearch.html', {'query':query, 'feeds':feeds, 'form':form})
             feeds = Feed.objects.all().filter(Q(music__icontains=query) | Q(artist__icontains=query) | Q(content__icontains=query)).order_by('-createdDate')          
 
