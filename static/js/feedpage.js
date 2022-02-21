@@ -30,6 +30,7 @@ musicArtistInput.classList.add('musicArtistInput')
 
 const ptag = feedFormB.querySelectorAll('p')
 const tagSelection = ptag[2].querySelector('select')
+ptag[2].style.marginBottom = '1rem'
 tagSelection.style.width = '100%';
 tagSelection.style.borderRadius = '0.5rem';
 tagSelection.style.border = '0.1rem solid black'
@@ -41,9 +42,12 @@ tagOptions.forEach((option)=>{
 })
 ptag[3].style.display= 'flex'
 ptag[3].style.flexDirection = 'column'
+
+
 ptag[4].style.display= 'flex'
 ptag[4].style.flexDirection = 'column'
-
+ptag[4].style.marginBottom = '1rem'
+ptag[5].style.marginBottom = '1rem'
 const hashTagInput = ptag[3].querySelector('input')
 //hashTagInput.classList.add('form-white-btn')
 hashTagInput.style.width = '100%'

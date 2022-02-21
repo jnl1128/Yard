@@ -296,7 +296,7 @@
 }
 
 
-#feedForm .searchDiv>div>button, #registerMusic, .saveFeedForm{
+#feedForm .searchDiv>div>button, .feedRegisterMusic, .saveFeedForm{
   margin-left: 5rem;
   font-size: 16px;
   background-color: rgba(219, 86, 231, 0.78);
@@ -311,12 +311,11 @@
   line-height: 4rem;
 }
 .saveFeedForm{
+  width: 100%;
   margin: 0 auto;
+  margin-bottom: 1rem;
 }
 
-#registerMusic{
-  margin-left: 36rem;
-}
 
 .form-control{
   border: none !important;
