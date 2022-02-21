@@ -17,19 +17,20 @@
         {% else %}
         <img src="{% static 'img/default.jpeg' %}" class="feed--userImg" alt="userImg">
         {% endif %}
-        <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" />
-
+        <input  type="text" type="submit" placeholder="글을 작성하려면 누르세요" data-bs-toggle="modal" data-bs-target="#feedForm" data-bs-backdrop="static" data-bs-keyboard="false"/>
+  
       </div>
       {% if request.user.id %}
       <div class="feed-filterBtn">
-        <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my" value="myFeed">내 글 모아보기</button></a>
-        <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like">좋아요 모아보기</button></a>
+        <a href="{% url 'user:feedList' %}"><button class="feed-list-btn float-on-hover" value="myFeed">전체 글 보기</button></a>
+        <a href="{% url 'user:searchMyFeed' %}"><button class="feed-my float-on-hover" value="myFeed">내가 쓴 글</button></a>
+        <a href="{% url 'user:searchLikedFeed' %}"><button class="feed-like float-on-hover">좋아하는 글</button></a>
       </div>
       {% endif %}
     </div>
-
+  
     {% for feed in feeds %}
-
+  
     {% if request.user.id != feed.userId.id%}
     <div class="feed-container">
       <div class="feed--userInfo">
@@ -43,15 +44,15 @@
       <div class="feed--content white-form">
         <div class="feed--content-top">
           <div class="feed--content-left">
-            <p class='feed-title'><span>Listening... </span>{{feed.artist}} - {{feed.music}}</p>
-            <p class='feed-content'>{{feed.content}}</p>
+            <p class='feed-title'><img style="padding: 0.8rem 1rem 0 0;" src="{% static 'img/purpleNote.png' %}" height="27" alt="">{{feed.artist}} - {{feed.music}}</p>
+            <p class='feed-content text-break'>{{feed.content}}</p>
             {% if feed.feedImg %}
             <img src="{{feed.feedImg.url}}" alt="">
             {% endif %}
-            <p>{{feed.createdDate}}</p>
           </div>
           <div class="feed--content-right">
-            <div class="feed-heart">
+            <p style="font-size: 1.4rem;">{{feed.createdDate|date:"Y-m-d H:i"}}</p>
+            <div class="feed-heart">  
               {% if request.user.is_authenticated %}
               <div>
                 {% if user in feed.like_users.all %}
@@ -59,7 +60,7 @@
                 {% else %}
                 <i class="far fa-heart likeButton" data-id="{{ feed.id }}" style="color:red"></i>
                 {% endif %}
-              </div>
+              </div> 
                 <div id="like-count-{{ feed.id }}">{{ feed.like_users.count }}</div>
               {% endif %}
               </div>
@@ -73,28 +74,31 @@
             {% endfor %}
           </div>
         </div>
-
+        
       </div>
     </div>
-
+    
     {% else %}
     <div class="feed-container">
     <div class="feed--content-my white-form">
       <div class="feed--content-top">
         <div class="feed--content-left">
-          <p class='feed-title'><span>Listening... </span>{{feed.artist}} - {{feed.music}}</p>
-          <p class='feed-content'>{{feed.content}}</p>
+          <p class='feed-title'><img style="padding: 0.8rem 1rem 0 0;" src="{% static 'img/purpleNote.png' %}" height="27" alt="">{{feed.artist}} - {{feed.music}}</p>
+          <p class='feed-content text-break'>{{feed.content}}</p>
           {% if feed.feedImg %}
           <img src="{{feed.feedImg.url}}"  alt="">
           {% endif %}
-          <p>{{feed.createdDate}}</p>
+          
         </div>
         <div class="feed--content-right">
           <div class="feed-twobtn">
+            <p>{{feed.createdDate|date:"Y-m-d H:i"}}</p>
+            &nbsp;&nbsp;|&nbsp;
             <a href="{% url 'user:updateFeed' feed.id %}">수정</a>
+            &nbsp;&nbsp;|&nbsp;
             <a href="{% url 'user:deleteFeed'  feed.id %}">삭제</a>
           </div>
-          <div class="feed-heart">
+          <div class="feed-heart">  
               {% if request.user.is_authenticated %}
               <div>
                 {% if user in feed.like_users.all %}
@@ -109,7 +113,7 @@
         </div>
       </div>
       <div class="feed--content-bottom">
-
+         
         <div class="feed-hashtagList">
           {% for tag in feed.tags.all %}
           <div id="hashTag" class="hashtag--btn">{{tag}}</div>
@@ -123,7 +127,7 @@
               function addInputTag(tags) {
                 console.log("!!")
                 const hashTagArray = tags.split(' ');
-
+               
                 for (let i=0; i < hashTagArray.length; i++) {
                   const newDiv = document.createElement('div');
                   newDiv.setAttribute("class", "hashtag--btn");
@@ -137,7 +141,7 @@
           {% endif %}
         </div>
       </div>
-
+      
     </div>
     <div class="feed--userInfo">
       {% if feed.userId.userImg %}
@@ -149,16 +153,16 @@
     </div>
   </div>
     {% endif %}
-
+    
     {% empty %}
-
+  
     <div class="empty-feed">
       <p class="my_search_text">
-        해당 노래/가수의 피드가 아직없네요! 피드를 생성해보세요! &nbsp
+        게시글이 아직 없네요, 게시글을 생성해보세요! &nbsp
       </p>
       <p><a href="{% url 'user:main' %}">메인으로 이동하기</a></p>
     </div>
-
+  
     {% endfor %}
   </div>
   <!--
@@ -170,8 +174,8 @@
     {% endfor %}
     {% endfor %}
   </div>-->
-  <div id ="tag-list-btn"  style="visibility:hidden"   class="tag-list-btn">추천태그</div>
-  <div class="tag-list tagClose" id = 'tag-list'  style="visibility:hidden" >
+  <div id ="tag-list-btn" style="visibility:hidden" class="tag-list-btn">추천태그</div>
+  <div class="tag-list tagClose" id = 'tag-list'  style="visibility:hidden">
     {% for feed in feeds %}
     {% for tag in feed.tags.all %}
     <ul class="tag">{{tag}}</ul>

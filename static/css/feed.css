@@ -173,6 +173,10 @@
   padding: 0.8rem 1rem 0.2rem 1rem;
   margin-bottom: 2rem;
   font-family: Roboto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 70%;
+  white-space: nowrap;
 }
 
 
@@ -214,9 +218,7 @@
   margin-left: 0;
 }
 
-#hashTag {
-  margin: 0.7rem;
-}
+
 
 .tag-list.tagClose{
  animation: fade-out 1s;

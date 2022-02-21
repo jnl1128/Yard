@@ -110,5 +110,5 @@ function autolink() {
     var regURL = new RegExp("(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)","gi");
     container[i].innerHTML = doc.replace(regURL,"<a href='$1://$2' class='text-decoration-underline text-primary' target='_blank'>$1://$2</a>");
   }
-
-  autolink();
+}
+autolink();

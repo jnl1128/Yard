@@ -118,7 +118,7 @@
         <div id="hashTag" class="hashtag--btn">{{tag}}</div>
         {% endfor %}
         {% if feed.inputTags %}
-          <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
+          <div id ="newHash" class="hashtag--btn" style="display:none";>{{feed.inputTags}}</div>
           <script>
             const hashTag = document.querySelector("#newHash").innerHTML;
             console.log(hashTag);
