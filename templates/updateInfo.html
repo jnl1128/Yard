@@ -1,26 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'searchBase.html' %}
 {% load static %}
 {%block content%}
 <div class="updateInfo-container white-form" id = 'updateInfo-container'>
   <div class="preview-img-div" id = 'preview-img-div'></div>
-  <form class="" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
+  <form class="center-container" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
     {% csrf_token %}
       <div class="updateInfo-img" id = "updateInfo-img">
-      <div>유저 이미지</div><div class="">{{form.userImg}}</div>
+        <div></div><div class="">{{form.userImg}}</div>
       </div>
-      <div class="updateInfo-nickName">
-        <div>유저 별명</div><div>{{form.nickName}}</div>
+      <div class="updateInfo-contents center-container" style="flex-direction: column;">
+        <span class="form-white-btn-font label">닉네임</span>
+        <div>{{form.nickName}}</div>
+      </div>
+      <div>
+        <div class="updateInfo-contents center-container" style="flex-direction: column;">
+          <span class="form-white-btn-font label">성별</span>
+          <div>{{form.gender}}</div>
+        </div>
+        <hr>
+        <div class="updateInfo-contents center-container" style="flex-direction: column;">
+          <span class="form-white-btn-font label">생년월일</span>
+          <div>{{form.birth}}</div>
+        </div>
       </div>
 
-      <button class="updateInfo-btn" type="submit">update</button>
-
+      <button class="updateInfo-btn form-white-btn form-submit-btn float-on-hover" type="submit">내 정보 수정</button>
 
   </form>
-  <div class="updateInfo-password">
-    <a href="/accounts/password/change">비밀번호 변경</a>
-    <a href="/accounts/password/reset">비밀번호 초기화</a>
-    <a href="/accounts/social/connections">소셜 계정 연결</a>
-  </div>
 </div>
 {% endblock %}
 

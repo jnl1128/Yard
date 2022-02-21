@@ -21,25 +21,10 @@
 .account--social a{
   margin-bottom: 1em;
 }
-/*
-.account--social a,
-#id_login,
-#id_password,
-button.primaryAction{
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 4px 10px;
-  width: 22em;
-  height: 2.5em;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}*/
 
 .account--social a img {
   margin-right: 1rem;
 }
-
 
 
 .account--or{
@@ -91,11 +76,7 @@ button.primaryAction {
   margin-bottom: 50px;
   width: 40%;
 }*/
-.info-updateBtn{
-  position: absolute;
-  margin-top: 100px;
-  right: 100px;
-}
+
 .info-userImg{
   border: 1px solid #fff;
   border-radius: 50%;
@@ -114,30 +95,30 @@ button.primaryAction {
 .info-container>div{
   justify-content: space-between;
   margin: 20px 40px;
-  border-bottom: 1px solid #E1D2FA;
 }
 
 .updateInfo-container{
   margin: 0 auto;
   padding: 4rem;
 }
+
 .updateInfo-container>div, .updateInfo-container>form>div{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 20px 40px;
-  border-bottom:1px solid #E1D2FA;
-}
-.updateInfo-btn{
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
 }
 
 .center-container {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 5vh;
 }
 
 .preview-img-div{
@@ -147,8 +128,13 @@ button.primaryAction {
   border-bottom: 0 !important;
 }
 
-#id_userImg {
-  padding-left: 20%;
+img.preview-img {
+  width: 15rem !important;
+  height: 15rem !important;
+}
+
+.image-container > a {
+
 }
 
 a.socialaccount_provider {
@@ -158,4 +144,44 @@ a.socialaccount_provider {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   margin: 2rem;
+}
+
+.info-nickName {
+  font-weight: bolder;
+  font-size: larger;
+  margin: 1.5vh 0;
+  padding: 0 2rem;
+  border-bottom: black 1px solid;
+}
+
+.index-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.index-container>.img-container {
+  border: black 0.1rem solid;
+  border-radius: 50%;
+  padding: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.updateInfo-img #userImg-clear_id {
+  appearance: auto !important;
+}
+
+.icon-edit {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
+
+.updateInfo-password {
+  font-size: small;
+  position: absolute;
+  bottom: 2.5rem;
 }

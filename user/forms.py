@@ -70,4 +70,4 @@ class createCertForm(forms.ModelForm):
 class updateUserInfoForm(forms.ModelForm):
     class Meta: 
         model = User
-        fields = ('userImg', 'nickName')
+        fields = ('userImg', 'nickName', 'gender', 'birth')
