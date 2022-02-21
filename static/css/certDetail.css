@@ -94,31 +94,20 @@
 
 .sns-all {
   display: flex;
-
+  justify-content: flex-start;
   width: 70%;
-  align-items: flex-end;
 }
 .sns-box {
-  border: 1px solid white;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-
-  margin-right: 3rem;
-}
-.sns-box i {
-  color: white;
+  width: 4rem;
+  height: 4rem;
+  margin-right: 2.5rem;
 }
 
-.certDetail-buttons{
+.certDetail-buttons {
   display: flex;
   align-items: flex-end;
 }
-.certDetail-buttons button{
+.certDetail-buttons button {
   margin-left: 1rem;
   color: white !important;
   font-size: 1.5rem;
