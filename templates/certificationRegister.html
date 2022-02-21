@@ -2,61 +2,68 @@
 {% load static %}
 {% block content %}
 <div class="cert-container register">
-    <div class="white-form">
-      <div class="center-container logoBox">
-        <img src="{% static 'img/logoPurple.png'%}" width="150px">
-      </div>
-    <h1 style="color:black">새 인증서</h1>
-    <div class="cert-music">
-        <div>음악 검색</div>
-        <form class="cert-music-input" action="methods"  enctype="multipart/form-data">
-            <input type="text" id="songinfo" class="whatToSearch form-white-btn" placeholder="검색" autocomplete="off"/>
-            <input type="text" style="display: none" />
-            <button type="button" class="" id='addMusicBtn'>검색</button>
-        </form>
-    </div>
-    <button id="registerMusic" class="form-white-btn form-submit-btn">노래 등록</button>
-    
-    
-    <form method="POST" class="post-form"  enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="createInfo-music">
-          <div>노래</div><div class="form-white-btn">{{form.music}}</div>
-        </div>
-        <div class="createInfo-artist">
-          <div>아티스트</div><div class="form-white-btn">{{form.artist}}</div>
-        </div>
-        <div class="updateInfo-img" id = "updateInfo-img">
-          <div>앨범 이미지</div><div class="form-white-btn">{{form.albumImg}}</div>
-        </div>
-        <a href="/mypage">
-            <button type="submit" class="form-white-btn  form-submit-btn">Save</button>
-        </a>
-    </form>
-</div>
-    <div class="musicListList"></div>
-    <div class="certificate-container"> 
-      <div class="certificate" id = 'certificate'>
-      <div class="music-container before" id="musicInfo">
-        <div class="music-info">
-          <div class="index">곡</div><div class="example-music"></div>
-        </div>
-        <div class="music-info">
-          <div class="index">아티스트</div><div class="example-artist"></div>
-        </div>
-        <div class="music-info">
-          <div class="index">발급일</div><div>오늘</div>
-        </div>
-      </div>
-    </div>
-    </div>
+	<div class="white-form">
+		<div class="center-container logoBox">
+			<img src="{% static 'img/logoPurple.png'%}" width="150px">
+		</div>
+		<h1 style="color:black">새 인증서</h1>
+		<div class="cert-music">
+			<div>음악 검색</div>
+			<form class="cert-music-input" action="methods" enctype="multipart/form-data">
+				<input type="text" id="songinfo" class="whatToSearch form-white-btn" placeholder="검색" autocomplete="off" />
+				<input type="text" style="display: none" />
+				<button type="button" class="" id='addMusicBtn'>검색</button>
+			</form>
+		</div>
+		<button id="registerMusic" class="form-white-btn form-submit-btn float-on-hover">노래 등록</button>
+
+
+		<form method="POST" class="post-form" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="createInfo-music">
+				<div>노래</div>
+				<div class="form-white-btn">{{form.music}}</div>
+			</div>
+			<div class="createInfo-artist">
+				<div>아티스트</div>
+				<div class="form-white-btn">{{form.artist}}</div>
+			</div>
+			<div class="updateInfo-img" id="updateInfo-img">
+				<div>앨범 이미지</div>
+				<div class="form-white-btn">{{form.albumImg}}</div>
+			</div>
+			<a href="/mypage">
+				<button type="submit" class="form-white-btn form-submit-btn float-on-hover">Save</button>
+			</a>
+		</form>
+	</div>
+	<div class="musicListList"></div>
+	<div class="certificate-container">
+		<div class="certificate" id='certificate'>
+			<div class="music-container before" id="musicInfo">
+				<div class="music-info">
+					<div class="index">곡</div>
+					<div class="example-music"></div>
+				</div>
+				<div class="music-info">
+					<div class="index">아티스트</div>
+					<div class="example-artist"></div>
+				</div>
+				<div class="music-info">
+					<div class="index">발급일</div>
+					<div>오늘</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 {% endblock %}
 {% block js %}
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src = '{% static "js/cert.js"  %}'></script>
+<script src='{% static "js/cert.js"  %}'></script>
 
 {% endblock %}
