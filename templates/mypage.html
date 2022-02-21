@@ -9,6 +9,7 @@
 		<img class="certificate-rightBtn" id='certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">
 	</div>
 
+	{% if certificates %}
 	<div class="certificate-list">
 		{% for certificate in certificates %}
 		{% if request.user == certificate.userId %}
@@ -36,6 +37,11 @@
 		{% endfor %}
 
 	</div>
+	{% else %}
+	<h1>등록된 인증서가 없어요! 인증서 예시페이지 보여주기</h1>
+	<br /><br /><br />
+	{% endif %}
+
 	<h1 class="boldfont">History</h1>
 
 	<div class="history-container">

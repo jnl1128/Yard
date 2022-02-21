@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* font-size: 4rem; */
+  font-size: 4rem;
 }
 .redirect-mypage-btn {
   transform: scaleX(-1);
@@ -89,7 +89,7 @@
 
 .sns-and-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .sns-all {
