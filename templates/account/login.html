@@ -9,7 +9,7 @@
 {% block content %}
 <div class="account-container">
   <div class="account--greeting">
-    <p>Welcome</p>
+    <p class="boldfont">Welcome</p>
     <img src="../../static/img/note.png" alt="">
   </div>
   <div class="account-form white-form">
@@ -26,9 +26,10 @@
         <span class="form-white-btn-font">Naver 계정으로 계속</span>        
       </a>
     </div>
-
-    <div class="account--or Roboto">
-      <hr width="40%" ><div>or</div><hr width="40%">
+    <div class="center-container">
+      <div class="account--or Roboto">
+        <hr width="40%" ><div>or</div><hr width="40%">
+      </div>
     </div>
 
     <form class="login center-container Roboto" method="POST" action="{% url 'account_login' %}">
