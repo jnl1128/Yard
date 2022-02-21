@@ -145,7 +145,7 @@ AUTH_USER_MODEL = "user.User"
 
 ACCOUNT_FORMS = {'signup': 'user.forms.CustomSignupForm'}
 
-SITE_ID = 2
+SITE_ID = 3
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
