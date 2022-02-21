@@ -161,23 +161,6 @@
 
   {% endfor %}
 </div>
-<!--
-<div class="tag-list tagClose white-form" id = 'tag-list'>
-  <h1>추천 태그</h1>
-  {% for feed in feeds %}
-  {% for tag in feed.tags.all %}
-  <ul>{{tag}}</ul>
-  {% endfor %}
-  {% endfor %}
-</div>-->
-<div id ="tag-list-btn"  class="tag-list-btn">추천태그</div>
-<div class="tag-list tagClose" id = 'tag-list'>
-  {% for feed in feeds %}
-  {% for tag in feed.tags.all %}
-  <ul class="tag">{{tag}}</ul>
-  {% endfor %}
-  {% endfor %}
-</div>
 </div>
 
 
