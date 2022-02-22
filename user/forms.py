@@ -22,6 +22,10 @@ class CustomSignupForm(SignupForm):
         return user
 
 class SocialRegisterForm(forms.ModelForm):
+    userImg = forms.ImageField(label="유저 이미지", required=False)
+    nickName = forms.CharField(label="닉네임", max_length=7, required=True, widget= forms.TextInput(attrs={'placeholder':'별명'}))
+    gender = forms.ChoiceField(label="성별", choices=GENDER_CHOICES, required=True)
+    birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=True)
     class Meta:
         model = User
         fields = ('userImg', 'nickName', 'gender', 'birth')
@@ -68,6 +72,10 @@ class createCertForm(forms.ModelForm):
         fields = ('albumImg', 'music', 'artist') 
 
 class updateUserInfoForm(forms.ModelForm):
+    userImg = forms.ImageField(label="유저 이미지", required=False)
+    nickName = forms.CharField(label="닉네임", max_length=7, required=True, widget= forms.TextInput(attrs={'placeholder':'별명'}))
+    gender = forms.ChoiceField(label="성별", choices=GENDER_CHOICES, required=True)
+    birth = forms.DateField(label="생년월일", widget=forms.SelectDateWidget(years=YEARS), initial="2022-01-01", required=True)
     class Meta: 
         model = User
         fields = ('userImg', 'nickName', 'gender', 'birth')

@@ -66,12 +66,14 @@ const musicartistInput = document.querySelector('.musicArtistInput')
   };
 
   const musicHandleResponse = (music, artist) => {
+    const songInfoInput = document.querySelector(".whatToSearch");
     const titleInput = document.querySelector("#id_music");
     const artistInput = document.querySelector("#id_artist");
 
     titleInput.value = music;
     artistInput.value = artist;
     
+    songInfoInput.style.backgroundColor = 'rgba(122, 71, 204, 0.2)'
     musictitleInput.style.backgroundColor = 'rgba(122, 71, 204, 0.2)'
     musicartistInput.style.backgroundColor = 'rgba(122, 71, 204, 0.2)'
     
