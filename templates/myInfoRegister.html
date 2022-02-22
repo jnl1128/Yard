@@ -5,17 +5,21 @@
 {%block content%}
 <div class="center-container">
     <div class="white-form center-container">
-        <div class="center-container logoBox">
-            <img src="{%static 'img/logoPurple.png' %}" width="150px">
-        </div>
-    
-        <p class="form-white-btn-font textContent">아래 정보를 입력해주세요!</p>
+        <p style="margin-bottom: 1rem;" class="form-white-btn-font textContent">저희 서비스가 처음이신가요?</p>
+        <p style="margin-bottom: 3rem;" class="form-white-btn-font textContent">아래 정보를 입력해주세요!</p>
         
         <div class="preview-img-div" id = 'preview-img-div'></div>
-        <form class="infoRegister center-container" method="POST" action="{% url 'user:myInfoRegister' %}" enctype="multipart/form-data">
+        <form class="center-container updateInfo" method="POST" enctype="multipart/form-data" action="{% url 'user:myInfoRegister' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button class="form-white-btn form-submit-btn" type="submit">{% trans "제출하기" %}</button>
+            <div class="updateInfo-img" id ="updateInfo-img">
+                <div></div><div style="margin-left: 25%;">{{form.userImg}}</div>
+            </div>
+            <p>
+                <span>닉네임 :</span>
+                {{form.nickName}}
+            </p>
+            <p><span>성별 : </span>{{form.gender}}&nbsp;|&nbsp;<span>생일 : </span>{{form.birth}}</p>
+            <button class="updateInfo-btn form-white-btn form-submit-btn float-on-hover" type="submit">내 정보 수정</button>
         </form>
     </div>
 </div>
