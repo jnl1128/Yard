@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <main class="mypage-container" style="margin-top: 3rem;">
-	<h1 class="boldfont">My Certificates <a class='plusCert' href="{% url 'user:certificationRegister'%}"><img
+	<h1 >나의 뮤직카드<a class='plusCert' href="{% url 'user:certificationRegister'%}"><img
 				width='60rem' height="60rem" src="{% static 'img/plus.png' %}" alt=""></a></h1>
 
 	{% if certificates %}
@@ -37,7 +37,7 @@
 		{% endfor %}
 	</div>
 
-	<h1 class="boldfont">History</h1>
+	<h1 class="">뮤직 카드 연대기</h1>
 	<div class="history-container">
 		{% for year in years%}
 		<h2>{{year}}</h2>
