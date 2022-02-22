@@ -60,3 +60,6 @@ input:focus {
   outline: none !important;
 }
 
+img {
+  object-fit: cover !important;
+}
