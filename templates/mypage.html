@@ -9,7 +9,6 @@
 		<img class="certificate-rightBtn" id='certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">
 	</div>
 	{% if certificates %}
-	<p>hello</p>
 	<div class="certificate-list">
 		{% for certificate in certificates %}
 		{% if request.user == certificate.userId %}
