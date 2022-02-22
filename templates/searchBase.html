@@ -18,7 +18,6 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	<!-- Bootstrap: CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -33,19 +32,21 @@
 
 	<!-- My CSS -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
-	<title>Yard | 야, 들어봐 너도!</title> <link rel="icon" href="{%static 'img/purpleNote.png' %}">
+	<title>Yard | 야, 들어봐 너도!</title>
+	<link rel="icon" href="{%static 'img/purpleNote.png' %}">
 </head>
 
 <body>
 	<header class="nav">
 		<div class="nav-logo"><a href="/"><img class="logobtn" src="{% static 'img/logo.png' %}" /></a></div>
 
-		<div class="nav--inputBox">
+		<div class="nav--inputBox" >
 			<img class="nav--searchBtn" id="nav--searchBtn" src="{% static 'img/search.png'%}" alt="">
 			<form class="" action="{% url 'user:search' %}" method="get">
 				{% csrf_token %}
 				<input class="nav--input" type="search" placeholder="가수, 노래, #해시태그" aria-label="Search" name="q" />
 			</form>
+			
 		</div>
 
 		{% if user.is_authenticated %}
@@ -60,6 +61,25 @@
 			<a href="/accounts/login">로그인</a>
 		</div>
 		{% endif %}
+		<div class="dropdown">
+			<a class="dropbtn" href=""><img src="{% static 'img/profile.png' %}"  alt=""></a>
+			<div class="dropdown-content">
+				{% if user.is_authenticated %}
+				<div class="nav-btn-drop">
+					<a href="{% url 'user:myPage' %}">뮤직 카드</a>
+					<a href="{% url 'user:myInfo' %}">내 정보</a>
+					<a href="/accounts/logout">로그아웃</a>
+				</div>
+				{% else %}
+				<div class="nav-btn-drop">
+					<a href="/accounts/login">뮤직 카드</a>
+					<a href="/accounts/login">로그인</a>
+				</div>
+				{% endif %}
+			</div> 
+		</div>
+		
+
 	</header>
 
 

@@ -6,7 +6,7 @@
 .main-top {
   display: flex;
   justify-content: center;
-  margin-top: 15rem;
+  margin-top: 10rem;
   font-size: 20rem;
   vertical-align: bottom;
   line-height: 100%;
@@ -75,4 +75,64 @@ form>img{
   font-size: 2rem;
   color: white;
   align-items: center;
+}
+@media screen and (min-width: 769px){
+  .dropdown{
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 768px) {
+  /* 모바일에 사용될 스트일 시트를 여기에 작성합니다. */
+  .nav-btn{
+    display: none;
+  }
+  .dropdown{
+    visibility: visible;
+  }
+  .main-top{
+    font-size: 10rem;
+    margin-top: 7rem;
+  }
+  .feed-description{
+    font-size: 1.5rem;
+  }
+  .search-container{
+    max-width: 40rem;
+  }
+  .search-input {
+    border: 1rem solid #ffffff;
+    border-radius: 4rem;
+    width: 100%;
+    background: transparent;
+    padding: 2.5rem;
+    padding-left: 10rem;
+    font-size: 2rem;
+    color: #fff;
+    
+  }
+  form>img{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    margin-left: 4rem;
+    margin-top: 2.5rem;
+    opacity: .5;
+  }
+  .hashtag-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  .hashtag--btn{
+    padding: 0.5rem 3rem;
+    border-radius: 10px;
+    background-color: rgba(68, 15, 218, 0.8);
+    border: 0.1rem solid rgba(68, 15, 218, 0.8);
+    margin-top: 1rem;
+    font-size: 2rem;
+    color: white;
+    align-items: center;
+  }
 }
