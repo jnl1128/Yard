@@ -40,10 +40,13 @@
 							src="{%static 'img/icon-kakao.png'%}" alt=""></a></div>
 			</div>
 
+			{% if request.user != cert.userId %}
+			{% else %}
 			<div class="certDetail-buttons">
 				<button><a href="{% url 'user:certUpdate' cert.id %}">수정</a></button>
 				<button><a href="{% url 'user:certDelete' cert.id %}">삭제</a></button>
 			</div>
+			{% endif %}
 		</div>
 	</div>
 </div>
@@ -56,26 +59,26 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 	const urlforKakao = window.location.href
-		function shareKakao() {
+	function shareKakao() {
 
-// 사용할 앱의 JavaScript 키 설정
-Kakao.init('1706f71509ba01819512832811f52204')
+		// 사용할 앱의 JavaScript 키 설정
+		Kakao.init('1706f71509ba01819512832811f52204')
 
-// 카카오링크 버튼 생성
-Kakao.Link.createDefaultButton({
-	container: '#btnKakao', // 카카오공유버튼ID
-	objectType: 'feed',
-	content: {
-		title: "야드Yard", // 보여질 제목
-		description: "Yard | 야, 들어봐 너도!", // 보여질 설명
-		imageUrl:  urlforKakao, // 콘텐츠 URL
-		link: {
-			mobileWebUrl: urlforKakao,
-			webUrl:  urlforKakao,
-		}
+		// 카카오링크 버튼 생성
+		Kakao.Link.createDefaultButton({
+			container: '#btnKakao', // 카카오공유버튼ID
+			objectType: 'feed',
+			content: {
+				title: "야드Yard", // 보여질 제목
+				description: "Yard | 야, 들어봐 너도!", // 보여질 설명
+				imageUrl: urlforKakao, // 콘텐츠 URL
+				link: {
+					mobileWebUrl: urlforKakao,
+					webUrl: urlforKakao,
+				}
+			}
+		});
 	}
-});
-}
 </script>
 
 {% endblock %}
