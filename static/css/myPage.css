@@ -139,16 +139,18 @@ a.plusCert {
   justify-content: space-evenly !important;
 }
 
-.exam-text h1 {
+.exam-text {
   margin-top: 2.5rem;
+}
+.exam-text h1 {
   text-align: center;
-
-  font-size: 4rem;
-  font-family: "Jua" !important;
+  font-size: 3.5rem;
+  font-family: "IM_Hyemin-Bold";
+  margin-bottom: 0.7rem;
 }
 
 .exam-guide h1 {
   font-size: 2.5rem;
   margin-left: 5rem;
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
