@@ -29,6 +29,8 @@
   </div>
 
   {% for feed in feeds %}
+  
+
 
   {% if request.user.id != feed.userId.id%}
   <div class="feed-container">
@@ -66,11 +68,48 @@
         </div>
       </div>
       <div class="feed--content-bottom">
-        <div class="feed-hashtagList">
+        <div class="feed-hashtagList feed-{{feed.id}}">
           {% for tag in feed.tags.all %}
-          <div class="hashtag--btn">{{tag}}
-          </div>
+          <div class="hashtag--btn">{{tag}}</div>
           {% endfor %}
+
+          {% if feed.inputTags %}
+          <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
+          <script>
+            addInputTag();
+
+            function addInputTag() {
+              const usersTag = document.querySelector(".feed-{{feed.id}} #newHash").innerHTML;
+              const choiceTags = document.querySelectorAll('.hashtag--btn');
+              let choiceTagList = []
+              for (let i=0; i < choiceTags.length; i++) {
+              let choiceTag = choiceTagList.push(choiceTags[i].innerText);
+              }
+              const hashTagArray = usersTag.split(' ');
+              let uniqueTagArray = [];
+              hashTagArray.forEach((element) => {
+                  if (!uniqueTagArray.includes(element)) {
+                    uniqueTagArray.push(element);
+                  }
+              });
+            
+
+              for (let i=0; i < uniqueTagArray.length; i++) {
+                if (!(choiceTagList.includes(uniqueTagArray[i]))) {
+                  const newDiv = document.createElement('div');
+                  newDiv.setAttribute("class", "hashtag--btn");
+                  const newText = document.createTextNode(uniqueTagArray[i]);
+                  newDiv.appendChild(newText);
+                  const tagDiv = document.querySelector('.feed-hashtagList.feed-{{feed.id}}');
+                  console.log(tagDiv)
+                  tagDiv.append(newDiv);
+                }
+                else {
+                }
+              };
+            };
+          </script>
+          {% endif %}
         </div>
       </div>
       
@@ -113,44 +152,45 @@
     </div>
     <div class="feed--content-bottom">
        
-      <div class="feed-hashtagList">
+      <div class="feed-hashtagList feed-{{feed.id}}">
         {% for tag in feed.tags.all %}
         <div id="hashTag" class="hashtag--btn">{{tag}}</div>
         {% endfor %}
         {% if feed.inputTags %}
           <div id ="newHash" style="display:none";>{{feed.inputTags}}</div>
           <script>
-            const usersTag = document.querySelector("#newHash").innerHTML;
-            const choiceTags = document.querySelectorAll('.hashtag--btn');
-            let choiceTagList = []
-            for (let i=0; i < choiceTags.length; i++) {
+            addInputTag();
+
+            function addInputTag() {
+              const usersTag = document.querySelector(".feed-{{feed.id}} #newHash").innerHTML;
+              const choiceTags = document.querySelectorAll('.hashtag--btn');
+              let choiceTagList = []
+              for (let i=0; i < choiceTags.length; i++) {
               let choiceTag = choiceTagList.push(choiceTags[i].innerText);
-            }
-            addInputTag(usersTag);
-            
-            function addInputTag(tags) {
-              const hashTagArray = tags.split(' ');
+              }
+              const hashTagArray = usersTag.split(' ');
               let uniqueTagArray = [];
               hashTagArray.forEach((element) => {
                   if (!uniqueTagArray.includes(element)) {
                     uniqueTagArray.push(element);
                   }
               });
+            
 
-              //choiceTags 안에서도 동일할 때를 처리해 줘야 함
               for (let i=0; i < uniqueTagArray.length; i++) {
                 if (!(choiceTagList.includes(uniqueTagArray[i]))) {
                   const newDiv = document.createElement('div');
                   newDiv.setAttribute("class", "hashtag--btn");
                   const newText = document.createTextNode(uniqueTagArray[i]);
                   newDiv.appendChild(newText);
-                  const tagDiv = document.querySelector('.feed-hashtagList');
-                  tagDiv.append(newDiv); 
+                  const tagDiv = document.querySelector('.feed-hashtagList.feed-{{feed.id}}');
+                  console.log(tagDiv)
+                  tagDiv.append(newDiv);
                 }
                 else {
                 }
               };
-            }
+            };
           </script>
         {% endif %}
       </div>
