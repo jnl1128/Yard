@@ -10,7 +10,6 @@
 		<img class="certificate-leftBtn" id='certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
 		<img class="certificate-rightBtn" id='certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">
 	</div>
-
 	<div class="certificate-list">
 		{% for certificate in certificates %}
 		{% if request.user == certificate.userId %}

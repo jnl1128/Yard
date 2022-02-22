@@ -13,4 +13,4 @@ function leaveInput(){
 
 
 inputBox.addEventListener('mouseenter', enterInput)
-inputBox.addEventListener('change', leaveInput)
+inputBox.addEventListener('mouseleave', leaveInput)

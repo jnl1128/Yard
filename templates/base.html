@@ -3,38 +3,51 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<!-- og 태그 -->
-	<meta property="og:title" content="Yard | 야, 들어봐 너도!"/>
+	<meta property="og:title" content="Yard | 야, 들어봐 너도!" />
 	<meta property="og:description" content="당신만 알고 있는 노래를 YARD에 담아 보세요!" />
 	<meta property="og:image" content="{% static 'img/default.jpeg' %}" />
-
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<!-- favicon.ico 404 (Not Found) -->
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
-	<!--bootstrap-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
 	<!--font-->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+	<!-- Bootstrap: CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+	<!-- JavaScript Bundle with Popper -->
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<!-- axios CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<!--fontawesome cdn-->
 	<script defer src="https://kit.fontawesome.com/34c2088d9a.js" crossorigin="anonymous"></script>
+
 	<!-- My CSS -->
-	<link rel="stylesheet" href="{% static 'css/style.css' %}?after">
-	<title>Yard</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
+	<title>Yard | 야, 들어봐 너도!</title> <link rel="icon" href="{%static 'img/purpleNote.png' %}">
 </head>
 
 <body>
-
 	<header class="nav">
-		<div class="nav-logo"><a href="/"><img class="logobtn" src="{%static 'img/logo.png' %}"></a></div>
+		<div class="nav-logo"><a href="/"><img class="logobtn" src="{% static 'img/logo.png' %}" /></a></div>
+
+		<div class="nav--inputBox" style="visibility: hidden">
+			<img class="nav--searchBtn" id="nav--searchBtn" src="{% static 'img/search.png'%}" alt="">
+			<form class="" action="{% url 'user:search' %}" method="get">
+				{% csrf_token %}
+				<input class="nav--input" type="search" placeholder="가수, 노래, #해시태그" aria-label="Search" name="q" />
+			</form>
+		</div>
+
 		{% if user.is_authenticated %}
 		<div class="nav-btn">
 			<a href="{% url 'user:myPage' %}">뮤직 카드</a>
@@ -43,15 +56,35 @@
 		</div>
 		{% else %}
 		<div class="nav-btn">
-			<a href="">뮤직 카드</a>
+			<a href="/accounts/login">뮤직 카드</a>
 			<a href="/accounts/login">로그인</a>
 		</div>
 		{% endif %}
+
+		<div class="dropdown">
+			<a class="dropbtn" href=""><img src="{% static 'img/profile.png' %}"  alt=""></a>
+      <div class="dropdown-content">
+        {% if user.is_authenticated %}
+				<div class="nav-btn-drop">
+					<a href="{% url 'user:myPage' %}">뮤직 카드</a>
+					<a href="{% url 'user:myInfo' %}">내 정보</a>
+					<a href="/accounts/logout">로그아웃</a>
+				</div>
+				{% else %}
+				<div class="nav-btn-drop">
+					<a href="/accounts/login">뮤직 카드</a>
+					<a href="/accounts/login">로그인</a>
+				</div>
+				{% endif %}
+      </div> 
+		</div>
+
 	</header>
+
 
 	{% block content %} {% endblock %}
 	{% block js %} {% endblock %}
-
+	<script src="{% static 'js/search.js' %}"></script>
 </body>
 
 </html>
