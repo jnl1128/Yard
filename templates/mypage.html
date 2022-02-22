@@ -4,15 +4,16 @@
 <main class="mypage-container" style="margin-top: 3rem;">
 	<h1 class="boldfont">My Certificates <a class='plusCert' href="{% url 'user:certificationRegister'%}"><img
 				width='60rem' height="60rem" src="{% static 'img/plus.png' %}" alt=""></a></h1>
+
+	{% if certificates %}
 	<div class="certificate-btn" id='certificate-btn'>
 		<img class="certificate-leftBtn" id='certificate-leftBtn' src="{% static 'img/moreCertBtn.png' %}">
 		<img class="certificate-rightBtn" id='certificate-rightBtn' src="{% static 'img/moreCertBtn.png' %}">
 	</div>
-	{% if certificates %}
 	<div class="certificate-list">
 		{% for certificate in certificates %}
 		{% if request.user == certificate.userId %}
-		
+
 		<a href="{% url 'user:certDetail' certificate.id %}">
 			<div class="certificate-container">
 				<div class="certificate" style="background-image:url({{ certificate.albumImg.url }})"></div>
@@ -52,6 +53,10 @@
 
 
 	{% else %}
+	<div class="exam-text">
+		<h1>뮤직카드가 없습니다.</h1>
+		<h1>당신만의 노래를 카드로 만들어보세요!</h1>
+	</div>
 	<div class="exam-guide">
 		<h1>뮤직카드 예시</h1>
 	</div>
@@ -90,9 +95,7 @@
 		</div>
 	</div>
 
-	<div class="exam-text">
-		<h1>당신만의 노래를 카드로 만들어보세요!</h1>
-	</div>
+
 	{% endif %}
 </main>
 {% endblock %}
