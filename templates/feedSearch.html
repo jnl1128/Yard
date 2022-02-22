@@ -241,7 +241,7 @@
 
 
 <!-- 피드 등록 폼 modal -->
-<div id="feedForm" class="modal fade" style="color: black;" data-bs-backdrop="static" data-bs-keyboard="false">
+<div id="feedForm" class="modal fade " style="color: black;" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -253,20 +253,20 @@
           <form class="searchDiv" action="methods" enctype="multipart/form-data">
             <label for="songinfo">음악 검색</label>
             <div>
-              <input type="text" id="songinfo" style="width: 140%;" class="whatToSearch" placeholder="검색" autocomplete="off" />
+              <input type="text" id="songinfo" style="width: 140%;" class="whatToSearch float-on-hover" placeholder="검색" autocomplete="off" />
               <input type="text" style="display: none" />
-              <button type="button" class="" style="width: 80%;" onclick="addMusicList()">검색</button>
+              <button type="button" class="float-on-hover" style="width: 80%;" onclick="addMusicList()">검색</button>
             </div>
           </form>
         </div>
         <div class="musicListList"></div>
 
-        <button id="registerMusic" class="saveFeedForm"  onclick="registerMusic()">노래 등록</button>
+        <button id="registerMusic" class="saveFeedForm float-on-hover"  onclick="registerMusic()">노래 등록</button>
         <form method="POST" class="post-form" enctype="multipart/form-data">
 
           {% csrf_token %} {{ form.as_p }}
 
-          <button type="submit" class="saveFeedForm">Save</button>
+          <button type="submit" class="saveFeedForm float-on-hover">등록</button>
         </form>
       </div>
     </div>
@@ -279,7 +279,7 @@
 {% block js %}
 <script src='{% static "js/feedpage.js"%}'></script>
 <script src='{% static "js/feedLike.js"%}'></script>
-<script src = '{% static "js/feed1.js" %}'>
-  
+<script src = '{%static "js/feed1.js" %}'>
+
 </script>
 {% endblock %}

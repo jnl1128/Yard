@@ -299,6 +299,16 @@
 
 
 /*모달 관련 css*/
+.modal-title{
+  font-family: 'IM_Hyemin-Bold';
+  font-size: 2rem;
+}
+
+#feedForm label{
+  font-family: 'IM_Hyemin-Bold';
+  font-size: 1rem;
+}
+
 #feedForm{
   margin-top: 3rem;
 }
@@ -349,4 +359,9 @@
 }
 .feedNtag-container a{
   color: black !important;
+}
+
+
+::selection{
+  background-color: 'rgba(122, 71, 204, 0.2)';
 }
