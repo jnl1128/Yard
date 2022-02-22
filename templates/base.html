@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="position: relative;">
 
 <head>
 	<meta charset="UTF-8" />
@@ -83,6 +83,51 @@
 
 
 	{% block content %} {% endblock %}
+	<footer style="
+		background-color: rgba(70, 70, 70, 0.329);
+		width: 100vw !important;
+		margin-left: -17vw;
+		margin-top: 17vw;
+		padding-left: 10rem;
+		padding-right: 10rem;
+	">
+		<div class="footerGrids d-flex justify-content-between">
+			<div class="footerAbout d-flex flex-column align-items-start">
+				<h3 class="mb-3" style="font-size: 2rem;">
+					More About Yard
+				</h3>
+				<p style="font-size: 1.5rem;">
+					야~ 너도 들어 봐!
+					<br>
+					노래 부심 인증 사이트
+				</p>
+			</div>
+			<div>
+				<h3 class="mb-3" style="font-size: 2rem;">
+					More About Us
+				</h3>
+				<ul class="d-flex flex-column align-items-start" style="font-size: 1.5rem;">
+					<li>윤석현 <a href="https://github.com/paulyoon28">@paulyoon28</a></li>
+					<li>김혜림 <a href="https://github.com/khr98">@khr98</a></li>
+					<li>김가은 <a href="https://github.com/gaeun0204">@gaeun0204</a></li>
+					<li>정나린 <a href="https://github.com/jnl1128">@jnl1128</a></li>
+					<li>박지연 <a href="https://github.com/yeoooon">@yeoooon</a></li>
+				</ul>
+			</div>
+			<div class="footerContact d-flex flex-column align-items-start">
+				<h3 class="mb-3" style="font-size: 2rem;">
+					Contact Information
+				</h3>
+				<p style="font-size: 1.5rem;">
+					<i class="far fa-envelope"></i>
+					piro.yard@gmail.com
+				</p>
+			</div>
+		</div>
+        <div class="footerBottom mt-3">
+	        <div class="d-flex justify-content-start text-white"><p>copyrightⓒ 2022 All rights reserved by Yard</p></div>
+		</div>
+	</footer>
 	{% block js %} {% endblock %}
 	<script src="{% static 'js/search.js' %}"></script>
 </body>
