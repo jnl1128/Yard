@@ -57,7 +57,6 @@ def mainSearch(request):
         else:
             hashTagList[count]=random_object.name
             count += 1;
-    print(hashTagList) 
     return render(request, 'mainPage.html', {'hashTags':hashTagList})
 
 
