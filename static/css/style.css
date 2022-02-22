@@ -34,9 +34,10 @@
 html {
   font-size: 62.5%;
   height: 100%;
+  position: relative;
 }
 
-body {
+body:not(footer) {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -60,3 +61,7 @@ input:focus {
   outline: none !important;
 }
 
+footer {
+  background-color: rgba(70, 70, 70, 0.329);
+  padding: 2rem 17vw;
+}
