@@ -2,31 +2,20 @@
 {% load static %}
 {%block content%}
 <div class="updateInfo-container white-form" id = 'updateInfo-container'>
-  <div class="preview-img-div" id = 'preview-img-div'></div>
-  <form class="center-container" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
-    {% csrf_token %}
-      <div class="updateInfo-img" id = "updateInfo-img">
-        <div></div><div class="">{{form.userImg}}</div>
-      </div>
-      <div class="updateInfo-contents center-container" style="flex-direction: column;">
-        <div><span class="form-white-btn-font label">닉네임</span></div>
-        <div>{{form.nickName}}</div>
-      </div>
-      <div>
-        <div class="updateInfo-contents center-container" style="flex-direction: column;">
-          <span class="form-white-btn-font label">성별</span>
-          <div>{{form.gender}}</div>
+  <p style="margin-bottom: 3rem; font-family: 'IM_Hyemin-Bold';" class="form-white-btn-font textContent">내 정보 수정</p>
+    <div class="preview-img-div" id = 'preview-img-div'></div>
+    <form class="center-container updateInfo" method="POST" enctype="multipart/form-data" action="{% url 'user:updateInfo' %}">
+      {% csrf_token %}
+        <div class="updateInfo-img" id = "updateInfo-img">
+          <div></div><div class="">{{form.userImg}}</div>
         </div>
-        <hr>
-        <div class="updateInfo-contents center-container" style="flex-direction: column;">
-          <span class="form-white-btn-font label">생년월일</span>
-          <div>{{form.birth}}</div>
-        </div>
-      </div>
-
-      <button class="updateInfo-btn form-white-btn form-submit-btn float-on-hover" type="submit">내 정보 수정</button>
-
-  </form>
+        <p>
+          <span>닉네임 :</span>
+          {{form.nickName}}
+        </p>
+        <p><span>성별 : </span>{{form.gender}}&nbsp;|&nbsp;<span>생일 : </span>{{form.birth}}</p>
+        <button class="updateInfo-btn form-white-btn form-submit-btn float-on-hover" type="submit">내 정보 수정</button>
+    </form>
 </div>
 {% endblock %}
 
